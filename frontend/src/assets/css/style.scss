@@ -2,6 +2,9 @@ $text-color: #ffffff;
 $blue-background: #1054A6;
 $white-background: #ffffff;
 $text-blue: #1054A6;
+$light-background: #e2edf8;
+$button-hover: #60A5FA;
+
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -28,6 +31,85 @@ h4 {
 p {
     font-size: 1.2em;
 }
+
+
+.small {
+    padding: 10px 15px;
+
+}
+
+.large {
+    padding: 15px 20px;
+}
+
+.btn-primary {
+    background-color: $blue-background;
+    border: 1px solid $blue-background;
+
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $button-hover;
+        border: 1px solid $button-hover;
+        color: $text-color;
+
+
+    }
+}
+
+.btn-secondary {
+    background-color: $blue-background;
+    border: 1px solid $blue-background;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $button-hover;
+        border: 1px solid $button-hover;
+        color: $text-color;
+
+
+    }
+}
+
+.section-header {
+    span {
+        color: $text-blue;
+        font-size: 1.5em;
+        padding-bottom: 10px;
+        display: block;
+        text-transform: uppercase;
+        font-weight: 900;
+    }
+}
+.banner-icon {
+            width: 85px;
+            height: 85px;
+            min-width: 85px;
+            border-radius: 50%;
+            background: $white-background;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $text-blue;
+            font-size: 32px;
+            box-shadow:
+                0 6px 0px rgba(0, 0, 0, 0.12),
+                0 12px 20px rgba(0, 0, 0, 0.1);
+
+            
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(4px);
+                box-shadow:
+                    0 2px 0px rgba(0, 0, 0, 0.12),
+                    0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+        }
 
 header {
     background-color: $blue-background;
@@ -73,7 +155,7 @@ header {
             padding: 10px 18px;
             border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); // Bouncy transition
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 
             &::after {
                 display: none !important;
@@ -151,21 +233,101 @@ header {
 
             }
 
-            .banner-icon {
-                width: 85px;
-                height: 85px;
-                min-width: 85px;
-                border-radius: 50%;
-                background: $white-background;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: $text-blue;
-                font-size: 32px;
-            }
-
         }
 
     }
 
+}
+
+.section-2 {
+    background-color: $light-background;
+
+    .item {
+        position: relative;
+        overflow: hidden;
+        color: $text-color;
+        margin-bottom: 20px;
+
+        &:hover {
+            .service-body {
+                transform: translateY(0%);
+
+                .service-content {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .service-image {
+            position: relative;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                border-radius: 40px;
+                aspect-ratio: 1 / 1.2;
+                object-fit: cover;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 40px;
+                background: linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0) 13.02%, rgba(0, 0, 0, 0.51) 42.5%, rgba(0, 0, 0, 0.63) 70%, #000000 100%);
+            }
+        }
+
+        .service-body {
+            position: absolute;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            transform: translateY(80%);
+            transition: all 0.4s ease-in-out;
+
+            .service-content {
+                transform: all 0.4s ease-in-out;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.section-3 {
+
+    .item {
+        position: relative;
+        overflow: hidden;
+        color: $text-blue;
+        margin-bottom: 20px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        background: $light-background;
+        border: 1px solid $light-background;
+        border-radius: 16px;
+        padding: 30px 24px;
+
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .statistic-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+    }
 }

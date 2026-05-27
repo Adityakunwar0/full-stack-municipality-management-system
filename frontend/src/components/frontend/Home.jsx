@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../common/Header'
 import { Link } from 'react-router-dom'
 import LatestProjects from '../common/LatestProjects'
+import Statistics from '../common/Statistics'
 
 const Home = () => {
   return (
@@ -58,6 +59,11 @@ const Home = () => {
         </section>
 
         <LatestProjects />
+
+        <Statistics />
+        
+
+
 
       </main>
 
