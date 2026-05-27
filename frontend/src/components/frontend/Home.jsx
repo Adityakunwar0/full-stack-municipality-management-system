@@ -3,6 +3,7 @@ import Header from '../common/Header'
 import { Link } from 'react-router-dom'
 import LatestProjects from '../common/LatestProjects'
 import Statistics from '../common/Statistics'
+import Footer from '../common/Footer'
 
 const Home = () => {
   return (
@@ -61,7 +62,9 @@ const Home = () => {
         <LatestProjects />
 
         <Statistics />
-        
+
+        <Footer />
+
 
 
 

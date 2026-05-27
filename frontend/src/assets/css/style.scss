@@ -85,31 +85,32 @@ p {
         font-weight: 900;
     }
 }
+
 .banner-icon {
-            width: 85px;
-            height: 85px;
-            min-width: 85px;
-            border-radius: 50%;
-            background: $white-background;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: $text-blue;
-            font-size: 32px;
-            box-shadow:
-                0 6px 0px rgba(0, 0, 0, 0.12),
-                0 12px 20px rgba(0, 0, 0, 0.1);
+    width: 85px;
+    height: 85px;
+    min-width: 85px;
+    border-radius: 50%;
+    background: $white-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-blue;
+    font-size: 32px;
+    box-shadow:
+        0 6px 0px rgba(0, 0, 0, 0.12),
+        0 12px 20px rgba(0, 0, 0, 0.1);
 
-            
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-            &:hover {
-                transform: translateY(4px);
-                box-shadow:
-                    0 2px 0px rgba(0, 0, 0, 0.12),
-                    0 4px 10px rgba(0, 0, 0, 0.1);
-            }
-        }
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(4px);
+        box-shadow:
+            0 2px 0px rgba(0, 0, 0, 0.12),
+            0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+}
 
 header {
     background-color: $blue-background;
@@ -155,7 +156,7 @@ header {
             padding: 10px 18px;
             border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
             &::after {
                 display: none !important;
@@ -330,4 +331,44 @@ header {
 
 
     }
+}
+
+footer {
+    background-color: $blue-background;
+    color: $text-color;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+
+        span {
+            color: $text-color;
+            line-height: 1.4;
+        }
+
+    }
+            p {
+    margin-top: 100;
+}
+
+    h3 {
+        font-size: 1.5em;
+        color: $text-color;
+
+    }
+
+    ul {
+        li {
+            padding: 5px 0;
+        }
+    }
+
+    a {
+        color: $text-color;
+        font-size: 1em;
+        text-decoration: none;
+    }
+
 }

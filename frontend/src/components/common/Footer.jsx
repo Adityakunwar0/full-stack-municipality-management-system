@@ -1,0 +1,81 @@
+import React from "react";
+import { Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Logo from '../../assets/images/logo.png';
+
+export const Footer = () => {
+  return (
+    <footer>
+      <div className="container py-4">
+        <div className="row">
+          <div className="col-md-3 ">
+            <Navbar.Brand href="/" className="logo">
+            <img width={50} src={Logo} />
+            <span>Gaur Municipality City <br /> Madhesh Province, Rautahat</span>
+          </Navbar.Brand>
+            <div className="pe-10 mb-100">
+              <p >
+                Committed to transparenency, sustanbility and inclusive development for a better Tommorrow.
+              </p>
+            </div>
+          </div>
+           <div className="col-md-3">
+            <h3 className="mb-3">Quick Links</h3>
+            <ul>
+                <li>
+                <Link to="/about">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About </Link>
+              </li>
+              <li>
+                <Link to="/projects">Projects</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-md-3">
+            <h3 className="mb-3">Useful Links</h3>
+            <ul>
+              <li>
+                <Link to="/service/7">Citizen Portal</Link>
+              </li>
+              <li>
+                <Link to="/service/6">Public Notices</Link>
+              </li>
+              <li>
+                <Link to="/service/4">Reports</Link>
+              </li>
+              <li>
+                <Link to="/service/5">FAQs</Link>
+              </li>
+            </ul>
+          </div>
+         
+          <div className="col-md-3">
+            <h3 className="mb-3">Contact Info</h3>
+            <ul>
+              <li>
+                <p>Gaur, Rautahat, Nepal</p>
+              </li>
+              <li>
+                <p>Phone No:- 055-520292, 055-520894 </p>
+              </li>
+              <li>
+                <p>Fax:- 055-520294</p>
+              </li>
+              
+            </ul>
+          </div>
+          <hr />
+          <p className="text-center pt-2">
+            Copyright @2026 Gaur Municipality City. All Right Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+export default Footer;
