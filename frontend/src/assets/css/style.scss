@@ -38,6 +38,10 @@ p {
 
 }
 
+.light-background {
+    background-color: $light-background;
+}
+
 .large {
     padding: 15px 20px;
 }
@@ -241,7 +245,7 @@ header {
 }
 
 .section-2 {
-    background-color: $light-background;
+
 
     .item {
         position: relative;
@@ -349,9 +353,6 @@ footer {
         }
 
     }
-            p {
-    margin-top: 100;
-}
 
     h3 {
         font-size: 1.5em;
@@ -361,7 +362,7 @@ footer {
 
     ul {
         li {
-            padding: 5px 0;
+            padding: 1px 0;
         }
     }
 
@@ -372,3 +373,127 @@ footer {
     }
 
 }
+
+.section-4 {
+    .hero {
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('../images/pond.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        width: 100%;
+        min-height: 500px;
+        color: $text-color;
+
+        span {
+            color: $text-color;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+
+    }
+}
+
+.section-5 {
+    .card {
+        border-radius: 40px;
+
+        img {
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .card-body {
+            .card-title {
+                font-size: 1.5em;
+                font-weight: 500;
+            }
+
+            .card-sub-title {
+                font-size: 1.3em;
+                font-weight: 800;
+                color: $text-blue;
+            }
+
+            .social-icon {
+                display: flex;
+                gap: 10px;
+
+                a {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $text-color;
+                    font-size: 16px;
+                    text-decoration: none;
+                    transition: opacity 0.3s;
+
+                    &:nth-child(1) {
+                        background-color: #1877F2;
+                    }
+
+                    &:nth-child(2) {
+                        background-color: #0A66C2;
+                    }
+
+                    &:nth-child(3) {
+                        background-color: #E1306C;
+                    }
+                }
+
+                &:hover {
+                    opacity: 0.85;
+                }
+            }
+
+
+
+        }
+    }
+
+}
+.section-6{
+    .quote-box{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        margin-top: 30px;
+        flex: 1;
+        background: #fff;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+         
+         .quote-left {
+            display: flex;
+          align-items: flex-start;
+          gap: 18px;
+
+      .quote-icon {
+        font-size: 30px;
+        color: $text-blue;
+        margin-top: 5px;
+      }
+    }
+    .quote-right {
+    min-width: 400px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img{
+        width: 200px;
+        min-height: 30vh;
+    }
+    }
+
+    }
+    
+}
+

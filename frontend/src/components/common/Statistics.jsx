@@ -54,8 +54,8 @@ const Statistics = () => {
                             </div>
                             <div className='statistic-content'>
                                 <h2>1,851</h2>
-                                <h4>Population Density</h4>
-                                <p>People per square kilometer</p>
+                                <h4>Population Density (Sq Km)</h4>
+                                <p>Growing and vibrant community.</p>
                             </div>
                         </div>
                     </div>
@@ -65,8 +65,8 @@ const Statistics = () => {
                                 <i className="fa-solid fa-chart-line"></i>
                             </div>
                             <div className='statistic-content'>
-                                <h2>1.26% - 1.4%</h2>
-                                <h4>Annual Growth Rate</h4>
+                                <h2>1.26 - 1.4</h2>
+                                <h4>Annual Growth Rate ( % )</h4>
                                 <p>Steady community expansion</p>
                             </div>
                         </div>
@@ -77,8 +77,8 @@ const Statistics = () => {
                                 <i class="fa-solid fa-book"></i>
                             </div>
                             <div className='statistic-content'>
-                                <h2>69.46%</h2>
-                                <h4>Literacy Rate</h4>
+                                <h2>69.46</h2>
+                                <h4>Literacy Rate ( % )</h4>
                                 <p>Empowering through education</p>
                             </div>
                         </div>

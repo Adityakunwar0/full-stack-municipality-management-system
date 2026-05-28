@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import LatestProjects from '../common/LatestProjects'
 import Statistics from '../common/Statistics'
 import Footer from '../common/Footer'
+import Quote from '../common/Quote'
 
 const Home = () => {
   return (
@@ -62,6 +63,7 @@ const Home = () => {
         <LatestProjects />
 
         <Statistics />
+        <Quote />
 
         <Footer />
 

@@ -4,7 +4,7 @@ import Smart from '../../assets/images/smart.jpg'
 
 const LatestProjects = () => {
   return (
-     <section className="section-2 py-3">
+     <section className="section-2 light-background py-3">
       <div className="container-fluid py-5">
         <div className="section-header text-center">
           <span>Latest projects</span>

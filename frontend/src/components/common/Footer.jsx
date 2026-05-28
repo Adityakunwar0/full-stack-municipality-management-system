@@ -6,20 +6,20 @@ import Logo from '../../assets/images/logo.png';
 export const Footer = () => {
   return (
     <footer>
-      <div className="container py-4">
-        <div className="row">
-          <div className="col-md-3 ">
+      <div className="container py-5">
+        <div className="row ">
+          <div className="col-md-3 px-2">
             <Navbar.Brand href="/" className="logo">
             <img width={50} src={Logo} />
             <span>Gaur Municipality City <br /> Madhesh Province, Rautahat</span>
           </Navbar.Brand>
-            <div className="pe-10 mb-100">
+            <div className="pe-10 mt-3 ">
               <p >
                 Committed to transparenency, sustanbility and inclusive development for a better Tommorrow.
               </p>
             </div>
           </div>
-           <div className="col-md-3">
+           <div className="col-md-3 px-5">
             <h3 className="mb-3">Quick Links</h3>
             <ul>
                 <li>
@@ -36,7 +36,7 @@ export const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 px-1">
             <h3 className="mb-3">Useful Links</h3>
             <ul>
               <li>
@@ -54,7 +54,7 @@ export const Footer = () => {
             </ul>
           </div>
          
-          <div className="col-md-3">
+          <div className="col-md-3 px-2">
             <h3 className="mb-3">Contact Info</h3>
             <ul>
               <li>
