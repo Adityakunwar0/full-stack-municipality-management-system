@@ -23,7 +23,7 @@ export const Footer = () => {
             <h3 className="mb-3">Quick Links</h3>
             <ul>
                 <li>
-                <Link to="/about">Home</Link>
+                <Link to="/">Home</Link>
               </li>
               <li>
                 <Link to="/about">About </Link>
@@ -40,16 +40,16 @@ export const Footer = () => {
             <h3 className="mb-3">Useful Links</h3>
             <ul>
               <li>
-                <Link to="/service/7">Citizen Portal</Link>
+                <Link to="/citizen-portal">Citizen Portal</Link>
               </li>
               <li>
-                <Link to="/service/6">Public Notices</Link>
+                <Link to="/notices">Public Notices</Link>
               </li>
               <li>
-                <Link to="/service/4">Reports</Link>
+                <Link to="/reports">Reports</Link>
               </li>
               <li>
-                <Link to="/service/5">FAQs</Link>
+                <Link to="/faqs">FAQs</Link>
               </li>
             </ul>
           </div>

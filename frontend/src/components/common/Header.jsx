@@ -20,29 +20,18 @@ const Header = () => {
               <Nav.Link href="/about" className="nav-link">
                 About
               </Nav.Link>
-              <Nav.Link href="/services" className="nav-link">
+              <Nav.Link href="/projects" className="nav-link">
                 Projects
               </Nav.Link>
-              <Nav.Link href="/projects" className="nav-link">
+              <Nav.Link href="/notices" className="nav-link">
                 Notices
               </Nav.Link>
-              <Nav.Link href="/blogs" className="nav-link">
+              <Nav.Link href="/contacts" className="nav-link">
                 Contact
               </Nav.Link>
-              <Nav.Link href="/contact" className="citizen-btn">
+              <Nav.Link href="/citizen-portal" className="citizen-btn">
                 <span className="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <circle cx="12" cy="7" r="4"></circle>
-                    <path d="M5.5 21c0-4.5 3-7 6.5-7s6.5 2.5 6.5 7"></path>
-                  </svg>
+                  <i class="fa-solid fa-user"></i>
                 </span>
                 Citizen Portal
               </Nav.Link>
