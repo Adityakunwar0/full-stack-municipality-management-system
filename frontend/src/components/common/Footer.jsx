@@ -46,7 +46,7 @@ export const Footer = () => {
                 <Link to="/complaint">Citizen Complaints</Link>
               </li>
               <li>
-                <Link to="/reports">Public Notices</Link>
+                <Link to="/notices">Public Notices</Link>
               </li>
               <li>
                 <Link to="/faqs">FAQs</Link>

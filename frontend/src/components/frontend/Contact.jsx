@@ -20,7 +20,7 @@ const Contact = () => {
               <div className="card-icon"><i className="fa fa-phone"></i></div>
               <div className="card-body">
                 <h3>Call Us</h3>
-                <a href="tel:+97715551234" className="card-highlight">+977 1-5551234</a>
+                <a href="tel:+97755520292" className="card-highlight">+977 55-520292</a>
                 <p>Sun – Fri (10:00 AM – 5:00 PM)</p>
               </div>
             </div>
