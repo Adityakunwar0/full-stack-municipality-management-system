@@ -9,6 +9,7 @@ import Contact from './components/frontend/Contact';
 import ScrollToTop from './components/common/ScrollToTop';
 import Login from './components/frontend/Login';
 import Complaint from './components/frontend/Complaint';
+import CitizenPortal from './components/Trial/CitizenPortal';
 
 
 const App = () => {
@@ -24,6 +25,9 @@ const App = () => {
           <Route path='/contacts' element={<Contact />} />
           <Route path='/login' element={<Login />} />
           <Route path='/complaint' element={<Complaint />} />
+
+          <Route path='/citizenPortal' element={<CitizenPortal />} />
+
 
         </Routes>
 

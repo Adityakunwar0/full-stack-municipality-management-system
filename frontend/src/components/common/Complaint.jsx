@@ -6,7 +6,7 @@ const Complaint = () => {
             <div className="container contact-wrapper">
 
                 <div className="message-box">
-                    <h2>Submit a Complaint Without LogIn :</h2>
+                    <h2>Without LogIn Complaint Here :</h2>
                     <p>
                         Please fill out the form below to register your complaint.
                         Our team will review and respond accordingly.
