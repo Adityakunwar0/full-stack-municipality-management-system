@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import Logo from '../../assets/images/logo.png';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -29,12 +30,28 @@ const Header = () => {
               <Nav.Link href="/contacts" className="nav-link">
                 Contact
               </Nav.Link>
-              <Nav.Link href="/citizen-portal" className="citizen-btn">
-                <span className="icon">
-                  <i class="fa-solid fa-user"></i>
-                </span>
-                Citizen Portal
-              </Nav.Link>
+              <div className="portal-dropdown">
+                <div className="citizen-btn">
+                  <span className="icon">
+                    <i className="fa-solid fa-user"></i>
+                  </span>
+                  Citizen Portal
+                  <i className="fa-solid fa-chevron-down"></i>
+                </div>
+
+                <div className="portal-menu">
+                  <Nav.Link href="/login">
+                    <i className="fa-solid fa-right-to-bracket"></i>
+                    Login
+                  </Nav.Link>
+
+                  <Nav.Link href="/complaint">
+                    <i className="fa-solid fa-triangle-exclamation"></i>
+                    Complaint Here
+                  </Nav.Link>
+                </div>
+              </div>
+
             </Nav>
           </Navbar.Collapse>
         </Navbar>

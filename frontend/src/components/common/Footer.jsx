@@ -40,13 +40,13 @@ export const Footer = () => {
             <h3 className="mb-3">Useful Links</h3>
             <ul>
               <li>
-                <Link to="/citizen-portal">Citizen Portal</Link>
+                <Link to="/login">Citizen Login</Link>
               </li>
               <li>
-                <Link to="/notices">Public Notices</Link>
+                <Link to="/complaint">Citizen Complaints</Link>
               </li>
               <li>
-                <Link to="/reports">Reports</Link>
+                <Link to="/reports">Public Notices</Link>
               </li>
               <li>
                 <Link to="/faqs">FAQs</Link>

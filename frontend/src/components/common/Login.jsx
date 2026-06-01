@@ -2,7 +2,7 @@ import React from 'react'
 
 const Login = () => {
   return (
-     <div className="container  my-5 d-flex justify-content-center">
+             <div className="container  my-5 d-flex justify-content-center">
           <div className="login-form  my-5">
             <div className="card border-0 light-background shadow">
               <div className="card-body p-5 ">

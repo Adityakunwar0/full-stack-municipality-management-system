@@ -7,7 +7,8 @@ import Projects from './components/frontend/Projects';
 import Notices from './components/frontend/Notices';
 import Contact from './components/frontend/Contact';
 import ScrollToTop from './components/common/ScrollToTop';
-import CitizenPortal from './components/frontend/CitizenPortal';
+import Login from './components/frontend/Login';
+import Complaint from './components/frontend/Complaint';
 
 
 const App = () => {
@@ -21,7 +22,8 @@ const App = () => {
           <Route path='/projects' element={<Projects />} />
           <Route path='/notices' element={<Notices />} />
           <Route path='/contacts' element={<Contact />} />
-          <Route path='/citizen-portal' element={<CitizenPortal />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/complaint' element={<Complaint />} />
 
         </Routes>
 
