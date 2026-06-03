@@ -1,7 +1,7 @@
 import React from 'react'
 import Footer from '../common/Footer'
 import Header from '../common/Header'
-import {default as CommonComplaint} from '../common/Complaint'
+import { default as CommonComplaint } from '../common/Complaint'
 import Quote from '../common/Quote'
 import Hero from '../common/Hero'
 
@@ -9,8 +9,8 @@ import Hero from '../common/Hero'
 const Complaint = () => {
   return (
     <>
-    <Header/>
-    <main>
+      <Header />
+      <main>
         <Hero
           preHeading="Building Today For A Better Tommorow."
           heading="Complaint Us "
@@ -19,12 +19,12 @@ const Complaint = () => {
         <CommonComplaint />
 
         <Quote />
-        
 
-    </main>
-    <Footer />
 
-     </>
+      </main>
+      <Footer />
+
+    </>
   )
 }
 

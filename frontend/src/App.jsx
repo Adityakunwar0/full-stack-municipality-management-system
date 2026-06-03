@@ -9,7 +9,6 @@ import Contact from './components/frontend/Contact';
 import ScrollToTop from './components/common/ScrollToTop';
 import Login from './components/frontend/Login';
 import Complaint from './components/frontend/Complaint';
-import CitizenPortal from './components/Trial/CitizenPortal';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/backend/Dashboard";
@@ -31,24 +30,23 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/complaint' element={<Complaint />} />
 
-          <Route path='/citizenPortal' element={<CitizenPortal />} />
-<Route
-  path="/admin/dashboard"
-  element={
-    <RequireAuth role="admin">
-      <Dashboard />
-    </RequireAuth>
-  }
-/>
+          <Route
+            path="/admin/dashboard"
+            element={
+              <RequireAuth role="admin">
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
 
-<Route
-  path="/user/dashboard"
-  element={
-    <RequireAuth role="user">
-      <Dashboard />
-    </RequireAuth>
-  }
-/>
+          <Route
+            path="/user/dashboard"
+            element={
+              <RequireAuth role="user">
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
 
         </Routes>
 

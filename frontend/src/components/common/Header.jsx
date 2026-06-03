@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import Logo from '../../assets/images/logo.png';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../backend/context/Auth";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <header>
       <div className="container py-2">
@@ -31,27 +34,43 @@ const Header = () => {
                 Contact
               </Nav.Link>
               <div className="portal-dropdown">
-                <div className="citizen-btn">
-                  <span className="icon">
-                    <i className="fa-solid fa-user"></i>
-                  </span>
-                  Citizen Portal
-                  <i className="fa-solid fa-chevron-down"></i>
-                </div>
 
-                <div className="portal-menu">
-                  <Nav.Link href="/login">
-                    <i className="fa-solid fa-right-to-bracket"></i>
-                    Login
-                  </Nav.Link>
+                {!user ? (
+                  <>
+                    <div className="citizen-btn">
+                      <span className="icon">
+                        <i className="fa-solid fa-user"></i>
+                      </span>
+                      Citizen Portal
+                      <i className="fa-solid fa-chevron-down"></i>
+                    </div>
 
-                  <Nav.Link href="/complaint">
-                    <i className="fa-solid fa-triangle-exclamation"></i>
-                    Complaint Here
-                  </Nav.Link>
-                </div>
+                    <div className="portal-menu">
+                      <Link to="/login">
+                        <i className="fa-solid fa-right-to-bracket"></i>
+                        Login
+                      </Link>
+
+                      <Link to="/complaint">
+                        <i className="fa-solid fa-triangle-exclamation"></i>
+                        Complaint Here
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="citizen-btn">
+                      <span className="icon">
+                        <i className="fa-solid fa-user-circle"></i>
+                      </span>
+
+                      {user.name}
+                    </div>
+
+                  </>
+                )}
+
               </div>
-
             </Nav>
           </Navbar.Collapse>
         </Navbar>

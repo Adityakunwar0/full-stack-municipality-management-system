@@ -67,9 +67,6 @@ const Home = () => {
 
         <Footer />
 
-
-
-
       </main>
 
     </>

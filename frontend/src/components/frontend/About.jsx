@@ -9,9 +9,9 @@ import Quote from '../common/Quote'
 const About = () => {
   return (
     <>
-    <Header />
-    <main>
-      <Hero
+      <Header />
+      <main>
+        <Hero
           preHeading="Building Today For A Better Tommorow."
           heading="About Municipality"
           text=" Gaur Municipality is commited to transparent <br/> governance, sustainable development, and  <br/> improving lives through efficient projects  <br/> and community teamwork to build a  <br/> stronger,  smarter         
@@ -22,11 +22,11 @@ const About = () => {
         <Statistics />
         <Quote />
 
-    </main>
-    
+      </main>
 
-    <Footer />
-    
+
+      <Footer />
+
     </>
   )
 }

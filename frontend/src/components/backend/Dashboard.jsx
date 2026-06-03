@@ -5,10 +5,16 @@ import BannerImage from "../../assets/images/pond.png";
 import PopularServices from "../common/PopularServices";
 import Dash from "../common/Dash";
 import { AuthContext } from "./context/Auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  }
   return (
     <>
       <Header />
@@ -30,19 +36,9 @@ const Dashboard = () => {
 
                 <p>
                   Your one-stop platform to access municipal services,
-                  track requests, make payments, and stay updated.
+                  track requests,  <br/> make payments, and stay updated.
                 </p>
 
-                <div className="search-box">
-                  <input
-                    type="text"
-                    placeholder="Search services, documents, or information..."
-                  />
-
-                  <button>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </div>
               </div>
 
               {/* Right Profile Card */}
@@ -94,10 +90,13 @@ const Dashboard = () => {
 
                 </ul>
 
-                <div className="logout">
-                  <i className="fa-solid fa-right-from-bracket"></i>
-                  Logout
-                </div>
+                <button
+          className="btn btn-primary small "
+          onClick={handleLogout}
+        >
+          <i className="fa-solid fa-right-to-bracket"></i>
+          Logout
+        </button>
               </div>
 
             </div>
