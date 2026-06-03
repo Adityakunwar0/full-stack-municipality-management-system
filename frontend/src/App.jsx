@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/backend/Dashboard";
 import RequireAuth from "./components/common/RequireAuth";
+import AdminPanel from './components/backend/AdminPanel';
 
 
 
@@ -44,6 +45,14 @@ const App = () => {
             element={
               <RequireAuth role="user">
                 <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/panel"
+            element={
+              <RequireAuth  >
+                <AdminPanel />
               </RequireAuth>
             }
           />

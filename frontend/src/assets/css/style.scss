@@ -1293,3 +1293,32 @@ footer {
         }
     }
 }
+
+.sidebar {
+    ul {
+        li {
+            list-style: none;
+
+
+            a {
+                display: block;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+                text-decoration: none;
+                color: #000000;
+
+            }
+        }
+    }
+}
+.login-form {
+    .card{
+        width: 400px;
+    }
+}
+
+.dashboard{
+    .card{
+        min-height: 400px;
+    }
+}

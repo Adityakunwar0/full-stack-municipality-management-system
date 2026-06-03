@@ -59,13 +59,13 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <div className="citizen-btn">
+                    <Link to={user?.role === "admin" ? "/admin/dashboard" : "/user/dashboard"} className="citizen-btn text-decoration-none">
                       <span className="icon">
                         <i className="fa-solid fa-user-circle"></i>
                       </span>
 
                       {user.name}
-                    </div>
+                    </Link>
 
                   </>
                 )}

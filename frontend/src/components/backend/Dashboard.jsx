@@ -36,7 +36,7 @@ const Dashboard = () => {
 
                 <p>
                   Your one-stop platform to access municipal services,
-                  track requests,  <br/> make payments, and stay updated.
+                  track requests,  <br /> make payments, and stay updated.
                 </p>
 
               </div>
@@ -62,8 +62,12 @@ const Dashboard = () => {
 
                 <ul>
                   {user?.role === "admin" && (
-                    <li>
-                      <Link to="/admin/dashboard">
+                    <li className="d-flex justify-content-center my-2">
+                      <Link
+                        to="/admin/panel"
+                        className="btn btn-primary small text-white px-4 py-2 d-flex align-items-center gap-2"
+                        style={{ borderRadius: "10px", minWidth: "160px", justifyContent: "center" }}
+                      >
                         <i className="fa-regular fa-user-shield"></i>
                         Admin Panel
                       </Link>
@@ -91,12 +95,12 @@ const Dashboard = () => {
                 </ul>
 
                 <button
-          className="btn btn-primary small "
-          onClick={handleLogout}
-        >
-          <i className="fa-solid fa-right-to-bracket"></i>
-          Logout
-        </button>
+                  className="btn btn-primary small "
+                  onClick={handleLogout}
+                >
+                  <i className="fa-solid fa-right-to-bracket"></i>
+                  Logout
+                </button>
               </div>
 
             </div>
