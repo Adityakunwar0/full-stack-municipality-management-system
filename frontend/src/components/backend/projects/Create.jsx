@@ -160,13 +160,13 @@ const Create = ({ placeholder }) => {
                       <div className="col-md-6">
                         <div className="mb-3">
                           <label htmlFor="" className="form-label">
-                            Construction Type
+                            Project Type
                           </label>
                           <select
                             className="form-control"
                             {...register("construction_type")}
                           >
-                            <option value="">Construction Type</option>
+                            <option value="">Project Type</option>
                             <option value="Residential construction">
                               Residential construction
                             </option>

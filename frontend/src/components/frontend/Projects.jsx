@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from "react"
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
 import { Link } from 'react-router-dom'
 import Smart from '../../assets/images/smart.jpg'
 import Quote from '../common/Quote'
+import { apiurl, fileUrl } from "../common/Http";
 
 const Projects = () => {
+  const [projects, setProjects] = useState([]);
+
+  const fetchAllProjects = async () => {
+    const res = await fetch(apiurl + "get-projects", {
+      method: "GET",
+    });
+    const result = await res.json();
+    // console.log(result);
+    setProjects(result.data);
+  };
+  useEffect(() => {
+    fetchAllProjects();
+  }, []);
+
   return (
     <>
     <Header/>
@@ -27,26 +42,28 @@ const Projects = () => {
              for organized, transparent, and efficient city operations.
               </p>
             </div>
-            <div className="row pt-4">
-              
-                    <div  className="col-md-4 col-lg-4">
+             <div className="row pt-4">
+              {projects &&
+                projects.map((project) => {
+                  return (
+                    <div key={project.id} className="col-md-4 col-lg-4">
                       <div className="item">
                         <div className="service-image">
                           <img
-                            src={Smart}
+                            src={`${fileUrl}uploads/projects/small/${project.image}`}
                             alt=""
                             className="w-100"
                           />
                         </div>
                         <div className="service-body">
                           <div className="service-title">
-                            <h3>Smart Road Development</h3>
+                            <h3>{project.title}</h3>
                           </div>
                           <div className="service-content">
-                            <p>Upgrading city roads with modern infrastructure for smoother and safer connectivity</p>
+                            <p>{project.short_desc}</p>
                           </div>
                           <Link
-                            to="/"
+                            to={`/project/${project.id}`}
                             className="btn btn-primary small"
                           >
                             Read More
@@ -54,7 +71,8 @@ const Projects = () => {
                         </div>
                       </div>
                     </div>
-                 
+                  );
+                })}
             </div>
           </div>
         </section>

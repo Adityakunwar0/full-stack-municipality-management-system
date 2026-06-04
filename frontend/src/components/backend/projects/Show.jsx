@@ -101,7 +101,7 @@ const Show = () => {
                                    <div className="d-flex flex-column flex-md-row gap-2">
                                   <Link
                                   to={`/admin/projects/edit/${project.id}`}
-                                  className="btn btn-primary small "
+                                  className="btn btn-secondary small "
                                 >
                                   Edit
                                 </Link>

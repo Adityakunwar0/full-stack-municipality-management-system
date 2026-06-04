@@ -6,9 +6,15 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Http\Controllers\front\ProjectController as FrontProjectController;
+
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
+
+Route::get('get-projects', [FrontProjectController::class,'index']);
+Route::get('get-latest-projects', [FrontProjectController::class,'latestProjects']);
+Route::get('get-project/{id}', [FrontProjectController::class,'project']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 
