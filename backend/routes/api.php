@@ -9,6 +9,8 @@ use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\front\ProjectController as FrontProjectController;
 use App\Http\Controllers\admin\NoticeController;
 use App\Http\Controllers\front\NoticeController as FrontNoticeController;
+use App\Http\Controllers\admin\MemberController;
+use App\Http\Controllers\front\MemberController as FrontMemberController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -20,6 +22,8 @@ Route::get('get-project/{id}', [FrontProjectController::class,'project']);
 Route::get('get-notices', [FrontNoticeController::class,'index']);
 Route::get('get-latest-notices', [FrontNoticeController::class,'latestNotices']);
 Route::get('get-notice/{id}', [FrontNoticeController::class,'notice']);
+
+Route::get('get-members', [FrontMemberController::class,'index']);
 
 
 
@@ -41,6 +45,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('notices/{id}', [NoticeController::class,'update']);
         Route::get('notices/{id}', [NoticeController::class,'show']);
         Route::delete('notices/{id}', [NoticeController::class,'destroy']);
+
+        Route::post('members', [MemberController::class,'store']);
+        Route::get('members', [MemberController::class,'index']);
+        Route::get('members/{id}', [MemberController::class,'show']);
+        Route::put('members/{id}', [MemberController::class,'update']);
+        Route::delete('members/{id}', [MemberController::class,'destroy']);
 
         
 

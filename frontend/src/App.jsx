@@ -20,6 +20,10 @@ import { default as EditProjects } from "./components/backend/projects/Edit";
 import { default as ShowNotices } from "./components/backend/notices/Show";
 import { default as CreateNotices } from "./components/backend/notices/Create";
 import { default as EditNotices } from "./components/backend/notices/Edit";
+import { default as ShowMembers } from "./components/backend/members/Show";
+import { default as CreateMembers } from "./components/backend/members/Create";
+import { default as EditMembers } from "./components/backend/members/Edit";
+
 const App = () => {
   return (
     <>
@@ -104,6 +108,30 @@ const App = () => {
             element={
               <RequireAuth>
                 <EditNotices />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/members"
+            element={
+              <RequireAuth>
+                <ShowMembers />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/members/create"
+            element={
+              <RequireAuth>
+                <CreateMembers />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/members/edit/:id"
+            element={
+              <RequireAuth>
+                <EditMembers />
               </RequireAuth>
             }
           />
