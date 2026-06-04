@@ -14,8 +14,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./components/backend/Dashboard";
 import RequireAuth from "./components/common/RequireAuth";
 import AdminPanel from './components/backend/AdminPanel';
-
-
+import { default as ShowProjects } from "./components/backend/projects/Show";
+import { default as CreateProjects } from "./components/backend/projects/Create";
+import { default as EditProjects } from "./components/backend/projects/Edit";
 
 const App = () => {
   return (
@@ -53,6 +54,30 @@ const App = () => {
             element={
               <RequireAuth  >
                 <AdminPanel />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/projects"
+            element={
+              <RequireAuth>
+                <ShowProjects />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/projects/create"
+            element={
+              <RequireAuth>
+                <CreateProjects />
+              </RequireAuth>
+            }
+          />
+           <Route
+            path="/admin/projects/edit/:id"
+            element={
+              <RequireAuth>
+                <EditProjects />
               </RequireAuth>
             }
           />
