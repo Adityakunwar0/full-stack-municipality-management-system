@@ -17,7 +17,9 @@ import AdminPanel from './components/backend/AdminPanel';
 import { default as ShowProjects } from "./components/backend/projects/Show";
 import { default as CreateProjects } from "./components/backend/projects/Create";
 import { default as EditProjects } from "./components/backend/projects/Edit";
-
+import { default as ShowNotices } from "./components/backend/notices/Show";
+import { default as CreateNotices } from "./components/backend/notices/Create";
+import { default as EditNotices } from "./components/backend/notices/Edit";
 const App = () => {
   return (
     <>
@@ -78,6 +80,30 @@ const App = () => {
             element={
               <RequireAuth>
                 <EditProjects />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/notices"
+            element={
+              <RequireAuth>
+                <ShowNotices />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/notices/create"
+            element={
+              <RequireAuth>
+                <CreateNotices />
+              </RequireAuth>
+            }
+          />
+           <Route
+            path="/admin/notices/edit/:id"
+            element={
+              <RequireAuth>
+                <EditNotices />
               </RequireAuth>
             }
           />

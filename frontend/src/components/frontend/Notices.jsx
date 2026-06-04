@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
-import Water from '../../assets/images/water.png'
 import { Link } from 'react-router-dom'
 import Quote from '../common/Quote'
+import { apiurl, fileUrl } from "../common/Http";
 
 const Notices = () => {
+  const [notices, setNotices] = useState([]);
+  
+    const fetchAllNotices = async () => {
+      const res = await fetch(apiurl + "get-notices", {
+        method: "GET",
+      });
+      const result = await res.json();
+      // console.log(result);
+      setNotices(result.data);
+    };
+    useEffect(() => {
+      fetchAllNotices();
+    }, []);
+
   return (
     <>
     <Header />
@@ -26,25 +40,28 @@ const Notices = () => {
               </p>
             </div>
             <div className="row pt-4">
+              {notices &&
+                notices.map((notice) => {
+                  return (
               
-                    <div  className="col-md-4 col-lg-4">
+                    <div key={notice.id} className="col-md-4 col-lg-4">
                       <div className="item">
                         <div className="service-image">
                           <img
-                            src={Water}
+                            src={`${fileUrl}uploads/notices/small/${notice.image}`}
                             alt=""
                             className="w-100"
                           />
                         </div>
                         <div className="service-body">
                           <div className="service-title">
-                            <h3>Water Supply Maintenance</h3>
+                            <h3>{notice.title}</h3>
                           </div>
                           <div className="service-content">
-                            <p>Water Supply Will be interrupted from 10:00 AM to 4:00 PM due to pipeline maintenance in Ward 5</p>
+                            <p>{notice.short_desc}</p>
                           </div>
                           <Link
-                            to="/"
+                            to={`/notice/${notice.id}`}
                             className="btn btn-primary small"
                           >
                             Read More
@@ -52,6 +69,8 @@ const Notices = () => {
                         </div>
                       </div>
                     </div>
+                  );
+                })}
                  
             </div>
           </div>

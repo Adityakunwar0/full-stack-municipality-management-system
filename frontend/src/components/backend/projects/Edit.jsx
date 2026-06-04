@@ -116,7 +116,7 @@ const Edit = ({ placeholder }) => {
             <div className="col-md-9">
               {/* Dashboard */}
               <div className="card shadow border-0">
-                <div className="card-body">
+                <div className="light-background card-body">
                   <div className="d-flex justify-content-between">
                     <h4 className="h5">Projects / Edit </h4>
                     <Link to="/admin/projects" className="btn btn-primary">

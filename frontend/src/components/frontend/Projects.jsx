@@ -3,7 +3,6 @@ import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
 import { Link } from 'react-router-dom'
-import Smart from '../../assets/images/smart.jpg'
 import Quote from '../common/Quote'
 import { apiurl, fileUrl } from "../common/Http";
 

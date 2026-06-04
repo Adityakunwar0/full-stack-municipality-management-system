@@ -5,6 +5,7 @@ import LatestProjects from '../common/LatestProjects'
 import Statistics from '../common/Statistics'
 import Footer from '../common/Footer'
 import Quote from '../common/Quote'
+import LatestNotices from '../common/LatestNotices'
 
 const Home = () => {
   return (
@@ -61,6 +62,7 @@ const Home = () => {
         </section>
 
         <LatestProjects />
+        <LatestNotices />
 
         <Statistics />
         <Quote />
