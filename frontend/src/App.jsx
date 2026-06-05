@@ -26,6 +26,9 @@ import { default as EditMembers } from "./components/backend/members/Edit";
 import { default as ShowStatistics } from "./components/backend/statistics/Show";
 import { default as CreateStatistics } from "./components/backend/statistics/Create";
 import { default as EditStatistics } from "./components/backend/statistics/Edit";
+import { default as ShowQuotes } from "./components/backend/quotes/Show";
+import { default as CreateQuotes } from "./components/backend/quotes/Create";
+import { default as EditQuotes } from "./components/backend/quotes/Edit";
 
 const App = () => {
   return (
@@ -159,6 +162,30 @@ const App = () => {
             element={
               <RequireAuth>
                 <EditStatistics />
+              </RequireAuth>
+            }
+          />
+                    <Route
+            path="/admin/quotes"
+            element={
+              <RequireAuth>
+                <ShowQuotes />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/quotes/create"
+            element={
+              <RequireAuth>
+                <CreateQuotes />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/quotes/edit/:id"
+            element={
+              <RequireAuth>
+                <EditQuotes />
               </RequireAuth>
             }
           />

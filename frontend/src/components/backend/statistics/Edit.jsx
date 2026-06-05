@@ -1,21 +1,21 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState } from "react";
 import Footer from "../../common/Footer";
 import Header from "../../common/Header";
 import Sidebar from "../../common/Sidebar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { apiurl, token, fileUrl } from "../../common/Http";
+import { apiurl, token } from "../../common/Http";
 import { useForm } from "react-hook-form";
 
 const Edit = () => {
-  const [statistic, setStatistic] = useState([]);
+  const [isDisable, setIsDisable] = useState(false);
+  const [statistic, setStatistic] = useState({});
 
   const params = useParams();
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: async () => {
@@ -28,12 +28,11 @@ const Edit = () => {
         },
       });
       const result = await res.json();
-
       setStatistic(result.data);
       return {
         icon_name: result.data.icon_name,
         number: result.data.number,
-        title: result.data.title,     
+        title: result.data.title,
         slog: result.data.slog,
       };
     },
@@ -41,7 +40,9 @@ const Edit = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = async () => {
+  // ✅ Fixed: added (data) parameter and use it in body
+  const onSubmit = async (data) => {
+    setIsDisable(true);
     const res = await fetch(apiurl + "statistics/" + params.id, {
       method: "PUT",
       headers: {
@@ -49,10 +50,11 @@ const Edit = () => {
         Accept: "application/json",
         Authorization: `Bearer ${token()}`,
       },
-      body: JSON.stringify(newData),
+      body: JSON.stringify(data), // ✅ Fixed
     });
     const result = await res.json();
-    // console.log(result);
+
+    setIsDisable(false);
 
     if (result.status == true) {
       toast.success(result.message);
@@ -61,7 +63,6 @@ const Edit = () => {
       toast.error(result.message);
     }
   };
-  
 
   return (
     <>
@@ -69,26 +70,22 @@ const Edit = () => {
       <main>
         <div className="container my-5">
           <div className="row">
-            <div className="col-md-3 ">
+            <div className="col-md-3">
               <Sidebar />
-              {/* sidebar */}
             </div>
             <div className="col-md-9">
-              {/* Dashboard */}
               <div className="card shadow border-0">
                 <div className="card-body">
                   <div className="d-flex justify-content-between">
-                    <h4 className="h5">statistics / Edit </h4>
+                    <h4 className="h5">Statistics / Edit</h4>
                     <Link to="/admin/statistics" className="btn btn-primary">
                       Back
                     </Link>
                   </div>
                   <hr />
-                   <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">
-                      <label htmlFor="" className="form-label">
-                        Icon_Name
-                      </label>
+                      <label className="form-label">Icon Name</label>
                       <textarea
                         placeholder="Icon_Name"
                         {...register("icon_name", {
@@ -103,12 +100,11 @@ const Edit = () => {
                         </p>
                       )}
                     </div>
+
                     <div className="mb-3">
-                      <label htmlFor="" className="form-label">
-                        Numbers
-                      </label>
+                      <label className="form-label">Number</label>
                       <input
-                        placeholder="Numbers"
+                        placeholder="Number"
                         {...register("number", {
                           required: "The Number field is required",
                         })}
@@ -122,34 +118,32 @@ const Edit = () => {
                       )}
                     </div>
 
-                    
                     <div className="mb-3">
-                      <label htmlFor="" className="form-label">
-                        Title
-                      </label>
+                      <label className="form-label">Title</label>
                       <input
                         placeholder="Title"
                         {...register("title")}
                         type="text"
-                        className={`form-control`}
+                        className="form-control"
                       />
                     </div>
+
                     <div className="mb-3">
-                      <label htmlFor="" className="form-label">
-                        Slog
-                      </label>
+                      <label className="form-label">Slog</label>
                       <input
                         placeholder="Slog"
                         {...register("slog")}
                         type="text"
-                        className={`form-control`}
+                        className="form-control"
                       />
                     </div>
-                    
-                    <button 
+
+                    {/* ✅ Fixed: button is disabled while submitting */}
+                    <button
+                      disabled={isDisable}
                       className="btn btn-primary small"
                     >
-                      submit
+                      Update
                     </button>
                   </form>
                 </div>
@@ -158,7 +152,6 @@ const Edit = () => {
           </div>
         </div>
       </main>
-
       <Footer />
     </>
   );

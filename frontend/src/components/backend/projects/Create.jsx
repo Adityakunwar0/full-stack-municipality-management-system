@@ -164,7 +164,7 @@ const Create = ({ placeholder }) => {
                           </label>
                           <select
                             className="form-control"
-                            {...register("construction_type")}
+                            {...register("project_type")}
                           >
                             <option value="">Project Type</option>
                             <option value="Residential construction">

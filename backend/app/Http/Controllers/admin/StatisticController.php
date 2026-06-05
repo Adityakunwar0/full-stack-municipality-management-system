@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Statistic; 
+use Illuminate\Support\Facades\Validator;
 
 class StatisticController extends Controller
 {
@@ -21,6 +22,17 @@ class StatisticController extends Controller
     //This method will insert a statstic in db 
 
     public function store(Request $request){
+         $validator = Validator::make($request->all(),[
+            'icon_name' => 'required',
+            'number' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
         
         
         $statistic = new Statistic();
@@ -48,7 +60,18 @@ class StatisticController extends Controller
             ]);
 
             
-        }       
+        }   
+         $validator = Validator::make($request->all(),[
+            'icon_name' => 'required',
+            'number' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }    
         $statistic->icon_name = $request->icon_name;
         $statistic->number = $request->number;
         $statistic->title = $request->title;

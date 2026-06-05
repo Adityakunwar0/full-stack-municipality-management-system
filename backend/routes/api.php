@@ -13,6 +13,8 @@ use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\front\MemberController as FrontMemberController;
 use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\front\StatisticController as FrontStatisticController;
+use App\Http\Controllers\admin\QuoteController;
+use App\Http\Controllers\front\QuoteController as FrontQuoteController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -28,6 +30,8 @@ Route::get('get-notice/{id}', [FrontNoticeController::class,'notice']);
 Route::get('get-members', [FrontMemberController::class,'index']);
 
 Route::get('get-statistics', [FrontStatisticController::class,'index']);
+
+Route::get('get-quotes', [FrontQuoteController::class,'index']);
 
 
 
@@ -61,6 +65,13 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::get('statistics/{id}', [StatisticController::class,'show']);
         Route::put('statistics/{id}', [StatisticController::class,'update']);
         Route::delete('statistics/{id}', [StatisticController::class,'destroy']);
+
+        Route::post('quotes', [QuoteController::class,'store']);
+        Route::get('quotes', [QuoteController::class,'index']);
+        Route::get('quotes/{id}', [QuoteController::class,'show']);
+        Route::put('quotes/{id}', [QuoteController::class,'update']);
+        Route::delete('quotes/{id}', [QuoteController::class,'destroy']);
+
 
         
 

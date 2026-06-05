@@ -7,10 +7,10 @@ import { apiurl, token } from "../../common/Http";
 import { toast } from "react-toastify";
 
 const Show = () => {
-  const [members, setMembers] = useState([]);
+  const [quotes, setQuotes] = useState([]);
 
-  const fetchMembers = async () => {
-    const res = await fetch(apiurl + "members", {
+  const fetchQuotes= async () => {
+    const res = await fetch(apiurl + "quotes", {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -19,13 +19,13 @@ const Show = () => {
       },
     });
     const result = await res.json();
-    setMembers(result.data);
+    setQuotes(result.data);
     // console.log(result);
   };
 
-  const deleteMember = async (id) => {
+  const deleteQuotes = async (id) => {
     if (confirm("Are You Sure You Want to Delete ?")) {
-      const res = await fetch(apiurl + "members/" + id, {
+      const res = await fetch(apiurl + "quotes/" + id, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
@@ -36,8 +36,8 @@ const Show = () => {
       const result = await res.json();
 
       if (result.status == true) {
-        const newMembers = members.filter((member) => member.id != id);
-        setMembers(newMembers);
+        const newQuotes = quotes.filter((quote) => quote.id != id);
+        setQuotes(newQuotes);
         toast.success(result.message);
       } else {
         toast.error(result.message);
@@ -47,7 +47,7 @@ const Show = () => {
     //setServices(result.data)
   };
   useEffect(() => {
-    fetchMembers();
+    fetchQuotes();
   }, []);
 
   return (
@@ -65,9 +65,9 @@ const Show = () => {
               <div className="card shadow border-0">
                 <div className="card-body">
                   <div className="d-flex justify-content-between">
-                    <h4 className="h5">Members</h4>
+                    <h4 className="h5">Quotes</h4>
                     <Link
-                      to="/admin/members/create"
+                      to="/admin/quotes/create"
                       className="btn btn-primary"
                     >
                       Create
@@ -79,33 +79,33 @@ const Show = () => {
                       <thead>
                         <tr>
                           <th>ID</th>
+                          <th>Quote</th>
                           <th>Name</th>
-                          <th>Job Title</th>
-                          <th>Status</th>
+                          <th>Designation_title</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {members &&
-                          members.map((member) => {
+                        {quotes &&
+                          quotes.map((quote) => {
                             return (
-                              <tr key={`member-${member.id}`}>
-                                <td>{member.id}</td>
-                                <td>{member.name}</td>
-                                <td>{member.job_title}</td>
+                              <tr key={`quote-${quote.id}`}>
+                                <td>{quote.id}</td>
+                                <td>{quote.quote}</td>
+                                <td>{quote.name}</td>
                                 <td>
-                                  {member.status == 1 ? "Active" : "Block"}
+                                  {quote.designation_title}
                                 </td>
                                 <td>
                                   <div className="d-flex flex-column flex-md-row gap-2">
                                     <Link
-                                      to={`/admin/members/edit/${member.id}`}
+                                      to={`/admin/quotes/edit/${quote.id}`}
                                       className="btn btn-primary small "
                                     >
                                       Edit
                                     </Link>
                                     <Link
-                                      onClick={() => deleteMember(member.id)}
+                                      onClick={() => deleteQuotes(quote.id)}
                                       href="#"
                                       className="btn btn-secondary small ms-2"
                                     >

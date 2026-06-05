@@ -48,7 +48,7 @@ class ProjectController extends Controller
         $project->slug = Str::slug($request->slug);
         $project->short_desc = $request->short_desc;
         $project->content = $request->content;
-        $project->construction_type = $request->construction_type;
+        $project->project_type = $request->project_type;
         $project->sector = $request->sector;
         $project->status = $request->status;
         $project->location = $request->location;
@@ -121,7 +121,7 @@ class ProjectController extends Controller
         $project->slug = Str::slug($request->slug);
         $project->short_desc = $request->short_desc;
         $project->content = $request->content;
-        $project->construction_type = $request->construction_type;
+        $project->project_type = $request->project_type;
         $project->sector = $request->sector;
         $project->status = $request->status;
         $project->location = $request->location;
