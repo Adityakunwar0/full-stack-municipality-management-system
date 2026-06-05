@@ -47,7 +47,7 @@ const Edit = ({ placeholder }) => {
         slug: result.data.slug,
         short_desc: result.data.short_desc,
         status: result.data.status,
-        construction_type: result.data.construction_type,
+        project_type: result.data.project_type,
         location: result.data.location,
         sector: result.data.sector,
       };

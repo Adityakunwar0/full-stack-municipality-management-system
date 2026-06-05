@@ -23,6 +23,9 @@ import { default as EditNotices } from "./components/backend/notices/Edit";
 import { default as ShowMembers } from "./components/backend/members/Show";
 import { default as CreateMembers } from "./components/backend/members/Create";
 import { default as EditMembers } from "./components/backend/members/Edit";
+import { default as ShowStatistics } from "./components/backend/statistics/Show";
+import { default as CreateStatistics } from "./components/backend/statistics/Create";
+import { default as EditStatistics } from "./components/backend/statistics/Edit";
 
 const App = () => {
   return (
@@ -132,6 +135,30 @@ const App = () => {
             element={
               <RequireAuth>
                 <EditMembers />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/statistics"
+            element={
+              <RequireAuth>
+                <ShowStatistics />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/statistics/create"
+            element={
+              <RequireAuth>
+                <CreateStatistics />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/statistics/edit/:id"
+            element={
+              <RequireAuth>
+                <EditStatistics />
               </RequireAuth>
             }
           />

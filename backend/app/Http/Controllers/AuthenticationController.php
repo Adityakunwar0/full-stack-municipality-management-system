@@ -14,28 +14,28 @@ class AuthenticationController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-         if($validator->fails()){
-                return response()->json([
-                    'status' => false,
-                    'error' => $validator->errors()
-                ]);
-            }
-            $credentials = [
-                'email' => $request->email,
-                'password' => $request->password,
-            ];
+        if($validator->fails()){
+            return response()->json([
+                'status' => false,
+                'error' => $validator->errors()
+            ]);
+        }
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
 
-            if(Auth::attempt($credentials)){
-                $user = Auth::user();
-                $token = $user->createToken('token')->plainTextToken;
-                return response()->json([
-                    'status' => true,
-                    'token' => $token,
-                    'id' => $user->id,
-        'name' => $user->name,
-        'email' => $user->email,
-        'role' => $user->role
-                ]);
+        if(Auth::attempt($credentials)){
+            $user = Auth::user();
+            $token = $user->createToken('token')->plainTextToken;
+            return response()->json([
+                'status' => true,
+                'token' => $token,
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role
+            ]);
             } else {
                 return response()->json([
                     'status' => false,

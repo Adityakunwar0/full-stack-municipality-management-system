@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\File;
 
 class NoticeController extends Controller
 {
+    // this method will return all notices
     public function index(){
         $notices = Notice::orderBy('created_at', 'DESC')->get();
        

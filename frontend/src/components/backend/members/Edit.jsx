@@ -35,7 +35,9 @@ const Edit = () => {
       return {
         name: result.data.name,
         job_title: result.data.job_title,
+        facebook_url: result.datafacebook_url,
         linkedin_url: result.data.lnkedin_url,
+        instagram_url: result.data.instagram_url,
         status: result.data.status,
       };
     },

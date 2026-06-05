@@ -13,6 +13,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class MemberController extends Controller
 {
+    // this method will return all members 
     public function index(){
         $members = Member::orderBy('created_at', 'DESC')->get();
        

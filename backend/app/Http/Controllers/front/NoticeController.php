@@ -9,6 +9,7 @@ use App\Models\Notice;
 
 class NoticeController extends Controller
 {
+    // This method will return all active notices
     public function index(){
         $notices = Notice::where('status',1)->orderBy('created_at','DESC')->get();
          return response()->json([
@@ -17,7 +18,7 @@ class NoticeController extends Controller
             ]);
     }
 
-    // This method will return latest active projects
+    // This method will return latest active notices
     public function latestNotices(Request $request){
         $notices = Notice::where('status',1)
                    ->take($request->get('limit'))
@@ -27,7 +28,7 @@ class NoticeController extends Controller
                 'data' => $notices
             ]);
     }
-     // This method will return a single service
+     // This method will return a single notice
     public function notice($id){
         $notice = Notice::find($id);
 

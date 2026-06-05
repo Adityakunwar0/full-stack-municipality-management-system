@@ -20,11 +20,12 @@ const Sidebar = () => {
                         <Link to="/admin/notices">Notices</Link>
                     </li>
                     <li>
-                        <Link to="/admin/members">Members</Link>
+                        <Link to="/admin/statistics">Statistics</Link>
                     </li>
                     <li>
-                        <Link to="/admin/testimonials">Testimonials</Link>
+                        <Link to="/admin/members">Members</Link>
                     </li>
+                    
                     <li>
                         <Link to="/admin/members">Members</Link>
                     </li>
