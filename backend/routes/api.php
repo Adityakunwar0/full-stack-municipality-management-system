@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\front\StatisticController as FrontStatisticController;
 use App\Http\Controllers\admin\QuoteController;
 use App\Http\Controllers\front\QuoteController as FrontQuoteController;
+use App\Http\Controllers\front\ContactController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -33,6 +34,7 @@ Route::get('get-statistics', [FrontStatisticController::class,'index']);
 
 Route::get('get-quotes', [FrontQuoteController::class,'index']);
 
+Route::post('contact-now', [ContactController::class,'index']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 

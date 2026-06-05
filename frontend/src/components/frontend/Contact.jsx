@@ -3,8 +3,38 @@ import Header from '../common/Header'
 import Footer from '../common/Footer'
 import Hero from '../common/Hero'
 import Quote from '../common/Quote'
+import { useForm } from 'react-hook-form'
+import { apiurl } from "../common/Http";
+import { toast } from "react-toastify";
 
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+   const onSubmit = async (data) => {
+  
+    const res = await fetch(apiurl + "contact-now", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (result.status === true) {
+      toast.success(result.message);
+      reset();
+    } else {
+      toast.error(result.message || "Something went wrong.");
+    }
+};
+
   return (
     <>
       <Header />
@@ -65,23 +95,59 @@ const Contact = () => {
                 will get back to you shortly.
               </p>
 
-              <form className="contact-form">
+              <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
                 <div className="form-group">
-                  <input type="text" placeholder="Your Name" />
+                  <input
+                    {...register("name", {
+                      required: "The name field is required",
+                    })}
+                    type="text" placeholder="Your Name"
+                    className={`form-control ${errors.name && "is-invalid"}`}
+                  /> {errors.name && (
+                    <p className="invalid-feedback">
+                      {errors.name?.message}
+                    </p>
+                  )}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="phone"
+                    {...register("phone")}
+                    className="form-control form-control-lg"
+                    placeholder="Your Phone Number" />
+                </div>
+                <div className="form-group">
+                  <input
+                    {...register("email", {
+                      required: "Thi email field is required",
+                      pattern: {
+                        value:
+                          /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Please enter a valid email address",
+                      },
+                    })}
+                    className={`form-control ${errors.email && "is-invalid"}`}
+                    type="email" placeholder="Your Email" />
+                  {errors.email && (
+                    <p className="invalid-feedback">
+                      {errors.email?.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="form-group">
-                  <input type="email" placeholder="Your Email" />
-                </div>
-
-                <div className="form-group">
-                  <input type="text" placeholder="Subject" />
+                  <input type="text"
+                    {...register("subject")}
+                    className="form-control form-control-lg"
+                    placeholder="Subject" />
                 </div>
 
                 <div className="form-group">
                   <textarea
+                    {...register("message")}
                     rows="6"
                     placeholder="Write Your Message"
+                    className="form-control form-control-lg"
                   ></textarea>
                 </div>
 
