@@ -94,6 +94,7 @@ p {
             0 4px 10px rgba(0, 0, 0, 0.1);
     }
 }
+
 header {
     background-color: $blue-background;
     color: $text-color;
@@ -788,178 +789,178 @@ footer {
 }
 
 .citizen-portal-section {
-  .portal-banner {
-    min-height: 550px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 35, 90, 0.55);
-    }
-  }
-
-  .portal-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-
-    @media (max-width: 992px) {
-      flex-direction: column;
-      padding: 50px 20px;
-    }
-  }
-
-  .portal-left {
-    flex: 1;
-    color: $text-color;
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-    }
-
-    .search-box {
-      max-width: 750px;
-      display: flex;
-      overflow: hidden;
-      border-radius: 12px;
-      background: $white-background;
-      margin-top: 30px;
-
-      input {
-        flex: 1;
-        border: none;
-        padding: 22px 25px;
-        font-size: 1.1rem;
-        outline: none;
-      }
-
-      button {
-        border: none;
-        background: $white-background;
-        padding: 0 30px;
-        color: $text-blue;
-        font-size: 2rem;
-        cursor: pointer;
+    .portal-banner {
+        min-height: 550px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
         display: flex;
         align-items: center;
-      }
-    }
-  }
 
-  .portal-card {
-    width: 340px;
-    background: $white-background;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    color: #22304d;
-
-    .user-info {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      margin-bottom: 25px;
-
-      .avatar {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        background: $white-background;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-
-        i {
-          font-size: 2rem;
-          color: $text-blue;
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 35, 90, 0.55);
         }
-      }
+    }
 
-      div {
-        h4 {
-          margin: 5px 0 3px 0;
-          color: #1a2c4e;
+    .portal-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 50px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+
+        @media (max-width: 992px) {
+            flex-direction: column;
+            padding: 50px 20px;
+        }
+    }
+
+    .portal-left {
+        flex: 1;
+        color: $text-color;
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         p {
-          margin: 0;
-          font-size: 14px;
-          color: #777;
+            font-size: 1.2rem;
+            max-width: 600px;
         }
-      }
+
+        .search-box {
+            max-width: 750px;
+            display: flex;
+            overflow: hidden;
+            border-radius: 12px;
+            background: $white-background;
+            margin-top: 30px;
+
+            input {
+                flex: 1;
+                border: none;
+                padding: 22px 25px;
+                font-size: 1.1rem;
+                outline: none;
+            }
+
+            button {
+                border: none;
+                background: $white-background;
+                padding: 0 30px;
+                color: $text-blue;
+                font-size: 2rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 14px 0;
+    .portal-card {
+        width: 340px;
+        background: $white-background;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         color: #22304d;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border-radius: 8px;
 
-        a {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          color: inherit;
-          text-decoration: none;
-          width: 100%;
+        .user-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 25px;
+
+            .avatar {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background: $white-background;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+
+                i {
+                    font-size: 2rem;
+                    color: $text-blue;
+                }
+            }
+
+            div {
+                h4 {
+                    margin: 5px 0 3px 0;
+                    color: #1a2c4e;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 14px;
+                    color: #777;
+                }
+            }
         }
 
-        &:hover {
-          color: $text-blue;
-          background: $white-background;
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 14px 0;
+                color: #22304d;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-radius: 8px;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    color: inherit;
+                    text-decoration: none;
+                    width: 100%;
+                }
+
+                &:hover {
+                    color: $text-blue;
+                    background: $white-background;
+                }
+            }
         }
-      }
-    }
 
-    .logout {
-      border-top: 1px solid $white-background;
-      margin-top: 20px;
-      padding-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: $text-blue;
-      cursor: pointer;
-      font-weight: 600;
-      background: none;
-      border: none;
-      width: 100%;
-      text-align: left;
-      padding: 14px 0;
+        .logout {
+            border-top: 1px solid $white-background;
+            margin-top: 20px;
+            padding-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: $text-blue;
+            cursor: pointer;
+            font-weight: 600;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            padding: 14px 0;
 
-      &:hover {
-        color: $light-background;
-      }
+            &:hover {
+                color: $light-background;
+            }
+        }
     }
-  }
 }
 
 .popular-services {
@@ -1324,14 +1325,15 @@ footer {
         }
     }
 }
+
 .login-form {
-    .card{
+    .card {
         width: 400px;
     }
 }
 
-.dashboard{
-    .card{
+.dashboard {
+    .card {
         min-height: 400px;
     }
 }
