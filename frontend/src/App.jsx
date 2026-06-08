@@ -30,6 +30,9 @@ import { default as ShowQuotes } from "./components/backend/quotes/Show";
 import { default as CreateQuotes } from "./components/backend/quotes/Create";
 import { default as EditQuotes } from "./components/backend/quotes/Edit";
 
+import { default as ShowComplaints }  from "./components/backend/complaints/Show";
+import { default as ViewComplaint }   from "./components/backend/complaints/View";
+
 const App = () => {
   return (
     <>
@@ -189,6 +192,8 @@ const App = () => {
               </RequireAuth>
             }
           />
+          <Route path="/admin/complaints"       element={<RequireAuth><ShowComplaints /></RequireAuth>} />
+          <Route path="/admin/complaints/:id"   element={<RequireAuth><ViewComplaint /></RequireAuth>} />
 
         </Routes>
 

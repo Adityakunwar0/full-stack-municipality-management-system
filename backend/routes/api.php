@@ -16,6 +16,7 @@ use App\Http\Controllers\front\StatisticController as FrontStatisticController;
 use App\Http\Controllers\admin\QuoteController;
 use App\Http\Controllers\front\QuoteController as FrontQuoteController;
 use App\Http\Controllers\front\ContactController;
+use App\Http\Controllers\admin\ComplaintController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -35,6 +36,9 @@ Route::get('get-statistics', [FrontStatisticController::class,'index']);
 Route::get('get-quotes', [FrontQuoteController::class,'index']);
 
 Route::post('contact-now', [ContactController::class,'index']);
+
+Route::post('complaints', [ComplaintController::class, 'store']);
+ Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 
@@ -73,6 +77,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::get('quotes/{id}', [QuoteController::class,'show']);
         Route::put('quotes/{id}', [QuoteController::class,'update']);
         Route::delete('quotes/{id}', [QuoteController::class,'destroy']);
+
+        
+        Route::get('complaints', [ComplaintController::class,'index']);
+        Route::get('complaints/{id}', [ComplaintController::class,'show']);
+       
+        Route::put('complaints/{id}/status',[ComplaintController::class, 'updateStatus']);
 
 
         
