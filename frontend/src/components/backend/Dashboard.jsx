@@ -60,38 +60,44 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <ul>
+               <ul>
                   {user?.role === "admin" && (
-                    <li className="d-flex justify-content-center my-2">
+                    <li>
                       <Link
-                        to="/admin/panel"
-                        className="btn btn-primary small text-white px-4 py-2 d-flex align-items-center gap-2"
-                        style={{ borderRadius: "10px", minWidth: "160px", justifyContent: "center" }}
-                      >
+                        to="/admin/panel">
                         <i className="fa-regular fa-user-shield"></i>
                         Admin Panel
                       </Link>
                     </li>
-                  )}  <li>
-                    <i className="fa-regular fa-square"></i>
-                    My Dashboard
+                  )}
+
+                  <li>
+                    <Link to="/complaint">
+                      <i className="fa-solid fa-file-circle-exclamation"></i>
+                      Complaint Register
+                    </Link>
                   </li>
 
                   <li>
-                    <i className="fa-regular fa-file-lines"></i>
-                    My Requests
+                    <Link to="/my-requests">
+                      <i className="fa-regular fa-file-lines"></i>
+                      My Requests
+                    </Link>
                   </li>
 
                   <li>
-                    <i className="fa-regular fa-credit-card"></i>
-                    My Payments
+                    <Link to="/my-payments">
+                      <i className="fa-regular fa-credit-card"></i>
+                      My Payments
+                    </Link>
                   </li>
 
                   <li>
-                    <i className="fa-regular fa-user"></i>
-                    My Profile
+                    <Link to="/profile">
+                      <i className="fa-regular fa-user"></i>
+                      My Profile
+                    </Link>
                   </li>
-
                 </ul>
 
                 <button
