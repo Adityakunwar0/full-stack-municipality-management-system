@@ -4,7 +4,7 @@ import { apiurl } from "../common/Http";
 const Complaint = () => {
   const [errors, setErrors] = useState({});
   const [token, setToken] = useState("");
-  const [activeTab, setActiveTab] = useState("submit"); // "submit" | "track"
+  const [activeTab, setActiveTab] = useState("submit"); 
 
   const [formData, setFormData] = useState({
     full_name: "",

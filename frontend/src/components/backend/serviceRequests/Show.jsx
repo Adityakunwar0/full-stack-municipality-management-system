@@ -77,13 +77,7 @@ const Show = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {requests.length === 0 ? (
-                                                    <tr>
-                                                        <td colSpan="7" className="text-center text-muted py-4">
-                                                            No service requests found.
-                                                        </td>
-                                                    </tr>
-                                                ) : (
+                                                {requests &&
                                                     requests.map((req) => (
                                                         <tr key={`request-${req.id}`}>
                                                             <td>{req.id}</td>
@@ -128,7 +122,7 @@ const Show = () => {
                                                             </td>
                                                         </tr>
                                                     ))
-                                                )}
+                                                }
                                             </tbody>
                                         </table>
                                     </div>

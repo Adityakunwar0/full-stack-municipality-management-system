@@ -85,7 +85,7 @@ const Edit = () => {
                                             <label className="form-label">Icon Class</label>
                                             <input
                                                 type="text"
-                                                placeholder="e.g. fa fa-home"
+                                                placeholder="Icon Name "
                                                 {...register("icon", {
                                                     required: "The Icon field is required",
                                                 })}
@@ -130,10 +130,10 @@ const Edit = () => {
 
                                         {/* Button Text */}
                                         <div className="mb-3">
-                                            <label className="form-label">Button Text <span className="text-muted">(optional)</span></label>
+                                            <label className="form-label">Button Text</label>
                                             <input
                                                 type="text"
-                                                placeholder="e.g. Apply Now"
+                                                placeholder="Button Name"
                                                 {...register("btn_text")}
                                                 className="form-control"
                                             />
@@ -141,7 +141,7 @@ const Edit = () => {
 
                                         {/* Color */}
                                         <div className="mb-3">
-                                            <label className="form-label">Color <span className="text-muted">(optional, e.g. #3498db)</span></label>
+                                            <label className="form-label">Color</label>
                                             <input
                                                 type="text"
                                                 placeholder="color name "

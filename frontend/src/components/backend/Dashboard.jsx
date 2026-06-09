@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const rolePath = user?.role === "admin" ? "/admin" : "/user";
+  const rolePath = user?.role === "admin" ? "admin" : "user";
 
   const handleLogout = () => {
     logout();
@@ -73,28 +73,22 @@ const Dashboard = () => {
                   )}
 
                   <li>
-                    <Link to={`${rolePath}/complaint`}>
+                    <Link to={`/${rolePath}/complaint`}>
                       <i className="fa-solid fa-file-circle-exclamation"></i>
                       Complaint Register
                     </Link>
                   </li>
 
                   <li>
-                    <Link to={`${rolePath}/my-requests`}>
+                    <Link to={`/${rolePath}/my-requests`}>
                       <i className="fa-regular fa-file-lines"></i>
                       My Requests
                     </Link>
                   </li>
 
-                  {/* <li>
-                    <Link to={`${rolePath}/my-payments`}>
-                      <i className="fa-regular fa-credit-card"></i>
-                      My Payments
-                    </Link>
-                  </li> */}
 
                   <li>
-                    <Link to={`${rolePath}/profile`}>
+                    <Link to={`/${rolePath}/profile`}>
                       <i className="fa-regular fa-user"></i>
                       My Profile
                     </Link>
@@ -113,6 +107,7 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
+        
 
         <PopularServices />
         <Dash />

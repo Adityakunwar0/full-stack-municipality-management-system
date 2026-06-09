@@ -40,6 +40,7 @@ import { default as ViewComplaint } from "./components/backend/complaints/View";
 import { default as ShowServiceRequests } from "./components/backend/serviceRequests/Show";
 import { default as ViewServiceRequest } from "./components/backend/serviceRequests/View";
 import Services from './components/frontend/Services';
+import Request from './components/backend/user/Request';
 
 const App = () => {
   return (
@@ -212,9 +213,15 @@ const App = () => {
           <Route path="/admin/services/edit/:id" element={<RequireAuth>
             <EditServices />
           </RequireAuth>} />
+          <Route path="/user/complaint" element={<RequireAuth><Complaint /></RequireAuth>} />
+           <Route path="/admin/complaint" element={<RequireAuth><Complaint /></RequireAuth>} />
+          
+
+          
 
           <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
           <Route path="/admin/serviceRequests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
+          <Route path="/admin/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
         </Routes>
 
       </BrowserRouter>

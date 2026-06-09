@@ -962,8 +962,9 @@ footer {
         }
     }
 }
+
 .services,
-.popular-services{
+.popular-services {
 
     .services-grid {
         display: grid;
@@ -978,6 +979,7 @@ footer {
             grid-template-columns: 1fr;
         }
     }
+
     .service-card {
         background: $white-background;
         border-radius: 16px;
@@ -1003,24 +1005,43 @@ footer {
                 font-size: 36px;
             }
 
+            &.teal {
+                background: #d0f0ee;
+                color: #0d9488;
+            }
+
+            &.red {
+                background: #fde8e8;
+                color: #ef4444;
+            }
+
+            &.yellow {
+                background: #fef9c3;
+                color: #ca8a04;
+            }
+            &.orange {
+                background: #fef9c3;
+                color: #ca8b04e0;
+            }
+
             &.green {
-                background: $white-background;
+                background: #dcfce7;
                 color: #16a34a;
             }
 
-            &.blue {
-                background: $white-background;
-                color: $blue-background;
+            &.indigo {
+                background: #e0e7ff;
+                color: #4f46e5;
             }
 
-            &.orange {
-                background: #fff4df;
-                color: #f59e0b;
+            &.blue {
+                background: #dbeafe;
+                color: #2563eb;
             }
 
             &.purple {
-                background: $white-background;
-                color: #7c3aed;
+                background: #f3e8ff;
+                color: #9333ea;
             }
         }
 
@@ -1045,14 +1066,19 @@ footer {
             cursor: pointer;
             transition: .3s;
 
-            &.green {
-                border: 2px solid #16a34a;
-                color: #16a34a;
+            &.teal {
+                border: 2px solid #0d9488;
+                color: #0d9488;
             }
 
-            &.blue {
-                border: 2px solid $text-blue;
-                color: $blue-background;
+            &.red {
+                border: 2px solid #ef4444;
+                color: #ef4444;
+            }
+
+            &.yellow {
+                border: 2px solid #ca8a04;
+                color: #ca8a04;
             }
 
             &.orange {
@@ -1060,9 +1086,23 @@ footer {
                 color: #f59e0b;
             }
 
+            &.indigo {
+                border: 2px solid #4f46e5;
+                color: #4f46e5;
+            }
+
+            &.blue {
+                border: 2px solid #2563eb;
+                color: #2563eb;
+            }
+            &.green{
+                border: 2px solid #84daa3;
+                color: #16a34a;
+            }
+
             &.purple {
-                border: 2px solid #7c3aed;
-                color: #7c3aed;
+                border: 2px solid #9333ea;
+                color: #9333ea;
             }
 
             &:hover {
@@ -1070,9 +1110,10 @@ footer {
             }
         }
     }
-    
+
 
 }
+
 .popular-services {
     padding: 60px 0;
     background: $light-background;

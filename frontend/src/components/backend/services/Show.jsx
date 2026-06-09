@@ -117,13 +117,6 @@ const Show = () => {
                                                         </td>
                                                     </tr>
                                                 ))}
-                                                {services.length === 0 && (
-                                                    <tr>
-                                                        <td colSpan="7" className="text-center text-muted py-4">
-                                                            No services found.
-                                                        </td>
-                                                    </tr>
-                                                )}
                                             </tbody>
                                         </table>
                                     </div>

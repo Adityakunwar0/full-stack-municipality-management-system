@@ -1,24 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { apiurl } from "./Http";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { apiurl, token } from "./Http";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../backend/context/Auth";
 
 
 const PopularServices = () => {
 
-   const [services, setServices] = useState([]);
-  
-    const fetchLatestServices = async () => {
-      const res = await fetch(apiurl + "get-latest-services?limit=4", {
-        method: "GET",
-      });
-      const result = await res.json();
-      //console.log(result);
-      setServices(result.data);
-    };
-    useEffect(() => {
-      fetchLatestServices();
-    }, []);
-  
+  const [services, setServices] = useState([]);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const fetchLatestServices = async () => {
+    const res = await fetch(apiurl + "get-latest-services?limit=4", {
+      method: "GET",
+    });
+    const result = await res.json();
+    //console.log(result);
+    setServices(result.data);
+  };
+  useEffect(() => {
+    fetchLatestServices();
+  }, []);
+
+  const handleApply = (serviceId) => {
+    const userToken = token();
+
+    if (userToken) {
+      const rolePath = user?.role === "admin" ? "admin" : "user";
+
+
+      toast.success("Proceeding to application...");
+      navigate(`/${rolePath}/my-requests`);
+    } else {
+
+      toast.warning(
+        <div>
+          Please login to apply for this service.
+          <span
+            onClick={() => navigate("/login")}
+          >
+            Login now
+          </span>
+        </div>,
+        { autoClose: 4000 }
+      );
+      setTimeout(() => navigate("/login"), 3000);
+    }
+  };
+
+
 
   return (
     <section className="popular-services">
@@ -40,7 +71,9 @@ const PopularServices = () => {
 
               <p>{service.description}</p>
 
-              <button className={`service-btn ${service.color}`}>
+              <button
+                onClick={handleApply}
+                className={`service-btn ${service.color}`}>
                 {service.btn_text}
               </button>
             </div>
