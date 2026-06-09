@@ -30,8 +30,16 @@ import { default as ShowQuotes } from "./components/backend/quotes/Show";
 import { default as CreateQuotes } from "./components/backend/quotes/Create";
 import { default as EditQuotes } from "./components/backend/quotes/Edit";
 
-import { default as ShowComplaints }  from "./components/backend/complaints/Show";
-import { default as ViewComplaint }   from "./components/backend/complaints/View";
+import { default as ShowServices } from "./components/backend/services/Show";
+import { default as CreateServices } from "./components/backend/services/Create";
+import { default as EditServices } from "./components/backend/services/Edit";
+
+import { default as ShowComplaints } from "./components/backend/complaints/Show";
+import { default as ViewComplaint } from "./components/backend/complaints/View";
+
+import { default as ShowServiceRequests } from "./components/backend/serviceRequests/Show";
+import { default as ViewServiceRequest } from "./components/backend/serviceRequests/View";
+import Services from './components/frontend/Services';
 
 const App = () => {
   return (
@@ -41,6 +49,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path='/services' element={<Services />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/notices' element={<Notices />} />
           <Route path='/contacts' element={<Contact />} />
@@ -88,7 +97,7 @@ const App = () => {
               </RequireAuth>
             }
           />
-           <Route
+          <Route
             path="/admin/projects/edit/:id"
             element={
               <RequireAuth>
@@ -112,7 +121,7 @@ const App = () => {
               </RequireAuth>
             }
           />
-           <Route
+          <Route
             path="/admin/notices/edit/:id"
             element={
               <RequireAuth>
@@ -168,7 +177,7 @@ const App = () => {
               </RequireAuth>
             }
           />
-                    <Route
+          <Route
             path="/admin/quotes"
             element={
               <RequireAuth>
@@ -192,9 +201,20 @@ const App = () => {
               </RequireAuth>
             }
           />
-          <Route path="/admin/complaints"       element={<RequireAuth><ShowComplaints /></RequireAuth>} />
-          <Route path="/admin/complaints/:id"   element={<RequireAuth><ViewComplaint /></RequireAuth>} />
+          <Route path="/admin/complaints" element={<RequireAuth><ShowComplaints /></RequireAuth>} />
+          <Route path="/admin/complaints/:id" element={<RequireAuth><ViewComplaint /></RequireAuth>} />
+          <Route path="/admin/services" element={<RequireAuth>
+            <ShowServices />
+          </RequireAuth>} />
+          <Route path="/admin/services/create" element={<RequireAuth>
+            <CreateServices />
+          </RequireAuth>} />
+          <Route path="/admin/services/edit/:id" element={<RequireAuth>
+            <EditServices />
+          </RequireAuth>} />
 
+          <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
+          <Route path="/admin/serviceRequests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
         </Routes>
 
       </BrowserRouter>

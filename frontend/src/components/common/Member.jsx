@@ -59,7 +59,7 @@ const Member = () => {
                   </div>
                 </div>
               );
-            })};
+            })}
         </div>
       </div>
     </section>

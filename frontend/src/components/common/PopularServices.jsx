@@ -1,37 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { apiurl } from "./Http";
+import { Link } from "react-router-dom";
 
-const services = [
-  {
-    icon: "fa-solid fa-file-circle-check",
-    title: "Building Permit",
-    description: "Apply for new building permit or renewal.",
-    btnText: "Apply Now",
-    color: "green",
-  },
-  {
-    icon: "fa-solid fa-droplet",
-    title: "Water Connection",
-    description: "Apply for new water connection or changes.",
-    btnText: "Apply Now",
-    color: "blue",
-  },
-  {
-    icon: "fa-solid fa-trash",
-    title: "Waste Collection",
-    description: "Request for waste collection services.",
-    btnText: "Apply Now",
-    color: "orange",
-  },
-  {
-    icon: "fa-solid fa-house",
-    title: "Tax Payment",
-    description: "Pay property tax and other taxes online.",
-    btnText: "Pay Now",
-    color: "purple",
-  },
-];
 
 const PopularServices = () => {
+
+   const [services, setServices] = useState([]);
+  
+    const fetchLatestServices = async () => {
+      const res = await fetch(apiurl + "get-latest-services?limit=4", {
+        method: "GET",
+      });
+      const result = await res.json();
+      //console.log(result);
+      setServices(result.data);
+    };
+    useEffect(() => {
+      fetchLatestServices();
+    }, []);
+  
+
   return (
     <section className="popular-services">
       <div className="container">
@@ -53,7 +41,7 @@ const PopularServices = () => {
               <p>{service.description}</p>
 
               <button className={`service-btn ${service.color}`}>
-                {service.btnText}
+                {service.btn_text}
               </button>
             </div>
           ))}

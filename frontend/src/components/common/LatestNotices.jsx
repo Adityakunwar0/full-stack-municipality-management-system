@@ -59,7 +59,7 @@ const LatestNotices = () => {
                                     </div>
                                 </div>
                             );
-                        })};
+                        })}
                 </div>
             </div>
         </section>

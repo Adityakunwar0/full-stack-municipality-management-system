@@ -60,7 +60,7 @@ const LatestProjects = () => {
                   </div>
                 </div>
               );
-            })};
+            })}
         </div>
       </div>
       <div className="text-center">

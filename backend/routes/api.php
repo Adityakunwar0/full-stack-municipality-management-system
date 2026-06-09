@@ -17,6 +17,9 @@ use App\Http\Controllers\admin\QuoteController;
 use App\Http\Controllers\front\QuoteController as FrontQuoteController;
 use App\Http\Controllers\front\ContactController;
 use App\Http\Controllers\admin\ComplaintController;
+use App\Http\Controllers\front\ServiceController as FrontServiceController;
+use App\Http\Controllers\ServiceRequestController;
+use App\Http\Controllers\admin\ServiceController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -28,6 +31,10 @@ Route::get('get-project/{id}', [FrontProjectController::class,'project']);
 Route::get('get-notices', [FrontNoticeController::class,'index']);
 Route::get('get-latest-notices', [FrontNoticeController::class,'latestNotices']);
 Route::get('get-notice/{id}', [FrontNoticeController::class,'notice']);
+
+Route::get('get-services', [FrontServiceController::class,'index']);
+Route::get('get-latest-services', [FrontServiceController::class,'latestServices']);
+Route::get('get-service/{id}', [FrontServiceController::class,'service']);
 
 Route::get('get-members', [FrontMemberController::class,'index']);
 
@@ -84,6 +91,16 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
        
         Route::put('complaints/{id}/status',[ComplaintController::class, 'updateStatus']);
 
+         Route::get('admin/requests', [ServiceRequestController::class, 'allRequests']);
+         Route::get('admin/request/{id}', [ServiceRequestController::class, 'show']);
+         Route::put('admin/request/{id}', [ServiceRequestController::class, 'updateStatus']);
+
+        Route::post('services', [ServiceController::class,'store']);
+        Route::get('services', [ServiceController::class,'index']);
+        Route::get('services/{id}', [ServiceController::class,'show']);
+        Route::put('services/{id}', [ServiceController::class,'update']);
+        Route::delete('services/{id}', [ServiceController::class,'destroy']);
+
 
         
 
@@ -92,6 +109,11 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::middleware('role:user')->group(function () {
 
         Route::get('/user/dashboard', [DashboardController::class, 'userDashboard']);
+
+
+
+        Route::post('user/apply-service', [ServiceRequestController::class, 'apply']);
+        Route::get('user/my-requests', [ServiceRequestController::class, 'myRequests']);
 
     });
   
