@@ -36,6 +36,7 @@ const Request = () => {
     const statusBadge = (status) => {
         const map = {
             progress: "warning",
+            review: "warning",
             completed: "success",
             rejected: "danger",
         };

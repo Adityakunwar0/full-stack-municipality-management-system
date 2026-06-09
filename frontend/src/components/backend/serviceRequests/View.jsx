@@ -13,7 +13,7 @@ const View = () => {
 
     const fetchRequest = async () => {
         try {
-            const res = await fetch(apiurl + "admin/request/" + id, {
+            const res = await fetch(apiurl + "admin/service-requests/" + id, {
                 headers: {
                     Accept: "application/json",
                     Authorization: `Bearer ${token()}`,
@@ -71,6 +71,7 @@ const View = () => {
     const statusBadge = (status) => {
         const map = {
             progress: "warning",
+            review: "warning",
             completed: "success",
             rejected: "danger",
         };
@@ -195,6 +196,7 @@ const View = () => {
                                 onChange={(e) => setRequestStatus(e.target.value)}
                             >
                                 <option value="progress">Progress</option>
+                                <option value="review">Under Review</option>
                                 <option value="completed">Completed</option>
                                 <option value="rejected">Rejected</option>
                             </select>

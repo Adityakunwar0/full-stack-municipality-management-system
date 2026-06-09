@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('complaints/{id}/status',[ComplaintController::class, 'updateStatus']);
 
          Route::get('admin/requests', [ServiceRequestController::class, 'allRequests']);
-         Route::get('admin/request/{id}', [ServiceRequestController::class, 'show']);
+         Route::get('admin/service-requests/{id}', [ServiceRequestController::class, 'show']);
          Route::put('admin/request/{id}', [ServiceRequestController::class, 'updateStatus']);
 
         Route::post('services', [ServiceController::class,'store']);
@@ -100,6 +100,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::get('services/{id}', [ServiceController::class,'show']);
         Route::put('services/{id}', [ServiceController::class,'update']);
         Route::delete('services/{id}', [ServiceController::class,'destroy']);
+
+        Route::post('admin/apply-service', [ServiceRequestController::class, 'apply']);
+        Route::get('admin/my-requests', [ServiceRequestController::class, 'myRequests']);
 
 
         

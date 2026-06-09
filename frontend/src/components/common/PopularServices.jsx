@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { apiurl, token } from "./Http";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../backend/context/Auth";
 
-
 const PopularServices = () => {
-
   const [services, setServices] = useState([]);
+  const [applying, setApplying] = useState(null); 
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -16,28 +15,22 @@ const PopularServices = () => {
       method: "GET",
     });
     const result = await res.json();
-    //console.log(result);
     setServices(result.data);
   };
+
   useEffect(() => {
     fetchLatestServices();
   }, []);
 
-  const handleApply = (serviceId) => {
+  const handleApply = async (serviceId) => {
     const userToken = token();
 
-    if (userToken) {
-      const rolePath = user?.role === "admin" ? "admin" : "user";
-
-
-      toast.success("Proceeding to application...");
-      navigate(`/${rolePath}/my-requests`);
-    } else {
-
+    if (!userToken) {
       toast.warning(
         <div>
-          Please login to apply for this service.
+          Please login to apply for this service.{" "}
           <span
+            style={{ cursor: "pointer", textDecoration: "underline" }}
             onClick={() => navigate("/login")}
           >
             Login now
@@ -46,15 +39,52 @@ const PopularServices = () => {
         { autoClose: 4000 }
       );
       setTimeout(() => navigate("/login"), 3000);
+      return;
+    }
+
+    setApplying(serviceId);
+     const applyUrl = user?.role === "admin"
+      ? apiurl + "admin/apply-service"
+      : apiurl + "user/apply-service";
+
+
+    try {
+      const res = await fetch(applyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          request_status: "progress",
+        }),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        toast.success("Service request submitted successfully!");
+        const rolePath = user?.role === "admin" ? "admin" : "user";
+        navigate(`/${rolePath}/my-requests`);
+      } else {
+        // Show backend validation errors if any
+        const errorMsg =
+          result?.message || result?.error || "Failed to submit request.";
+        toast.error(errorMsg);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setApplying(null);
     }
   };
-
-
 
   return (
     <section className="popular-services">
       <div className="container">
-
         <div className="section-header">
           <h2>Popular Services</h2>
           <a href="/services">View All Services →</a>
@@ -68,18 +98,18 @@ const PopularServices = () => {
               </div>
 
               <h4>{service.title}</h4>
-
               <p>{service.description}</p>
 
               <button
-                onClick={handleApply}
-                className={`service-btn ${service.color}`}>
-                {service.btn_text}
+                onClick={() => handleApply(service.id)}  // ✅ pass service.id
+                className={`service-btn ${service.color}`}
+                disabled={applying === service.id}
+              >
+                {applying === service.id ? "Applying..." : service.btn_text}
               </button>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

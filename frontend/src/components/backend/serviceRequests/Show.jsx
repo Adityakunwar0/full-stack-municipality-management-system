@@ -8,6 +8,7 @@ const Show = () => {
     const [requests, setRequests] = useState([]);
 
     const fetchRequests = async () => {
+        
         try {
             const res = await fetch(apiurl + "admin/requests", {
                 method: "GET",

@@ -10,6 +10,7 @@ import { AuthContext } from '../backend/context/Auth';
 
 const Services = () => {
     const [services, setServices] = useState([]);
+    
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
