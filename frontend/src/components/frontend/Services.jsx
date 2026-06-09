@@ -10,6 +10,7 @@ import { AuthContext } from '../backend/context/Auth';
 
 const Services = () => {
     const [services, setServices] = useState([]);
+     const [applying, setApplying] = useState(null); 
     
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -26,31 +27,65 @@ const Services = () => {
         fetchServices();
     }, []);
 
-    const handleApply = (serviceId) => {
-        const userToken = token();
-
-        if (userToken) {
-            const rolePath = user?.role === "admin" ? "admin" : "user";
-
-            
-            toast.success("Proceeding to application...");
-            navigate(`/${rolePath}/my-requests`);
-        } else {
-
-            toast.warning(
-                <div>
-                    Please login to apply for this service.
-                    <span
-                        onClick={() => navigate("/login")}
-                    >
-                        Login now
-                    </span>
-                </div>,
-                { autoClose: 4000 }
-            );
-            setTimeout(() => navigate("/login"), 3000);
-        }
-    };
+   const handleApply = async (serviceId) => {
+       const userToken = token();
+   
+       if (!userToken) {
+         toast.warning(
+           <div>
+             Please login to apply for this service.{" "}
+             <span
+               style={{ cursor: "pointer", textDecoration: "underline" }}
+               onClick={() => navigate("/login")}
+             >
+               Login now
+             </span>
+           </div>,
+           { autoClose: 4000 }
+         );
+         setTimeout(() => navigate("/login"), 3000);
+         return;
+       }
+   
+       setApplying(serviceId);
+        const applyUrl = user?.role === "admin"
+         ? apiurl + "admin/apply-service"
+         : apiurl + "user/apply-service";
+   
+   
+       try {
+         const res = await fetch(applyUrl, {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             Accept: "application/json",
+             Authorization: `Bearer ${userToken}`,
+           },
+           body: JSON.stringify({
+             service_id: serviceId,
+             request_status: "progress",
+           }),
+         });
+   
+         const result = await res.json();
+   
+         if (res.ok) {
+           toast.success("Service request submitted successfully!");
+           const rolePath = user?.role === "admin" ? "admin" : "user";
+           navigate(`/${rolePath}/my-requests`);
+         } else {
+           // Show backend validation errors if any
+           const errorMsg =
+             result?.message || result?.error || "Failed to submit request.";
+           toast.error(errorMsg);
+         }
+       } catch (error) {
+         console.error(error);
+         toast.error("Something went wrong. Please try again.");
+       } finally {
+         setApplying(null);
+       }
+     };
 
 
     return (
@@ -79,11 +114,13 @@ const Services = () => {
 
                                     <p>{service.description}</p>
 
-                                    <button
-                                        onClick={handleApply}
-                                        className={`service-btn ${service.color}`}>
-                                        {service.btn_text}
-                                    </button>
+                                   <button
+                onClick={() => handleApply(service.id)}  // ✅ pass service.id
+                className={`service-btn ${service.color}`}
+                disabled={applying === service.id}
+              >
+                {applying === service.id ? "Applying..." : service.btn_text}
+              </button>
                                 </div>
                             ))}
 
