@@ -18,7 +18,7 @@ return new class extends Migration
              $table->text('description');
              $table->string('btn_text')->default('Apply Now');
              $table->string('color')->nullable();
-              $table->integer('status')->default(1);
+             $table->integer('status')->default(1);
              $table->timestamps();
         });
     }

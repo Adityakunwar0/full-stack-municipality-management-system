@@ -26,7 +26,8 @@ return new class extends Migration
         'completed',
         'rejected'
     ])->default('progress');
-     $table->integer('status')->default(1);
+    
+    $table->integer('status')->default(1);
 
     $table->timestamps();
         });

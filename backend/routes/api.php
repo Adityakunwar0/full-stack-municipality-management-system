@@ -45,7 +45,8 @@ Route::get('get-quotes', [FrontQuoteController::class,'index']);
 Route::post('contact-now', [ContactController::class,'index']);
 
 Route::post('complaints', [ComplaintController::class, 'store']);
- Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
+
+Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 
@@ -91,9 +92,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
        
         Route::put('complaints/{id}/status',[ComplaintController::class, 'updateStatus']);
 
-         Route::get('admin/requests', [ServiceRequestController::class, 'allRequests']);
-         Route::get('admin/service-requests/{id}', [ServiceRequestController::class, 'show']);
-         Route::put('admin/request/{id}', [ServiceRequestController::class, 'updateStatus']);
+        Route::get('admin/requests', [ServiceRequestController::class, 'allRequests']);
+        Route::get('admin/service-requests/{id}', [ServiceRequestController::class, 'show']);
+        Route::put('admin/request/{id}', [ServiceRequestController::class, 'updateStatus']);
 
         Route::post('services', [ServiceController::class,'store']);
         Route::get('services', [ServiceController::class,'index']);
@@ -112,8 +113,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::middleware('role:user')->group(function () {
 
         Route::get('/user/dashboard', [DashboardController::class, 'userDashboard']);
-
-
 
         Route::post('user/apply-service', [ServiceRequestController::class, 'apply']);
         Route::get('user/my-requests', [ServiceRequestController::class, 'myRequests']);
