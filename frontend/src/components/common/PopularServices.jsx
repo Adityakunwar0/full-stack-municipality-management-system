@@ -6,7 +6,7 @@ import { AuthContext } from "../backend/context/Auth";
 
 const PopularServices = () => {
   const [services, setServices] = useState([]);
-  const [applying, setApplying] = useState(null); 
+  const [applying, setApplying] = useState(null);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
@@ -28,7 +28,7 @@ const PopularServices = () => {
     if (!userToken) {
       toast.warning(
         <div>
-          Please login to apply for this service.{" "}
+          Please login to apply for this service.
           <span
             style={{ cursor: "pointer", textDecoration: "underline" }}
             onClick={() => navigate("/login")}
@@ -43,7 +43,7 @@ const PopularServices = () => {
     }
 
     setApplying(serviceId);
-     const applyUrl = user?.role === "admin"
+    const applyUrl = user?.role === "admin"
       ? apiurl + "admin/apply-service"
       : apiurl + "user/apply-service";
 
@@ -101,7 +101,7 @@ const PopularServices = () => {
               <p>{service.description}</p>
 
               <button
-                onClick={() => handleApply(service.id)}  // ✅ pass service.id
+                onClick={() => handleApply(service.id)} 
                 className={`service-btn ${service.color}`}
                 disabled={applying === service.id}
               >

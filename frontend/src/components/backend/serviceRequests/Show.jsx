@@ -29,6 +29,33 @@ const Show = () => {
             console.error(error);
         }
     };
+    const updateStatus = async () => {
+    try {
+        const res = await fetch(apiurl + "admin/request/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token()}`,
+            },
+            body: JSON.stringify({
+                request_status: requestStatus,
+            }),
+        });
+
+        const result = await res.json();
+
+        if (result.message) {
+            toast.success(result.message);
+
+            setTimeout(() => {
+                navigate("/admin/serviceRequests");
+            }, 1000);
+        }
+    } catch (error) {
+        toast.error("Failed to update status.");
+    }
+};
 
     useEffect(() => {
         fetchRequests();
@@ -37,6 +64,7 @@ const Show = () => {
     const statusBadge = (status) => {
         const map = {
             progress: "warning",
+            review: "warning",
             completed: "success",
             rejected: "danger",
         };

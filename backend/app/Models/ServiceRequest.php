@@ -12,6 +12,7 @@ class ServiceRequest extends Model
         'user_id',
         'service_id',
         'remarks',
+        'request_status',
         'status'
     ];
 

@@ -38,18 +38,18 @@ class ServiceRequestController extends Controller
         ])->latest()->get();
     }
 
-    public function updateStatus(Request $request,$id)
-    {
-        $requestData = ServiceRequest::findOrFail($id);
+   public function updateStatus(Request $request,$id)
+{
+    $requestData = ServiceRequest::findOrFail($id);
 
-        $requestData->update([
-            'request_status' => $request->request_status
-        ]);
+    $requestData->request_status = $request->request_status;
+    $requestData->save();
 
-        return response()->json([
-            'message' => 'Status Updated'
-        ]);
-    }
+    return response()->json([
+        'message' => 'Status Updated',
+        'data' => $requestData
+    ]);
+}
     public function show($id)
 {
     $request = ServiceRequest::with(['user', 'service'])->findOrFail($id);

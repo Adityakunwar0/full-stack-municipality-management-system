@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { apiurl, token } from "../../common/Http";
 import { toast } from "react-toastify";
 import Header from "../../common/Header";
@@ -10,6 +10,7 @@ const View = () => {
 
     const [serviceRequest, setServiceRequest] = useState(null);
     const [requestStatus, setRequestStatus] = useState("");
+    const navigate = useNavigate();
 
     const fetchRequest = async () => {
         try {
@@ -102,6 +103,14 @@ const View = () => {
             <Header />
             <main>
                 <div className="container my-4">
+                     <div className="d-flex mb-3">
+            <button
+                className="btn btn-primary small"
+                onClick={() => navigate("/admin/serviceRequests")}
+            >
+                Back
+            </button>
+        </div>
 
                     {/* DETAIL CARD */}
                     <div className="card border-0 shadow-sm mb-3">
