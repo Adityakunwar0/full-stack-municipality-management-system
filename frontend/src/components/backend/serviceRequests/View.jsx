@@ -10,6 +10,7 @@ const View = () => {
 
     const [serviceRequest, setServiceRequest] = useState(null);
     const [requestStatus, setRequestStatus] = useState("");
+    const [remarks, setRemarks] = useState("");
     const navigate = useNavigate();
 
     const fetchRequest = async () => {
@@ -22,19 +23,17 @@ const View = () => {
             });
 
             const result = await res.json();
-
-            // allRequests returns array; for single use the admin GET /admin/requests filtered,
-            // or if you have a show route, adjust the URL accordingly.
-            // Here we fetch all and find by id as a fallback.
             if (Array.isArray(result)) {
                 const found = result.find((r) => r.id === parseInt(id));
                 if (found) {
                     setServiceRequest(found);
                     setRequestStatus(found.request_status);
+                    setRemarks(found.remarks || "")
                 }
             } else if (result && result.id) {
                 setServiceRequest(result);
                 setRequestStatus(result.request_status);
+                setRemarks(result.remarks || "");
             }
         } catch (error) {
             console.error(error);
@@ -54,14 +53,17 @@ const View = () => {
                     Accept: "application/json",
                     Authorization: `Bearer ${token()}`,
                 },
-                body: JSON.stringify({ request_status: requestStatus }),
+                body: JSON.stringify({
+                    request_status: requestStatus,
+                    remarks: remarks
+                }),
             });
 
             const result = await res.json();
 
             if (result.message) {
                 toast.success(result.message);
-                setServiceRequest((prev) => ({ ...prev, request_status: requestStatus }));
+                setServiceRequest((prev) => ({ ...prev, request_status: requestStatus, remarks: remarks }));
             }
         } catch (error) {
             console.error(error);
@@ -103,14 +105,14 @@ const View = () => {
             <Header />
             <main>
                 <div className="container my-4">
-                     <div className="d-flex mb-3">
-            <button
-                className="btn btn-primary small"
-                onClick={() => navigate("/admin/serviceRequests")}
-            >
-                Back
-            </button>
-        </div>
+                    <div className="d-flex mb-3">
+                        <button
+                            className="btn btn-primary small"
+                            onClick={() => navigate("/admin/serviceRequests")}
+                        >
+                            Back
+                        </button>
+                    </div>
 
                     {/* DETAIL CARD */}
                     <div className="card border-0 shadow-sm mb-3">
@@ -210,11 +212,24 @@ const View = () => {
                                 <option value="rejected">Rejected</option>
                             </select>
 
+                            <div className="mb-3">
+                                <label className="form-label">
+                                    Admin Remarks
+                                </label>
+
+                                <textarea
+                                    className="form-control"
+                                    rows="4"
+                                    value={remarks}
+                                    onChange={(e) => setRemarks(e.target.value)}
+                                />
+                            </div>
+
                             <button
                                 className="btn btn-primary w-100"
                                 onClick={updateStatus}
                             >
-                                Update Status
+                                Update Request
                             </button>
                         </div>
                     </div>

@@ -54,37 +54,37 @@ const Create = ({ placeholder }) => {
     }
   };
   const handleFile = async (e) => {
-  const formData = new FormData();
-  const file = e.target.files[0];
-  formData.append("image", file);
-  setIsDisable(true);
+    const formData = new FormData();
+    const file = e.target.files[0];
+    formData.append("image", file);
+    setIsDisable(true);
 
-  try {
-    const res = await fetch(apiurl + "temp-images", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token()}`,
-      },
-      body: formData,
-    });
+    try {
+      const res = await fetch(apiurl + "temp-images", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token()}`,
+        },
+        body: formData,
+      });
 
-    const result = await res.json();
-    setIsDisable(false);
+      const result = await res.json();
+      setIsDisable(false);
 
-    if (!res.ok || result.status === false) {
-      toast.error(result?.errors?.image?.[0] ?? result?.message ?? "Upload failed");
-    } else if (result?.data?.id) {
-      setImageId(result.data.id);
-    } else {
-      toast.error("Unexpected response from server");
+      if (!res.ok || result.status === false) {
+        toast.error(result?.errors?.image?.[0] ?? result?.message ?? "Upload failed");
+      } else if (result?.data?.id) {
+        setImageId(result.data.id);
+      } else {
+        toast.error("Unexpected response from server");
+      }
+    } catch (err) {
+      setIsDisable(false);
+      toast.error("Image upload failed. Please try again.");
+      console.error("Upload error:", err);
     }
-  } catch (err) {
-    setIsDisable(false);
-    toast.error("Image upload failed. Please try again.");
-    console.error("Upload error:", err);
-  }
-};
+  };
   return (
     <>
       <Header />
@@ -237,7 +237,7 @@ const Create = ({ placeholder }) => {
                         config={config}
                         tabIndex={1} // tabIndex of textarea
                         onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                        onChange={(newContent) => {}}
+                        onChange={(newContent) => { }}
                       />
                     </div>
                     <div className="mb-3">

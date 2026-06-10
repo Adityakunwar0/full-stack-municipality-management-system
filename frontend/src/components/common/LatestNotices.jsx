@@ -18,8 +18,8 @@ const LatestNotices = () => {
     }, []);
 
     return (
-        <section className="section-2  py-3">
-            <div className="container-fluid light-background py-5">
+        <section className="section-2 light-background">
+            <div className="container  py-5">
                 <div className="section-header text-center">
                     <span>Latest Notices</span>
                     <h2>Building A Better Tomorrow</h2>

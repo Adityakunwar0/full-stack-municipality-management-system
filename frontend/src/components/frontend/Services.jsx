@@ -74,7 +74,6 @@ const Services = () => {
         const rolePath = user?.role === "admin" ? "admin" : "user";
         navigate(`/${rolePath}/my-requests`);
       } else {
-        // Show backend validation errors if any
         const errorMsg =
           result?.message || result?.error || "Failed to submit request.";
         toast.error(errorMsg);

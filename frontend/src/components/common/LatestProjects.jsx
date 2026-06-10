@@ -20,7 +20,7 @@ const LatestProjects = () => {
   return (
 
      <section className="section-2 light-background py-3">
-      <div className="container-fluid py-5">
+      <div className="container py-5">
         <div className="section-header text-center">
           <span>Latest projects</span>
           <h2>Building A Better Tomorrow</h2>

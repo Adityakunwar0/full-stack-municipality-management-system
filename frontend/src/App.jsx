@@ -222,6 +222,8 @@ const App = () => {
           <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
           <Route path="/admin/service-requests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
           <Route path="/admin/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
+
+          <Route path="/user/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
         </Routes>
 
       </BrowserRouter>

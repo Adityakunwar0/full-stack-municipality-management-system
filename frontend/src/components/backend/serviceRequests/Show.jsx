@@ -8,7 +8,7 @@ const Show = () => {
     const [requests, setRequests] = useState([]);
 
     const fetchRequests = async () => {
-        
+
         try {
             const res = await fetch(apiurl + "admin/requests", {
                 method: "GET",
@@ -30,32 +30,32 @@ const Show = () => {
         }
     };
     const updateStatus = async () => {
-    try {
-        const res = await fetch(apiurl + "admin/request/" + id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${token()}`,
-            },
-            body: JSON.stringify({
-                request_status: requestStatus,
-            }),
-        });
+        try {
+            const res = await fetch(apiurl + "admin/request/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token()}`,
+                },
+                body: JSON.stringify({
+                    request_status: requestStatus,
+                }),
+            });
 
-        const result = await res.json();
+            const result = await res.json();
 
-        if (result.message) {
-            toast.success(result.message);
+            if (result.message) {
+                toast.success(result.message);
 
-            setTimeout(() => {
-                navigate("/admin/serviceRequests");
-            }, 1000);
+                setTimeout(() => {
+                    navigate("/admin/serviceRequests");
+                }, 1000);
+            }
+        } catch (error) {
+            toast.error("Failed to update status.");
         }
-    } catch (error) {
-        toast.error("Failed to update status.");
-    }
-};
+    };
 
     useEffect(() => {
         fetchRequests();

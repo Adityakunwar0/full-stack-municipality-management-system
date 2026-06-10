@@ -43,6 +43,7 @@ class ServiceRequestController extends Controller
     $requestData = ServiceRequest::findOrFail($id);
 
     $requestData->request_status = $request->request_status;
+    $requestData->remarks = $request->remarks;
     $requestData->save();
 
     return response()->json([

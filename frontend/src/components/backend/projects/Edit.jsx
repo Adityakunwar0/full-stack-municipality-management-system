@@ -253,9 +253,9 @@ const Edit = ({ placeholder }) => {
                         ref={editor}
                         value={content}
                         config={config}
-                        tabIndex={1} 
-                        onBlur={(newContent) => setContent(newContent)} 
-                        onChange={(newContent) => {}}
+                        tabIndex={1}
+                        onBlur={(newContent) => setContent(newContent)}
+                        onChange={(newContent) => { }}
                       />
                     </div>
                     <div className="mb-3">

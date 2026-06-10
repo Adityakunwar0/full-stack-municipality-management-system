@@ -75,58 +75,58 @@ const Show = () => {
                   </div>
                   <hr />
                   <div className="table-responsive">
-                     <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Slug</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {projects &&
-                        projects.map((project) => {
-                          return (
-                            <tr key={`projects-${project.id}`}>
-                              <td>{project.id}</td>
-                              <td>{project.title}</td>
-                              <td>{project.slug}</td>
-                              <td>
-                                {project.status == 1 ? "Active" : "Block"}
-                              </td>
-                              <td>
-                                <div className="d-flex flex-column flex-md-row gap-2">
-                                   <div className="d-flex flex-column flex-md-row gap-2">
-                                  <Link
-                                  to={`/admin/projects/edit/${project.id}`}
-                                  className="btn btn-secondary small "
-                                >
-                                  Edit
-                                </Link>
-                                <Link
-                                  onClick={() => deleteProject(project.id)}
-                                  href="#"
-                                  className="btn btn-secondary small ms-2"
-                                >
-                                  Delete
-                                </Link>
+                    <table className="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Slug</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {projects &&
+                          projects.map((project) => {
+                            return (
+                              <tr key={`projects-${project.id}`}>
+                                <td>{project.id}</td>
+                                <td>{project.title}</td>
+                                <td>{project.slug}</td>
+                                <td>
+                                  {project.status == 1 ? "Active" : "Block"}
+                                </td>
+                                <td>
+                                  <div className="d-flex flex-column flex-md-row gap-2">
+                                    <div className="d-flex flex-column flex-md-row gap-2">
+                                      <Link
+                                        to={`/admin/projects/edit/${project.id}`}
+                                        className="btn btn-secondary small "
+                                      >
+                                        Edit
+                                      </Link>
+                                      <Link
+                                        onClick={() => deleteProject(project.id)}
+                                        href="#"
+                                        className="btn btn-secondary small ms-2"
+                                      >
+                                        Delete
+                                      </Link>
 
-                                </div>
-                               
+                                    </div>
 
-                                </div>
-                                
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
+
+                                  </div>
+
+                                </td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    </table>
 
                   </div>
-                 
+
                 </div>
               </div>
             </div>
