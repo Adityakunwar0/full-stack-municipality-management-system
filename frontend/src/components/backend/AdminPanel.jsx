@@ -6,9 +6,9 @@ import Sidebar from '../common/Sidebar'
 const AdminPanel = () => {
   return (
     <>
-    <Header/>
-    <main>
-         <div className="container my-5">
+      <Header />
+      <main>
+        <div className="container my-5">
           <div className="row">
             <div className="col-md-3 ">
               <Sidebar />
@@ -24,9 +24,9 @@ const AdminPanel = () => {
             </div>
           </div>
         </div>
-    </main>
-    
-    <Footer />
+      </main>
+
+      <Footer />
     </>
   )
 }

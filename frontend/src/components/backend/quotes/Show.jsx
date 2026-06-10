@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const Show = () => {
   const [quotes, setQuotes] = useState([]);
 
-  const fetchQuotes= async () => {
+  const fetchQuotes = async () => {
     const res = await fetch(apiurl + "quotes", {
       method: "GET",
       headers: {

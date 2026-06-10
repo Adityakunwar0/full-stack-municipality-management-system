@@ -147,9 +147,8 @@ const Edit = ({ placeholder }) => {
                         {...register("title", {
                           required: "Title is required",
                         })}
-                        className={`form-control ${
-                          errors.title ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.title ? "is-invalid" : ""
+                          }`}
                       />
                       {errors.title && (
                         <p className="invalid-feedback">
@@ -165,9 +164,8 @@ const Edit = ({ placeholder }) => {
                         {...register("slug", {
                           required: "Slug is required",
                         })}
-                        className={`form-control ${
-                          errors.slug ? "is-invalid" : ""
-                        }`}
+                        className={`form-control ${errors.slug ? "is-invalid" : ""
+                          }`}
                       />
                       {errors.slug && (
                         <p className="invalid-feedback">
@@ -226,7 +224,7 @@ const Edit = ({ placeholder }) => {
                         config={config}
                         tabIndex={1}
                         onBlur={(newContent) => setContent(newContent)}
-                        onChange={() => {}}
+                        onChange={() => { }}
                       />
                     </div>
 

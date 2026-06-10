@@ -75,58 +75,58 @@ const Show = () => {
                   </div>
                   <hr />
                   <div className="table-responsive">
-                     <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Slug</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {notices &&
-                        notices.map((notice) => {
-                          return (
-                            <tr key={`notices-${notice.id}`}>
-                              <td>{notice.id}</td>
-                              <td>{notice.title}</td>
-                              <td>{notice.slug}</td>
-                              <td>
-                                {notice.status == 1 ? "Active" : "Block"}
-                              </td>
-                              <td>
-                                <div className="d-flex flex-column flex-md-row gap-2">
-                                   <div className="d-flex flex-column flex-md-row gap-2">
-                                  <Link
-                                  to={`/admin/notices/edit/${notice.id}`}
-                                  className="btn btn-secondary small "
-                                >
-                                  Edit
-                                </Link>
-                                <Link
-                                  onClick={() => deletenotice(notice.id)}
-                                  href="#"
-                                  className="btn btn-secondary small ms-2"
-                                >
-                                  Delete
-                                </Link>
+                    <table className="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Slug</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {notices &&
+                          notices.map((notice) => {
+                            return (
+                              <tr key={`notices-${notice.id}`}>
+                                <td>{notice.id}</td>
+                                <td>{notice.title}</td>
+                                <td>{notice.slug}</td>
+                                <td>
+                                  {notice.status == 1 ? "Active" : "Block"}
+                                </td>
+                                <td>
+                                  <div className="d-flex flex-column flex-md-row gap-2">
+                                    <div className="d-flex flex-column flex-md-row gap-2">
+                                      <Link
+                                        to={`/admin/notices/edit/${notice.id}`}
+                                        className="btn btn-secondary small "
+                                      >
+                                        Edit
+                                      </Link>
+                                      <Link
+                                        onClick={() => deletenotice(notice.id)}
+                                        href="#"
+                                        className="btn btn-secondary small ms-2"
+                                      >
+                                        Delete
+                                      </Link>
 
-                                </div>
-                               
+                                    </div>
 
-                                </div>
-                                
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
+
+                                  </div>
+
+                                </td>
+                              </tr>
+                            );
+                          })}
+                      </tbody>
+                    </table>
 
                   </div>
-                 
+
                 </div>
               </div>
             </div>

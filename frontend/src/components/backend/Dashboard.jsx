@@ -6,20 +6,20 @@ import RequestDashboard from "../common/RequestDashboard";
 import Portal from "../common/Portal";
 
 const Dashboard = () => {
-  
+
   return (
     <>
       <Header />
       <main>
-        <Portal 
-            heading="Citizen Portal" 
-            text="Your one-stop platform to access municipal services, track requests, and make payments." 
+        <Portal
+          heading="Citizen Portal"
+          text="Your one-stop platform to access municipal services, track requests, and make payments."
         />
 
         <PopularServices />
         <RequestDashboard />
 
-        
+
 
       </main>
 

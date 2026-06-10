@@ -16,7 +16,7 @@ const Create = ({ placeholder }) => {
 
     const config = useMemo(
         () => ({
-            readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+            readonly: false, 
             placeholder: placeholder || "Content",
         }),
         [placeholder],

@@ -98,7 +98,7 @@ const Create = () => {
                       )}
                     </div>
 
-                    
+
                     <div className="mb-3">
                       <label htmlFor="" className="form-label">
                         Title
@@ -121,8 +121,8 @@ const Create = () => {
                         className={`form-control`}
                       />
                     </div>
-                    
-                    <button 
+
+                    <button
                       className="btn btn-primary small"
                     >
                       submit

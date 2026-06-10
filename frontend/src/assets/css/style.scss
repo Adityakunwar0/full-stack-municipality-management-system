@@ -1019,6 +1019,7 @@ footer {
                 background: #fef9c3;
                 color: #ca8a04;
             }
+
             &.orange {
                 background: #fef9c3;
                 color: #ca8b04e0;
@@ -1095,7 +1096,8 @@ footer {
                 border: 2px solid #2563eb;
                 color: #2563eb;
             }
-            &.green{
+
+            &.green {
                 border: 2px solid #84daa3;
                 color: #16a34a;
             }
@@ -1382,6 +1384,7 @@ footer {
         min-height: 400px;
     }
 }
+
 .request-tabs {
     .nav-link {
         border: none;
@@ -1422,69 +1425,68 @@ footer {
 }
 
 .summary-box {
-  background: $white-background;
-  border-radius: 12px; 
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  text-align: left;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
- 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  }
-
-  i {
-    font-size: 20px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%; // Moves the circular behavior to the icon background where it belongs
+    background: $white-background;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
     justify-content: center;
-    margin-bottom: 16px;
-    transition: background-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    // Semantic status color modifications
-    &.blue {
-      background: $light-background;
-      color: #2563eb;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     }
 
-    &.orange {
-      background: #fef3c7; // Softer pastel orange tint
-      color: #d97706;
+    i {
+        font-size: 20px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%; // Moves the circular behavior to the icon background where it belongs
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        transition: background-color 0.2s ease;
+
+        // Semantic status color modifications
+        &.blue {
+            background: $light-background;
+            color: #2563eb;
+        }
+
+        &.orange {
+            background: #fef3c7; // Softer pastel orange tint
+            color: #d97706;
+        }
+
+        &.green {
+            background: #e8f5e9; // Clean, soft green tint
+            color: #16a34a;
+        }
+
+        &.purple {
+            background: #f3e8ff; // Clean, soft purple tint
+            color: #7c3aed;
+        }
     }
 
-    &.green {
-      background: #e8f5e9; // Clean, soft green tint
-      color: #16a34a;
+    h2 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+        color: #1f2937; // Strong charcoal color for visual accessibility
+        line-height: 1.2;
     }
 
-    &.purple {
-      background: #f3e8ff; // Clean, soft purple tint
-      color: #7c3aed;
+    p {
+        margin: 6px 0 0 0;
+        color: #6b7280; // Standard dashboard muted gray text
+        font-size: 14px;
+        font-weight: 500;
     }
-  }
-
-  h2 {
-    margin: 0;
-    font-size: 30px;
-    font-weight: 700;
-    color: #1f2937; // Strong charcoal color for visual accessibility
-    line-height: 1.2;
-  }
-
-  p {
-    margin: 6px 0 0 0;
-    color: #6b7280; // Standard dashboard muted gray text
-    font-size: 14px;
-    font-weight: 500;
-  }
 }
-

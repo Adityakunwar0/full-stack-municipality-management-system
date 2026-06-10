@@ -107,7 +107,7 @@ const Create = () => {
                     </div>
                     <div className="mb-3">
                       <label htmlFor="" className="form-label">
-                       Name
+                        Name
                       </label>
                       <input
                         placeholder="Name"
@@ -124,7 +124,7 @@ const Create = () => {
                       )}
                     </div>
 
-                    
+
                     <div className="mb-3">
                       <label htmlFor="" className="form-label">
                         Designation Title
