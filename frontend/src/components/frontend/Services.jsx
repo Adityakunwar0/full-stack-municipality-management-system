@@ -114,7 +114,7 @@ const Services = () => {
                   <p>{service.description}</p>
 
                   <button
-                    onClick={() => handleApply(service.id)}  // ✅ pass service.id
+                    onClick={() => handleApply(service.id)}  
                     className={`service-btn ${service.color}`}
                     disabled={applying === service.id}
                   >

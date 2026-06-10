@@ -15,8 +15,8 @@ const Contact = () => {
     reset,
     formState: { errors },
   } = useForm();
-   const onSubmit = async (data) => {
-  
+  const onSubmit = async (data) => {
+
     const res = await fetch(apiurl + "contact-now", {
       method: "POST",
       headers: {
@@ -33,7 +33,7 @@ const Contact = () => {
     } else {
       toast.error(result.message || "Something went wrong.");
     }
-};
+  };
 
   return (
     <>

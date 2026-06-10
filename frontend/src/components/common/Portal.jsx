@@ -28,7 +28,7 @@ const Portal = ({ heading, text, children }) => {
                     <div className="portal-left">
                         {/* Fallback defaults are provided using || operator */}
                         <h1>{heading || "Citizen Portal"}</h1>
-                        
+
                         {text ? (
                             <p>{text}</p>
                         ) : children ? (

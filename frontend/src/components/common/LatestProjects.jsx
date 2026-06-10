@@ -19,22 +19,22 @@ const LatestProjects = () => {
 
   return (
 
-     <section className="section-2 light-background py-3">
+    <section className="section-2 light-background py-3">
       <div className="container py-5">
         <div className="section-header text-center">
           <span>Latest projects</span>
           <h2>Building A Better Tomorrow</h2>
           <p>
             We deliver smart municipality management solutions
-             for organized, transparent, and efficient city operations.
+            for organized, transparent, and efficient city operations.
           </p>
         </div>
         <div className="row pt-4">
-           {projects &&
+          {projects &&
             projects.map((project) => {
               return (
-    
-                <div key={project.id}  className="col-md-3 col-lg-3">
+
+                <div key={project.id} className="col-md-3 col-lg-3">
                   <div className="item">
                     <div className="service-image">
                       <img

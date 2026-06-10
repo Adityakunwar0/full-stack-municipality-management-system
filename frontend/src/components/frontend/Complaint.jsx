@@ -15,8 +15,8 @@ const Complaint = () => {
 
       <main>
         {user ? (
-          <Portal 
-            heading="Grievance Redressal Portal" 
+          <Portal
+            heading="Grievance Redressal Portal"
             text="Submit your civic complaints directly to municipal authorities. Track local area resolutions live."
           />
         ) : (

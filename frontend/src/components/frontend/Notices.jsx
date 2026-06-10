@@ -8,23 +8,23 @@ import { apiurl, fileUrl } from "../common/Http";
 
 const Notices = () => {
   const [notices, setNotices] = useState([]);
-  
-    const fetchAllNotices = async () => {
-      const res = await fetch(apiurl + "get-notices", {
-        method: "GET",
-      });
-      const result = await res.json();
-      // console.log(result);
-      setNotices(result.data);
-    };
-    useEffect(() => {
-      fetchAllNotices();
-    }, []);
+
+  const fetchAllNotices = async () => {
+    const res = await fetch(apiurl + "get-notices", {
+      method: "GET",
+    });
+    const result = await res.json();
+    // console.log(result);
+    setNotices(result.data);
+  };
+  useEffect(() => {
+    fetchAllNotices();
+  }, []);
 
   return (
     <>
-    <Header />
-    <main >
+      <Header />
+      <main >
         <Hero
           preHeading="Building Today For A Better Tommorow."
           heading="Notices"
@@ -43,7 +43,7 @@ const Notices = () => {
               {notices &&
                 notices.map((notice) => {
                   return (
-              
+
                     <div key={notice.id} className="col-md-4 col-lg-4">
                       <div className="item">
                         <div className="service-image">
@@ -71,14 +71,14 @@ const Notices = () => {
                     </div>
                   );
                 })}
-                 
+
             </div>
           </div>
         </section>
         <Quote />
 
-    </main>
-    <Footer />
+      </main>
+      <Footer />
     </>
   )
 }

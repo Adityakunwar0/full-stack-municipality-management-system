@@ -23,8 +23,8 @@ const Projects = () => {
 
   return (
     <>
-    <Header/>
-    <main>
+      <Header />
+      <main>
         <Hero
           preHeading="Building Today For A Better Tommorow."
           heading="Projects"
@@ -38,10 +38,10 @@ const Projects = () => {
               <h2>Building A Better Tomorrow</h2>
               <p>
                 We deliver smart municipality management solutions
-             for organized, transparent, and efficient city operations.
+                for organized, transparent, and efficient city operations.
               </p>
             </div>
-             <div className="row pt-4">
+            <div className="row pt-4">
               {projects &&
                 projects.map((project) => {
                   return (
@@ -77,11 +77,11 @@ const Projects = () => {
         </section>
         <Quote />
 
-    </main>
+      </main>
 
 
 
-    <Footer />
+      <Footer />
     </>
   )
 }

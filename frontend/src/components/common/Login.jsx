@@ -6,11 +6,11 @@ import { AuthContext } from "../backend/context/Auth";
 import { apiurl } from "../common/Http";
 
 const Login = () => {
-  
+
   const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  
+
   const {
     register,
     handleSubmit,
@@ -19,47 +19,47 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    
-      const res = await fetch(apiurl + "authenticate", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
 
-      if (!res.ok) {
-        toast.error("Server error, please try again.");
-        return;
-      }
+    const res = await fetch(apiurl + "authenticate", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-      const result = await res.json();
+    if (!res.ok) {
+      toast.error("Server error, please try again.");
+      return;
+    }
 
-      if (result.status == false) {
-        toast.error(result.message);
+    const result = await res.json();
+
+    if (result.status == false) {
+      toast.error(result.message);
+    } else {
+      // save user info in local storage and update auth context
+      const userInfo = {
+        id: result.id,
+        token: result.token,
+        role: result.role,
+        name: result.name,
+        email: result.email,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      login(userInfo);
+      if (result.role === "admin") {
+        navigate("/admin/dashboard");
       } else {
-        // save user info in local storage and update auth context
-        const userInfo = {
-  id: result.id,
-  token: result.token,
-  role: result.role,
-  name: result.name,
-  email: result.email,
-};
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        login(userInfo);
-        if (result.role === "admin") {
-  navigate("/admin/dashboard");
-} else {
-  navigate("/user/dashboard");
-}
+        navigate("/user/dashboard");
       }
-    
+    }
+
   };
 
   return (
     <>
-      
+
       <main>
         <div className="container  my-5 d-flex justify-content-center">
           <div className="login-form  my-5">
@@ -79,7 +79,7 @@ const Login = () => {
                           message: "Please enter a valid email address",
                         },
                       })}
-                      id= "email"
+                      id="email"
                       type="email"
                       placeholder="Email"
                       className={`form-control ${errors.email && "is-invalid"}`}

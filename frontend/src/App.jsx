@@ -214,10 +214,10 @@ const App = () => {
             <EditServices />
           </RequireAuth>} />
           <Route path="/user/complaint" element={<RequireAuth><Complaint /></RequireAuth>} />
-           <Route path="/admin/complaint" element={<RequireAuth><Complaint /></RequireAuth>} />
-          
+          <Route path="/admin/complaint" element={<RequireAuth><Complaint /></RequireAuth>} />
 
-          
+
+
 
           <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
           <Route path="/admin/service-requests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
