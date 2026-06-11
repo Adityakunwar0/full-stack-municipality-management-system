@@ -44,6 +44,8 @@ import Request from './components/backend/user/Request';
 import Profile from './components/backend/user/Profile';
 import { default as ShowProfile } from "./components/backend/profile/Show";
 import { default as ViewProfile } from "./components/backend/profile/View";
+import ProjectDetail from './components/frontend/ProjectDetail';
+import NoticeDetail from './components/frontend/NoticeDetail';
 
 const App = () => {
   return (
@@ -55,7 +57,9 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path='/services' element={<Services />} />
           <Route path='/projects' element={<Projects />} />
+          <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path='/notices' element={<Notices />} />
+           <Route path="/notice/:id" element={<NoticeDetail />} />
           <Route path='/contacts' element={<Contact />} />
           <Route path='/login' element={<Login />} />
           <Route path='/complaint' element={<Complaint />} />

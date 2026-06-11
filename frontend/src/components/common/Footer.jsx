@@ -7,75 +7,75 @@ export const Footer = () => {
   return (
     <footer>
       <div className="container py-5">
-        <div className="row ">
-          <div className="col-md-3 px-2">
+        {/* Added g-4 for consistent responsive column spacing gaps */}
+        <div className="row g-4"> 
+          
+          {/* Logo & Description Section */}
+          <div className="col-sm-6 col-lg-3">
             <Navbar.Brand href="/" className="logo">
-              <img width={50} src={Logo} />
+              <img width={50} src={Logo} alt="Gaur Municipality Logo" />
               <span>Gaur Municipality City <br /> Madhesh Province, Rautahat</span>
             </Navbar.Brand>
-            <div className="pe-10 mt-3 ">
-              <p >
-                Committed to transparenency, sustanbility and inclusive development for a better Tommorrow.
+            <div className="mt-3 description-text">
+              <p>
+                Committed to transparency, sustainability, and inclusive development for a better tomorrow.
               </p>
             </div>
           </div>
-          <div className="col-md-3 px-5">
-            <h3 className="mb-3">Quick Links</h3>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About </Link>
-              </li>
-              <li>
-                <Link to="/projects">Projects</Link>
-              </li>
-              <li>
-                <Link to="/contacts">Contact</Link>
-              </li>
+
+          {/* Quick Links */}
+          <div className="col-sm-6 col-lg-3">
+            <h3 className="footer-heading">Quick Links</h3>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/projects">Projects</Link></li>
+              <li><Link to="/contacts">Contact</Link></li>
             </ul>
           </div>
-          <div className="col-md-3 px-1">
-            <h3 className="mb-3">Useful Links</h3>
-            <ul>
+
+          {/* Useful Links */}
+          <div className="col-sm-6 col-lg-3">
+            <h3 className="footer-heading">Useful Links</h3>
+            <ul className="footer-links">
+              <li><Link to="/login">Citizen Login</Link></li>
+              <li><Link to="/complaint">Citizen Complaints</Link></li>
+              <li><Link to="/notices">Public Notices</Link></li>
+              <li><Link to="/services">Public Services</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="col-sm-6 col-lg-3">
+            <h3 className="footer-heading">Contact Info</h3>
+            <ul className="footer-info">
               <li>
-                <Link to="/login">Citizen Login</Link>
+                <p><i className="fa-solid fa-location-dot me-2"></i>Gaur, Rautahat, Nepal</p>
               </li>
               <li>
-                <Link to="/complaint">Citizen Complaints</Link>
+                <p><i className="fa-solid fa-phone me-2"></i>055-520292, 055-520894</p>
               </li>
               <li>
-                <Link to="/notices">Public Notices</Link>
-              </li>
-              <li>
-                <Link to="/faqs">FAQs</Link>
+                <p><i className="fa-solid fa-print me-2"></i>Fax: 055-520294</p>
               </li>
             </ul>
           </div>
 
-          <div className="col-md-3 px-2">
-            <h3 className="mb-3">Contact Info</h3>
-            <ul>
-              <li>
-                <p>Gaur, Rautahat, Nepal</p>
-              </li>
-              <li>
-                <p>Phone No:- 055-520292, 055-520894 </p>
-              </li>
-              <li>
-                <p>Fax:- 055-520294</p>
-              </li>
-
-            </ul>
-          </div>
-          <hr />
-          <p className="text-center pt-2">
-            Copyright @2026 Gaur Municipality City. All Right Reserved.
-          </p>
         </div>
+
+        {/* Bottom Copyright Section */}
+        <div className="row mt-4">
+          <div className="col-12">
+            <hr className="footer-hr" />
+            <p className="text-center copyright-text pt-2">
+              Copyright ©2026 Gaur Municipality City. All Rights Reserved.
+            </p>
+          </div>
+        </div>
+
       </div>
     </footer>
   );
 };
+
 export default Footer;
