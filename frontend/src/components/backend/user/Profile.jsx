@@ -175,15 +175,15 @@ const Profile = () => {
 
                                 <h4>{formData.citizen_name}</h4>
                                 <span className="role-badge">Citizen Number :{formData.citizen_number}</span>
-                                
+
 
                                 <div className="profile-info">
                                     <div className="info-item">
-                                         <i className="fa-solid fa-id-card"></i>
+                                        <i className="fa-solid fa-id-card"></i>
                                         {formData.citizen_name || "Citizen Name"}
                                     </div>
                                     <div className="info-item">
-                                         <i className="fa-solid fa-id-card"></i>
+                                        <i className="fa-solid fa-id-card"></i>
                                         {formData.citizen_number || "Citizen Number"}
                                     </div>
                                     <div className="info-item">
@@ -191,7 +191,7 @@ const Profile = () => {
                                         {formData.nid_number || "NID Number"}
                                     </div>
                                     <div className="info-item">
-                                         <i className="fa-solid fa-phone"></i>
+                                        <i className="fa-solid fa-phone"></i>
                                         {formData.phone || "Phone Number"}
                                     </div>
                                 </div>
