@@ -41,6 +41,9 @@ import { default as ShowServiceRequests } from "./components/backend/serviceRequ
 import { default as ViewServiceRequest } from "./components/backend/serviceRequests/View";
 import Services from './components/frontend/Services';
 import Request from './components/backend/user/Request';
+import Profile from './components/backend/user/Profile';
+import { default as ShowProfile } from "./components/backend/profile/Show";
+import { default as ViewProfile } from "./components/backend/profile/View";
 
 const App = () => {
   return (
@@ -222,8 +225,14 @@ const App = () => {
           <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
           <Route path="/admin/service-requests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
           <Route path="/admin/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
+          <Route path="/admin/profile" element={<RequireAuth><Profile /></RequireAuth>} />
 
           <Route path="/user/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
+          <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+
+          <Route path="/admin/profiles" element={<RequireAuth><ShowProfile /></RequireAuth>} />
+          <Route path="/admin/profiles/:id" element={<RequireAuth><ViewProfile /></RequireAuth>} />
+
         </Routes>
 
       </BrowserRouter>

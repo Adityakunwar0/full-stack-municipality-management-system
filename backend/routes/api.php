@@ -20,6 +20,10 @@ use App\Http\Controllers\admin\ComplaintController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\AdminProfileController;
+
+use App\Http\Controllers\ProfileController;
+
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -105,6 +109,14 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::post('admin/apply-service', [ServiceRequestController::class, 'apply']);
         Route::get('admin/my-requests', [ServiceRequestController::class, 'myRequests']);
 
+        Route::get('admin/profiles', [AdminProfileController::class, 'index']);
+        Route::get('admin/profiles/{id}', [AdminProfileController::class, 'show']);
+        Route::put('admin/profiles/{id}', [AdminProfileController::class, 'update']);
+        Route::delete('admin/profiles/{id}', [AdminProfileController::class, 'destroy']);
+
+         Route::get('admin/profile',  [ProfileController::class, 'show']);  
+         Route::post('admin/profile', [ProfileController::class, 'store']); 
+
 
         
 
@@ -116,6 +128,10 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
         Route::post('user/apply-service', [ServiceRequestController::class, 'apply']);
         Route::get('user/my-requests', [ServiceRequestController::class, 'myRequests']);
+
+        Route::get('user/profile',  [ProfileController::class, 'show']);  
+        Route::post('user/profile', [ProfileController::class, 'store']); 
+
 
     });
   
