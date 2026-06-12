@@ -16,18 +16,23 @@ const Services = () => {
   const { user } = useContext(AuthContext);
 
   const fetchServices = async () => {
-    const res = await fetch(apiurl + "get-services", {
-      method: "GET",
-    });
-    const result = await res.json();
-    // console.log(result);
-    setServices(result.data);
+    try {
+      const res = await fetch(apiurl + "get-services", {
+        method: "GET",
+      });
+      const result = await res.json();
+      setServices(result.data || []); // Added fallback default empty array
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
   };
+
   useEffect(() => {
     fetchServices();
   }, []);
 
-  const handleApply = async (serviceId) => {
+  // FIXED: Changed parameter from serviceId to the full service object
+  const handleApply = async (service) => {
     const userToken = token();
 
     if (!userToken) {
@@ -47,11 +52,10 @@ const Services = () => {
       return;
     }
 
-    setApplying(serviceId);
+    setApplying(service.id);
     const applyUrl = user?.role === "admin"
       ? apiurl + "admin/apply-service"
       : apiurl + "user/apply-service";
-
 
     try {
       const res = await fetch(applyUrl, {
@@ -62,7 +66,7 @@ const Services = () => {
           Authorization: `Bearer ${userToken}`,
         },
         body: JSON.stringify({
-          service_id: serviceId,
+          service_id: service.id,
           request_status: "progress",
         }),
       });
@@ -71,11 +75,15 @@ const Services = () => {
 
       if (res.ok) {
         toast.success("Service request submitted successfully!");
+        
+        // FIXED: This safely runs because 'service' object is now in scope
+        const isPayment = service.btn_text?.toLowerCase() === "pay now";
+        const targetPage = isPayment ? "my-payments" : "my-requests";
         const rolePath = user?.role === "admin" ? "admin" : "user";
-        navigate(`/${rolePath}/my-requests`);
+        
+        navigate(`/${rolePath}/${targetPage}`);
       } else {
-        const errorMsg =
-          result?.message || result?.error || "Failed to submit request.";
+        const errorMsg = result?.message || result?.error || "Failed to submit request.";
         toast.error(errorMsg);
       }
     } catch (error) {
@@ -86,7 +94,6 @@ const Services = () => {
     }
   };
 
-
   return (
     <>
       <Header />
@@ -96,44 +103,71 @@ const Services = () => {
           heading="Services"
           text=" Stay updated with the latest announcements <br/> and important information. "
         />
+
         <section className='section-3 services light-background py-3'>
           <div className='container-fluid py-5'>
             <div className='section-header text-center'>
-              <span> Services </span>
-              <h2>Our Municipality</h2>
+              <span> Payments </span>
+              <h2>Municipality Payment Services</h2>
             </div>
-            <div className='container-fluid row pt-4 services-grid '>
-              {services.map((service, index) => (
-                <div className="service-card" key={index}>
-                  <div className={`icon-circle ${service.color}`}>
-                    <i className={service.icon}></i>
+            <div className='row pt-4 services-grid'>
+              {services
+                .filter(service => service.btn_text?.toLowerCase() === "pay now")
+                .map((service, index) => (
+                  <div className="service-card" key={index}>
+                    <div className={`icon-circle ${service.color}`}>
+                      <i className={service.icon}></i>
+                    </div>
+                    <h4>{service.title}</h4>
+                    <p>{service.description}</p>
+                    <button
+                      onClick={() => handleApply(service)} 
+                      className={`service-btn ${service.color}`}
+                      disabled={applying === service.id}
+                    >
+                      {applying === service.id ? "Applying..." : service.btn_text}
+                    </button>
                   </div>
-
-                  <h4>{service.title}</h4>
-
-                  <p>{service.description}</p>
-
-                  <button
-                    onClick={() => handleApply(service.id)}  
-                    className={`service-btn ${service.color}`}
-                    disabled={applying === service.id}
-                  >
-                    {applying === service.id ? "Applying..." : service.btn_text}
-                  </button>
-                </div>
-              ))}
-
+                ))}
             </div>
           </div>
-
         </section>
-        <Quote />
 
+        <section className='section-3 services light-background py-3'>
+          <div className='container-fluid py-5'>
+            <div className='section-header text-center'>
+              <span> Requests </span>
+              <h2>Municipality Request Services</h2>
+            </div>
+            
+            <div className='row pt-4 services-grid'>
+              {services
+                .filter(service => service.btn_text?.toLowerCase() === "apply now")
+                .map((service, index) => (
+                  <div className="service-card" key={index}>
+                    <div className={`icon-circle ${service.color}`}>
+                      <i className={service.icon}></i>
+                    </div>
+                    <h4>{service.title}</h4>
+                    <p>{service.description}</p>
+                    <button
+                      onClick={() => handleApply(service)} 
+                      className={`service-btn ${service.color}`}
+                      disabled={applying === service.id}
+                    >
+                      {applying === service.id ? "Applying..." : service.btn_text}
+                    </button>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </section>
+
+        <Quote />
       </main>
       <Footer />
-
     </>
   )
 }
 
-export default Services
+export default Services;

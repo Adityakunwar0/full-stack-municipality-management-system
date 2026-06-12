@@ -104,6 +104,17 @@ const Create = () => {
                                                 <p className="invalid-feedback">{errors.description?.message}</p>
                                             )}
                                         </div>
+                                        {/* Amount */}
+ <div className="mb-3">
+                                            <label className="form-label">Amount</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Amount"
+                                                {...register("amount")}
+                                                className="form-control"
+                                            />
+                                        </div>
+
 
                                         {/* Button Text */}
                                         <div className="mb-3">

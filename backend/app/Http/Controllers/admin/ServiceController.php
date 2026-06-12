@@ -27,6 +27,7 @@ class ServiceController extends Controller
            'description' => 'required|string',
            'btn_text' => 'nullable|string|max:255',
            'color' => 'nullable|string|max:255',
+           'amount' => 'nullable|integer|min:0',
     ]);
 
     $service = Service::create($validated);
@@ -47,6 +48,7 @@ class ServiceController extends Controller
         'description' => 'sometimes|required|string',
         'btn_text' => 'nullable|string|max:255',
         'color' => 'nullable|string|max:255',
+        'amount' => 'nullable|integer|min:0',
     ]);
 
     $service->update($validated);

@@ -12,7 +12,8 @@ class Service extends Model
         'title',
         'description',
         'btn_text',
-        'color'
+        'color',
+        'amount'
     ];
     public function requests()
     {

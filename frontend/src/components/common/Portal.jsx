@@ -83,6 +83,12 @@ const Portal = ({ heading, text, children }) => {
                                     My Requests
                                 </Link>
                             </li>
+                            <li>
+                                <Link to={`/${rolePath}/my-payments`}>
+                                    <i className="fa-regular fa-money-bill-1"></i>
+                                    My Payments
+                                </Link>
+                            </li>
 
                             <li>
                                 <Link to={`/${rolePath}/profile`}>

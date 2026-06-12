@@ -16,7 +16,7 @@ const Create = ({ placeholder }) => {
 
   const config = useMemo(
     () => ({
-      readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+      readonly: false, 
       placeholder: placeholder || "Content",
     }),
     [placeholder],
@@ -168,16 +168,16 @@ const Create = ({ placeholder }) => {
                           >
                             <option value="">Project Type</option>
                             <option value="Residential construction">
-                              Residential construction
+                              Residential Development
                             </option>
-                            <option value="Commercial construction">
-                              Commercial construction
+                            <option value="Commercial Development">
+                              Commercial Development
                             </option>
                             <option value="Industrial Construction">
-                              Industrial Construction
+                              Industrial Development
                             </option>
-                            <option value="Infrastructure construction">
-                              Infrastructure construction
+                            <option value="Infrastructure Development">
+                              Infrastructure Development
                             </option>
                           </select>
                         </div>

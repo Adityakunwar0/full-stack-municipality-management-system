@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { apiurl, token } from "../common/Http"
+import React, { useContext, useEffect, useState } from 'react';
+import { apiurl, token } from "../common/Http";
 import { AuthContext } from "../backend/context/Auth";
-import { Link } from "react-router-dom";
 
 const RequestDashboard = () => {
     const [requests, setRequests] = useState([]);
@@ -12,12 +11,10 @@ const RequestDashboard = () => {
 
     const VISIBLE_LIMIT = 4;
 
-
     const fetchMyRequests = async () => {
         if (!user) return;
         try {
-            const endpoint =
-                user?.role === "admin" ? "admin/my-requests" : "user/my-requests";
+            const endpoint = user?.role === "admin" ? "admin/my-requests" : "user/my-requests";
             const res = await fetch(apiurl + endpoint, {
                 method: "GET",
                 headers: {
@@ -28,10 +25,14 @@ const RequestDashboard = () => {
             });
             const result = await res.json();
             if (Array.isArray(result)) {
-                setRequests(result);
+                // Isolate only submission application rows
+                const filteredRequests = result.filter(
+                    (item) => item.service?.btn_text?.toLowerCase() === "apply now"
+                );
+                setRequests(filteredRequests);
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching request data:", error);
         } finally {
             setLoading(false);
         }
@@ -41,7 +42,6 @@ const RequestDashboard = () => {
         fetchMyRequests();
     }, [user]);
 
-    // Reset "show all" whenever the tab changes
     useEffect(() => {
         setShowAll(false);
     }, [activeTab]);
@@ -55,9 +55,7 @@ const RequestDashboard = () => {
         };
         return (
             <span className={`badge bg-${map[status] || "secondary"}`}>
-                {status
-                    ? status.charAt(0).toUpperCase() + status.slice(1)
-                    : "—"}
+                {status ? status.charAt(0).toUpperCase() + status.slice(1) : "—"}
             </span>
         );
     };
@@ -72,10 +70,14 @@ const RequestDashboard = () => {
         : filteredRequests.slice(0, VISIBLE_LIMIT);
 
     const hasMore = filteredRequests.length > VISIBLE_LIMIT;
-    return (
-        <div className="light-background container-fluid  requests-wrapper ">
 
-            {/* Tabs */}
+    if (loading) {
+        return <div className="text-center py-5 text-muted">Loading requests dashboard...</div>;
+    }
+
+    return (
+        <div className="light-background container-fluid requests-wrapper px-0">
+            {/* Request Filter Tabs */}
             <div className="container request-tabs card border-0 shadow-sm mb-4">
                 <div className="card-body py-2">
                     <ul className="nav">
@@ -99,7 +101,7 @@ const RequestDashboard = () => {
                 </div>
             </div>
 
-            {/* Recent Requests */}
+            {/* Recent Submissions Activity List */}
             <div className="container card border-0 shadow-sm mb-4">
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center mb-4">
@@ -109,9 +111,7 @@ const RequestDashboard = () => {
                                 className="btn btn-sm btn-outline-primary"
                                 onClick={() => setShowAll((prev) => !prev)}
                             >
-                                {showAll
-                                    ? "Show Less"
-                                    : `View All (${filteredRequests.length})`}
+                                {showAll ? "Show Less" : `View All (${filteredRequests.length})`}
                             </button>
                         )}
                     </div>
@@ -119,10 +119,7 @@ const RequestDashboard = () => {
                     {visibleRequests.length > 0 ? (
                         <>
                             {visibleRequests.map((req) => (
-                                <div
-                                    key={req.id}
-                                    className="request-item d-flex justify-content-between align-items-center"
-                                >
+                                <div key={req.id} className="request-item d-flex justify-content-between align-items-center">
                                     <div className="d-flex align-items-center">
                                         <div className="request-icon">
                                             <i className={`${req.service?.icon || "fas fa-file-alt"}`}></i>
@@ -139,7 +136,6 @@ const RequestDashboard = () => {
                                 </div>
                             ))}
 
-                            {/* Bottom View All / Show Less link */}
                             {hasMore && (
                                 <div className="text-center mt-3">
                                     <button
@@ -147,30 +143,22 @@ const RequestDashboard = () => {
                                         onClick={() => setShowAll((prev) => !prev)}
                                     >
                                         {showAll ? (
-                                            <>
-                                                <i className="fas fa-chevron-up me-1"></i>
-                                                Show Less
-                                            </>
+                                            <><i className="fas fa-chevron-up me-1"></i>Show Less</>
                                         ) : (
-                                            <>
-                                                <i className="fas fa-chevron-down me-1"></i>
-                                                View All {filteredRequests.length} Requests
-                                            </>
+                                            <><i className="fas fa-chevron-down me-1"></i>View All {filteredRequests.length} Requests</>
                                         )}
                                     </button>
                                 </div>
                             )}
                         </>
                     ) : (
-                        <div className="text-center py-4 text-muted">
-                            No requests found.
-                        </div>
+                        <div className="text-center py-4 text-muted">No records found.</div>
                     )}
                 </div>
             </div>
 
-            {/* Request Summary */}
-            <div className=" card light-background border-0 shadow-sm">
+            {/* Application Metrics Summary */}
+            <div className="card light-background border-0 shadow-sm">
                 <div className="container card-body">
                     <h4 className="mb-4">Request Summary</h4>
                     <div className="row g-3">
@@ -183,9 +171,7 @@ const RequestDashboard = () => {
                             <div className="col-md-3" key={status}>
                                 <div className="summary-box">
                                     <i className={`${colorClass} ${icon}`}></i>
-                                    <h2>
-                                        {requests.filter(r => r.request_status === status).length}
-                                    </h2>
+                                    <h2>{requests.filter(r => r.request_status === status).length}</h2>
                                     <p>{label}</p>
                                 </div>
                             </div>
@@ -193,9 +179,8 @@ const RequestDashboard = () => {
                     </div>
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default RequestDashboard
+export default RequestDashboard;

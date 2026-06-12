@@ -77,7 +77,7 @@ const Show = () => {
                                                     <th>Title</th>
                                                     <th>Description</th>
                                                     <th>Btn Text</th>
-                                                    <th>Color</th>
+                                                    <th>Amount</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -96,9 +96,7 @@ const Show = () => {
                                                                 : service.description}
                                                         </td>
                                                         <td>{service.btn_text}</td>
-                                                        <td>
-                                                            {service.color}
-                                                        </td>
+                                                        <td>{service.amount}</td>
                                                         <td>
                                                             <div className="d-flex flex-column flex-md-row gap-2">
                                                                 <Link

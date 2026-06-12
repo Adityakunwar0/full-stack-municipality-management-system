@@ -11,18 +11,23 @@ const PopularServices = () => {
   const { user } = useContext(AuthContext);
 
   const fetchLatestServices = async () => {
-    const res = await fetch(apiurl + "get-latest-services?limit=4", {
-      method: "GET",
-    });
-    const result = await res.json();
-    setServices(result.data);
+    try {
+      const res = await fetch(apiurl + "get-latest-services?limit=4", {
+        method: "GET",
+      });
+      const result = await res.json();
+      setServices(result.data || []); // Fallback safeguard array
+    } catch (error) {
+      console.error("Error fetching popular services:", error);
+    }
   };
 
   useEffect(() => {
     fetchLatestServices();
   }, []);
 
-  const handleApply = async (serviceId) => {
+  // UPDATED: Now receives the entire service object instead of just serviceId
+  const handleApply = async (service) => {
     const userToken = token();
 
     if (!userToken) {
@@ -42,11 +47,10 @@ const PopularServices = () => {
       return;
     }
 
-    setApplying(serviceId);
+    setApplying(service.id);
     const applyUrl = user?.role === "admin"
       ? apiurl + "admin/apply-service"
       : apiurl + "user/apply-service";
-
 
     try {
       const res = await fetch(applyUrl, {
@@ -57,7 +61,7 @@ const PopularServices = () => {
           Authorization: `Bearer ${userToken}`,
         },
         body: JSON.stringify({
-          service_id: serviceId,
+          service_id: service.id,
           request_status: "progress",
         }),
       });
@@ -66,12 +70,16 @@ const PopularServices = () => {
 
       if (res.ok) {
         toast.success("Service request submitted successfully!");
+        
+        // DYNAMIC ROUTING CONFIGURATION
+        const isPayment = service.btn_text?.toLowerCase() === "pay now";
+        const targetPage = isPayment ? "my-payments" : "my-requests";
         const rolePath = user?.role === "admin" ? "admin" : "user";
-        navigate(`/${rolePath}/my-requests`);
+        
+        // Navigates dynamically to /user/my-payments or /user/my-requests
+        navigate(`/${rolePath}/${targetPage}`);
       } else {
-        // Show backend validation errors if any
-        const errorMsg =
-          result?.message || result?.error || "Failed to submit request.";
+        const errorMsg = result?.message || result?.error || "Failed to submit request.";
         toast.error(errorMsg);
       }
     } catch (error) {
@@ -101,7 +109,7 @@ const PopularServices = () => {
               <p>{service.description}</p>
 
               <button
-                onClick={() => handleApply(service.id)}
+                onClick={() => handleApply(service)} 
                 className={`service-btn ${service.color}`}
                 disabled={applying === service.id}
               >

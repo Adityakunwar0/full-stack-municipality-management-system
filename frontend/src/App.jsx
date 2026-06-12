@@ -46,6 +46,7 @@ import { default as ShowProfile } from "./components/backend/profile/Show";
 import { default as ViewProfile } from "./components/backend/profile/View";
 import ProjectDetail from './components/frontend/ProjectDetail';
 import NoticeDetail from './components/frontend/NoticeDetail';
+import Payment from './components/backend/user/Payment';
 
 const App = () => {
   return (
@@ -229,10 +230,12 @@ const App = () => {
           <Route path="/admin/serviceRequests" element={<RequireAuth><ShowServiceRequests /></RequireAuth>} />
           <Route path="/admin/service-requests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
           <Route path="/admin/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
+          <Route path="/admin/my-payments" element={<RequireAuth><Payment /></RequireAuth>} />
           <Route path="/admin/profile" element={<RequireAuth><Profile /></RequireAuth>} />
 
           <Route path="/user/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
           <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route path="/user/my-payments" element={<RequireAuth><Payment /></RequireAuth>} />
 
           <Route path="/admin/profiles" element={<RequireAuth><ShowProfile /></RequireAuth>} />
           <Route path="/admin/profiles/:id" element={<RequireAuth><ViewProfile /></RequireAuth>} />

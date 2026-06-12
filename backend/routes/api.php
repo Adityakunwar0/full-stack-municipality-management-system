@@ -23,7 +23,9 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AdminProfileController;
 
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\front\MyPaymentController;
+use App\Http\Controllers\admin\PaymentController as AdminPaymentController;
 
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
@@ -51,6 +53,8 @@ Route::post('contact-now', [ContactController::class,'index']);
 Route::post('complaints', [ComplaintController::class, 'store']);
 
 Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
+
+Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 
@@ -117,6 +121,22 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
          Route::get('admin/profile',  [ProfileController::class, 'show']);  
          Route::post('admin/profile', [ProfileController::class, 'store']); 
 
+         Route::get('admin/my-payments', [MyPaymentController::class, 'index']);
+ 
+    // Single payment detail
+    Route::get('admin/my-payments/{id}', [MyPaymentController::class, 'show']);
+ 
+    // Step 1: Create PaymentIntent (returns client_secret to frontend)
+    Route::post('admin/my-payments/create-intent', [MyPaymentController::class, 'createIntent']);
+ 
+    // Step 2: Confirm after Stripe processes card on frontend
+    Route::post('admin/my-payments/confirm', [MyPaymentController::class, 'confirm']);
+
+     Route::get('admin/payments', [AdminPaymentController::class, 'index']);
+ 
+    // Single payment detail
+    Route::get('admin/payments/{id}', [AdminPaymentController::class, 'show']);
+
 
         
 
@@ -131,6 +151,17 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
         Route::get('user/profile',  [ProfileController::class, 'show']);  
         Route::post('user/profile', [ProfileController::class, 'store']); 
+
+        Route::get('user/my-payments', [MyPaymentController::class, 'index']);
+ 
+    // Single payment detail
+    Route::get('user/my-payments/{id}', [MyPaymentController::class, 'show']);
+ 
+    // Step 1: Create PaymentIntent (returns client_secret to frontend)
+    Route::post('user/my-payments/create-intent', [MyPaymentController::class, 'createIntent']);
+ 
+    // Step 2: Confirm after Stripe processes card on frontend
+    Route::post('user/my-payments/confirm', [MyPaymentController::class, 'confirm']);
 
 
     });

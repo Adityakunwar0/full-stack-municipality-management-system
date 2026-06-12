@@ -33,6 +33,7 @@ const Edit = () => {
                 description: result.data.description,
                 btn_text: result.data.btn_text,
                 color: result.data.color,
+                amount: result.data.amount,
             };
         },
     });
@@ -127,6 +128,17 @@ const Edit = () => {
                                                 <p className="invalid-feedback">{errors.description?.message}</p>
                                             )}
                                         </div>
+                                        {/* Amount */}
+ <div className="mb-3">
+                                            <label className="form-label">Amount</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Amount Name"
+                                                {...register("amount")}
+                                                className="form-control"
+                                            />
+                                        </div>
+
 
                                         {/* Button Text */}
                                         <div className="mb-3">
