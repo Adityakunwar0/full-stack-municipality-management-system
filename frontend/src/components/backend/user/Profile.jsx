@@ -11,6 +11,7 @@ const Profile = () => {
     const [imageUploading, setImageUploading] = useState(false);
     const [saving, setSaving] = useState(false);
     const { user } = useContext(AuthContext);
+    const [isEditable, setIsEditable] = useState(false);
 
     const [formData, setFormData] = useState({
         citizen_name: "",
@@ -23,7 +24,6 @@ const Profile = () => {
         about_me: "",
     });
 
-    // ── Fetch existing profile on mount ──────────────────────────────────────
     useEffect(() => {
         const fetchProfile = async () => {
             const applyUrl = user?.role === "admin"
@@ -38,6 +38,11 @@ const Profile = () => {
                 const result = await res.json();
                 if (result.success && result.data) {
                     const p = result.data;
+                    if (user?.role === "admin") {
+                        setIsEditable(true);
+                    } else {
+                        setIsEditable(false);
+                    }
                     setFormData({
                         citizen_name: p.citizen_name || "",
                         citizen_number: p.citizen_number || "",
@@ -63,14 +68,24 @@ const Profile = () => {
 
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+
+        if (!isEditable && user?.role !== "admin") {
+            toast.warning(
+                "You cannot change this information. Only admin can change."
+            );
+            return;
+        }
+
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
     };
 
     const handleImage = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Immediate local preview
         setPreviewImage(URL.createObjectURL(file));
         setImageUploading(true);
 
@@ -100,7 +115,7 @@ const Profile = () => {
         }
     };
 
-    // ── Save profile ─────────────────────────────────────────────────────────
+
     const saveProfile = async (e) => {
         e.preventDefault();
         if (imageUploading) {
@@ -140,7 +155,6 @@ const Profile = () => {
         }
     };
 
-    // ── Render ────────────────────────────────────────────────────────────────
     return (
         <>
             <Header />
@@ -213,6 +227,7 @@ const Profile = () => {
                                                 name="citizen_name"
                                                 value={formData.citizen_name}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -226,6 +241,7 @@ const Profile = () => {
                                                 name="citizen_number"
                                                 value={formData.citizen_number}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -239,6 +255,7 @@ const Profile = () => {
                                                 name="nid_number"
                                                 value={formData.nid_number}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -252,6 +269,7 @@ const Profile = () => {
                                                 name="phone"
                                                 value={formData.phone}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -265,6 +283,7 @@ const Profile = () => {
                                                 name="dob"
                                                 value={formData.dob}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -277,6 +296,7 @@ const Profile = () => {
                                                 name="gender"
                                                 value={formData.gender}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             >
                                                 <option value="">Select gender</option>
                                                 <option value="male">Male</option>
@@ -295,6 +315,7 @@ const Profile = () => {
                                                 name="address"
                                                 value={formData.address}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
@@ -308,20 +329,23 @@ const Profile = () => {
                                                 name="about_me"
                                                 value={formData.about_me}
                                                 onChange={handleChange}
+                                                readOnly={!isEditable && user?.role !== "admin"}
                                             />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="text-end">
-                                    <button
-                                        className="save-btn"
-                                        onClick={saveProfile}
-                                        disabled={saving || imageUploading}
-                                    >
-                                        {saving ? "Saving..." : "Save Profile"}
-                                    </button>
-                                </div>
+                                {(user?.role === "admin" || isEditable) && (
+                                    <div className="text-end">
+                                        <button
+                                            className="save-btn"
+                                            onClick={saveProfile}
+                                            disabled={saving || imageUploading}
+                                        >
+                                            {saving ? "Saving..." : "Save Profile"}
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
