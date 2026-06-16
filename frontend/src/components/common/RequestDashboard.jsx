@@ -126,10 +126,23 @@ const RequestDashboard = () => {
                                         </div>
                                         <div>
                                             <h6 className="mb-1">{req.service?.title}</h6>
-                                            <small className="text-muted">REQ-{req.id}</small>
+
+                                            <small className="text-muted">
+                                                REQ-{req.id}
+                                            </small>
+
                                             <small className="text-muted ms-2">
                                                 • {new Date(req.created_at).toLocaleDateString()}
                                             </small>
+
+
+                                            <div className="mt-2 p-2 bg-light rounded">
+                                                <strong>Review Details:</strong>
+                                                <p className="mb-0 text-muted">
+                                                    {req.remarks}
+                                                </p>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div>{statusBadge(req.request_status)}</div>
