@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from '../../common/Header';
 import { useParams } from "react-router-dom";
-import { apiurl, token } from "../../common/Http";
+import { apiurl, fileUrl, token } from "../../common/Http";
 import { toast } from "react-toastify";
 import Footer from '../../common/Footer';
 
@@ -17,6 +17,8 @@ const View = () => {
     const [imageId, setImageId] = useState(null);
     const [isDisable, setIsDisable] = useState(false);
     const [profile, setProfile] = useState(null);
+    const [dob, setDob] = useState("");                 
+    const [gender, setGender] = useState("");
 
     const fetchProfile = async () => {
 
@@ -32,10 +34,12 @@ const View = () => {
         const result = await res.json();
 
         const profile = result.data;
-
+        setProfile(profile);
         setCitizenName(profile.citizen_name || "");
         setCitizenNumber(profile.citizen_number || "");
         setNidNumber(profile.nid_number || "");
+        setDob(profile.dob || "");                      
+        setGender(profile.gender || "");  
         setPhone(profile.phone || "");
         setAddress(profile.address || "");
         setAboutMe(profile.about_me || "");
@@ -64,6 +68,8 @@ const View = () => {
                         citizen_number: citizenNumber,
                         nid_number: nidNumber,
                         phone,
+                        dob,                            
+                        gender,  
                         address,
                         about_me: aboutMe,
                         imageId
@@ -166,6 +172,30 @@ const View = () => {
                                             setPhone(e.target.value)
                                         }
                                     />
+                                </div>
+                                <div className="mb-3">
+                                    <label>Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        className="form-control"
+                                        value={dob}
+                                        onChange={(e) => setDob(e.target.value)}
+                                    />
+                                </div>
+
+                              
+                                <div className="mb-3">
+                                    <label>Gender</label>
+                                    <select
+                                        className="form-control"
+                                        value={gender}
+                                        onChange={(e) => setGender(e.target.value)}
+                                    >
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
                                 </div>
 
                                 <div className="mb-3">

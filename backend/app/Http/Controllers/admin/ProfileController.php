@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\File;
 
-class AdminProfileController extends Controller
+class ProfileController extends Controller
 {
     /**
      * List all profiles with their user
@@ -52,6 +53,8 @@ class AdminProfileController extends Controller
             'citizen_number' => 'nullable|string|max:255',
             'nid_number' => 'nullable|string|max:255',
             'phone'       => 'nullable|string|max:20',
+            'dob'         => 'nullable|date',           
+            'gender'         => 'nullable|in:male,female,other',
             'address'     => 'nullable|string',
             'about_me'    => 'nullable|string',
         ]);

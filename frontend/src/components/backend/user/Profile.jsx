@@ -12,6 +12,7 @@ const Profile = () => {
     const [saving, setSaving] = useState(false);
     const { user } = useContext(AuthContext);
     const [isEditable, setIsEditable] = useState(false);
+    const [isProfileSaved, setIsProfileSaved] = useState(false);
 
     const [formData, setFormData] = useState({
         citizen_name: "",
@@ -30,7 +31,6 @@ const Profile = () => {
                 ? apiurl + "admin/profile"
                 : apiurl + "user/profile";
 
-
             try {
                 const res = await fetch(applyUrl, {
                     headers: { Authorization: `Bearer ${token()}` },
@@ -38,11 +38,13 @@ const Profile = () => {
                 const result = await res.json();
                 if (result.success && result.data) {
                     const p = result.data;
+
                     if (user?.role === "admin") {
                         setIsEditable(true);
                     } else {
                         setIsEditable(false);
                     }
+
                     setFormData({
                         citizen_name: p.citizen_name || "",
                         citizen_number: p.citizen_number || "",
@@ -53,10 +55,16 @@ const Profile = () => {
                         address: p.address || "",
                         about_me: p.about_me || "",
                     });
+
                     if (p.profile_image) {
                         setPreviewImage(
                             `${fileUrl}uploads/profiles/${p.profile_image}`
                         );
+                    }
+
+                    // ✅ If any key field is already filled, profile was saved before
+                    if (p.citizen_name || p.citizen_number || p.nid_number) {
+                        setIsProfileSaved(true);
                     }
                 }
             } catch (err) {
@@ -66,9 +74,7 @@ const Profile = () => {
         fetchProfile();
     }, []);
 
-
     const handleChange = (e) => {
-
         if (!isEditable && user?.role !== "admin") {
             toast.warning(
                 "You cannot change this information. Only admin can change."
@@ -115,7 +121,6 @@ const Profile = () => {
         }
     };
 
-
     const saveProfile = async (e) => {
         e.preventDefault();
         if (imageUploading) {
@@ -144,6 +149,7 @@ const Profile = () => {
 
             if (res.ok) {
                 toast.success(result.message || "Profile saved successfully");
+                setIsProfileSaved(true); // ✅ Hide the button after first save
             } else {
                 toast.error(result.message || "Failed to save profile");
             }
@@ -188,8 +194,7 @@ const Profile = () => {
                                 </div>
 
                                 <h4>{formData.citizen_name}</h4>
-                                <span className="role-badge">Citizen Number :{formData.citizen_number}</span>
-
+                                <span className="role-badge">Citizen Number: {formData.citizen_number}</span>
 
                                 <div className="profile-info">
                                     <div className="info-item">
@@ -216,6 +221,13 @@ const Profile = () => {
                         <div className="col-lg-8">
                             <div className="profile-form-card">
                                 <h4>Personal Information</h4>
+
+                                {/* ✅ Show a notice when profile is already saved */}
+                                {isProfileSaved && (
+                                    <div className="alert alert-info mb-3">
+                                        Your profile has been saved. Contact admin to make changes.
+                                    </div>
+                                )}
 
                                 <div className="row">
                                     <div className="col-md-6">
@@ -296,7 +308,7 @@ const Profile = () => {
                                                 name="gender"
                                                 value={formData.gender}
                                                 onChange={handleChange}
-                                                readOnly={!isEditable && user?.role !== "admin"}
+                                                disabled={!isEditable && user?.role !== "admin"}
                                             >
                                                 <option value="">Select gender</option>
                                                 <option value="male">Male</option>
@@ -335,7 +347,8 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                {(user?.role === "admin" || isEditable) && (
+                                
+                                {!isProfileSaved && (
                                     <div className="text-end">
                                         <button
                                             className="save-btn"

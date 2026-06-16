@@ -20,7 +20,7 @@ use App\Http\Controllers\admin\ComplaintController;
 use App\Http\Controllers\front\ServiceController as FrontServiceController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\admin\ServiceController;
-use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeWebhookController;
