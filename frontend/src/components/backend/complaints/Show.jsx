@@ -61,13 +61,7 @@ const Show = () => {
                             <div className="card shadow border-0">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between">
-                                        <h4 className="h5">Members</h4>
-                                        <Link
-                                            to="/admin/members/create"
-                                            className="btn btn-primary"
-                                        >
-                                            Create
-                                        </Link>
+                                        <h4 className="h5">Complaints</h4>
                                     </div>
                                     <hr />
                                     <div className="table-responsive">

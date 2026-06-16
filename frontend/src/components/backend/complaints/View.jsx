@@ -68,6 +68,14 @@ const View = () => {
       <Header />
       <main>
         <div className="container my-4">
+           <div className="d-flex mb-3">
+                        <button
+                            className="btn btn-primary small"
+                            onClick={() => navigate("/admin/complaints")}
+                        >
+                            Back
+                        </button>
+                    </div>
 
           {/* HEADER */}
           <div className="card border-0 shadow-sm mb-3">

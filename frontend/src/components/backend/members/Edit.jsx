@@ -35,8 +35,8 @@ const Edit = () => {
       return {
         name: result.data.name,
         job_title: result.data.job_title,
-        facebook_url: result.datafacebook_url,
-        linkedin_url: result.data.lnkedin_url,
+        facebook_url: result.data.facebook_url,
+        linkedin_url: result.data.linkedin_url,
         instagram_url: result.data.instagram_url,
         status: result.data.status,
       };
@@ -154,7 +154,7 @@ const Edit = () => {
                         Facebook Url
                       </label>
                       <input
-                        placeholder="Facebbok Url"
+                        placeholder="Facebook Url"
                         {...register("facebook_url")}
                         type="text"
                         className={`form-control`}

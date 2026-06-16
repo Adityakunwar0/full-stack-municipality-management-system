@@ -184,18 +184,24 @@ const Edit = ({ placeholder }) => {
                             className="form-control"
                             {...register("project_type")}
                           >
-                            <option value="">Project Type</option>
-                            <option value="Residential construction">
-                              Residential construction
+                           <option value="">Project Type</option>
+                            <option value="Urban Development">
+                              Urban Development
                             </option>
-                            <option value="Commercial construction">
-                              Commercial construction
+                            <option value="Public Service Project">
+                              Public Service Project
                             </option>
-                            <option value="Industrial Construction">
-                              Industrial Construction
+                            <option value="Environmental Project">
+                              Environmental Project
                             </option>
-                            <option value="Infrastructure construction">
-                              Infrastructure construction
+                            <option value="Infrastructure Development">
+                              Infrastructure Development
+                            </option>
+                            <option value="Social Development">
+                              Social Development
+                            </option>
+                            <option value="Technology Development">
+                              Technology Development
                             </option>
                           </select>
                         </div>
@@ -213,8 +219,11 @@ const Edit = ({ placeholder }) => {
                           >
                             <option value="">Sector</option>
                             <option value="Health">Health</option>
-                            <option value="Education">Education</option>
-                            <option value="Corporate">Corporate</option>
+                            <option value="Environment & Sanitation">Environment & Sanitation</option>
+                            <option value="Digital Governance">Digital Governance</option>
+                            <option value="Road & Transportation">Road & Transportation</option>
+                            <option value="Water Supply">Water Supply</option>
+                            <option value="Energy & Public Safety">Energy & Public Safety</option>
                           </select>
                         </div>
                       </div>

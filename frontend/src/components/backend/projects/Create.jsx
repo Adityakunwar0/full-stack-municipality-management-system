@@ -167,17 +167,23 @@ const Create = ({ placeholder }) => {
                             {...register("project_type")}
                           >
                             <option value="">Project Type</option>
-                            <option value="Residential construction">
-                              Residential Development
+                            <option value="Urban Development">
+                              Urban Development
                             </option>
-                            <option value="Commercial Development">
-                              Commercial Development
+                            <option value="Public Service Project">
+                              Public Service Project
                             </option>
-                            <option value="Industrial Construction">
-                              Industrial Development
+                            <option value="Environmental Project">
+                              Environmental Project
                             </option>
                             <option value="Infrastructure Development">
                               Infrastructure Development
+                            </option>
+                            <option value="Social Development">
+                              Social Development
+                            </option>
+                            <option value="Technology Development">
+                              Technology Development
                             </option>
                           </select>
                         </div>
@@ -195,8 +201,11 @@ const Create = ({ placeholder }) => {
                           >
                             <option value="">Sector</option>
                             <option value="Health">Health</option>
-                            <option value="Education">Education</option>
-                            <option value="Corporate">Corporate</option>
+                            <option value="Environment & Sanitation">Environment & Sanitation</option>
+                            <option value="Digital Governance">Digital Governance</option>
+                            <option value="Road & Transportation">Road & Transportation</option>
+                            <option value="Water Supply">Water Supply</option>
+                            <option value="Energy & Public Safety">Energy & Public Safety</option>
                           </select>
                         </div>
                       </div>
