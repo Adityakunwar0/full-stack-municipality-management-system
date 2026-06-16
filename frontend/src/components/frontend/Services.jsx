@@ -75,12 +75,12 @@ const Services = () => {
 
       if (res.ok) {
         toast.success("Service request submitted successfully!");
-        
+
         // FIXED: This safely runs because 'service' object is now in scope
         const isPayment = service.btn_text?.toLowerCase() === "pay now";
         const targetPage = isPayment ? "my-payments" : "my-requests";
         const rolePath = user?.role === "admin" ? "admin" : "user";
-        
+
         navigate(`/${rolePath}/${targetPage}`);
       } else {
         const errorMsg = result?.message || result?.error || "Failed to submit request.";
@@ -121,11 +121,13 @@ const Services = () => {
                     <h4>{service.title}</h4>
                     <p>{service.description}</p>
                     <button
-                      onClick={() => handleApply(service)} 
+                      onClick={() => handleApply(service)}
                       className={`service-btn ${service.color}`}
                       disabled={applying === service.id}
                     >
-                      {applying === service.id ? "Applying..." : service.btn_text}
+                      {applying === service.id
+                        ? "Processing..."
+                        : `${service.btn_text} - Rs. ${service.amount || 0}`}
                     </button>
                   </div>
                 ))}
@@ -139,7 +141,7 @@ const Services = () => {
               <span> Requests </span>
               <h2>Municipality Request Services</h2>
             </div>
-            
+
             <div className='row pt-4 services-grid'>
               {services
                 .filter(service => service.btn_text?.toLowerCase() === "apply now")
@@ -151,7 +153,7 @@ const Services = () => {
                     <h4>{service.title}</h4>
                     <p>{service.description}</p>
                     <button
-                      onClick={() => handleApply(service)} 
+                      onClick={() => handleApply(service)}
                       className={`service-btn ${service.color}`}
                       disabled={applying === service.id}
                     >

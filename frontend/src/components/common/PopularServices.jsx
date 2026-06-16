@@ -70,12 +70,12 @@ const PopularServices = () => {
 
       if (res.ok) {
         toast.success("Service request submitted successfully!");
-        
+
         // DYNAMIC ROUTING CONFIGURATION
         const isPayment = service.btn_text?.toLowerCase() === "pay now";
         const targetPage = isPayment ? "my-payments" : "my-requests";
         const rolePath = user?.role === "admin" ? "admin" : "user";
-        
+
         // Navigates dynamically to /user/my-payments or /user/my-requests
         navigate(`/${rolePath}/${targetPage}`);
       } else {
@@ -109,11 +109,19 @@ const PopularServices = () => {
               <p>{service.description}</p>
 
               <button
-                onClick={() => handleApply(service)} 
+                onClick={() => handleApply(service)}
                 className={`service-btn ${service.color}`}
                 disabled={applying === service.id}
               >
-                {applying === service.id ? "Applying..." : service.btn_text}
+                {applying === service.id ? (
+                  "Applying..."
+                ) : service.btn_text?.toLowerCase() === "pay now" ? (
+                  <>
+                    {service.btn_text} - Rs. {service.amount || 0}
+                  </>
+                ) : (
+                  service.btn_text
+                )}
               </button>
             </div>
           ))}
