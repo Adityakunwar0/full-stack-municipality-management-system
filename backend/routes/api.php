@@ -106,7 +106,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
        
         Route::get('admin/payment-requests', [PaymentRequestController::class, 'allRequests']);
         Route::get('admin/payment-requests/{id}', [PaymentRequestController::class, 'show']);
-        Route::put('admin/payment-request/{id}/status', [PaymentRequestController::class, 'updateStatus']);
+        Route::put('admin/payment-requests/{id}', [PaymentRequestController::class, 'updateStatus']);
         Route::delete('admin/payment-requests/{id}', [PaymentRequestController::class, 'destroy']);
 
         Route::post('services', [ServiceController::class,'store']);
