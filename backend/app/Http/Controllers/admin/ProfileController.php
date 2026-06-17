@@ -68,7 +68,7 @@ class ProfileController extends Controller
 
             if ($tempImage != null) {
                 $extArray = explode('.', $tempImage->name);
-                $ext      = last($extArray);
+                $ext = last($extArray);
 
                 $fileName = strtotime('now') . $profile->id . '.' . $ext;
 

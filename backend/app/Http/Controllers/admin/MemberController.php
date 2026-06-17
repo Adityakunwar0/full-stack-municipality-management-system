@@ -11,8 +11,7 @@ use App\Models\TempImage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-class MemberController extends Controller
-{
+class MemberController extends Controller {
     // this method will return all members 
     public function index(){
         $members = Member::orderBy('created_at', 'DESC')->get();
@@ -47,7 +46,7 @@ class MemberController extends Controller
         $member->status = $request->status;
         $member->save();
 
-         if ($request->imageId > 0){
+        if ($request->imageId > 0){
             $tempImage = TempImage::find($request->imageId);
             if($tempImage != null){
                 $extArray = explode('.',$tempImage->name);
@@ -69,7 +68,7 @@ class MemberController extends Controller
             }
         }
 
-         return response()->json([
+        return response()->json([
             'status' => true,
             'message' => 'Member added sucessfully'
         ]);
@@ -89,7 +88,6 @@ class MemberController extends Controller
 
             
         }
-
 
         $validator = Validator::make($request->all(),[
             'name' => 'required',
@@ -112,7 +110,7 @@ class MemberController extends Controller
         $member->save();
        
 
-         if ($request->imageId > 0){
+        if ($request->imageId > 0){
             $oldImage = $member->image;
             $tempImage = TempImage::find($request->imageId);
             if($tempImage != null){

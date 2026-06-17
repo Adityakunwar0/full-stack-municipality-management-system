@@ -64,7 +64,7 @@ const App = () => {
           <Route path='/projects' element={<Projects />} />
           <Route path="/project/:id" element={<ProjectDetail />} />
           <Route path='/notices' element={<Notices />} />
-           <Route path="/notice/:id" element={<NoticeDetail />} />
+          <Route path="/notice/:id" element={<NoticeDetail />} />
           <Route path='/contacts' element={<Contact />} />
           <Route path='/login' element={<Login />} />
           <Route path='/complaint' element={<Complaint />} />
@@ -235,11 +235,11 @@ const App = () => {
           <Route path="/admin/service-requests/:id" element={<RequireAuth><ViewServiceRequest /></RequireAuth>} />
           <Route path="/admin/paymentRequests" element={<RequireAuth><ShowPaymentRequests /></RequireAuth>} />
           <Route path="/admin/payment-requests/:id" element={<RequireAuth><ViewPaymentRequests /></RequireAuth>} />
-          
+
           <Route path="/admin/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
           <Route path="/admin/my-payments" element={<RequireAuth><Payment /></RequireAuth>} />
           <Route path="/admin/profile" element={<RequireAuth><Profile /></RequireAuth>} />
-          
+
 
           <Route path="/user/my-requests" element={<RequireAuth><Request /></RequireAuth>} />
           <Route path="/user/profile" element={<RequireAuth><Profile /></RequireAuth>} />

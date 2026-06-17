@@ -21,7 +21,7 @@ const Services = () => {
         method: "GET",
       });
       const result = await res.json();
-      setServices(result.data || []); 
+      setServices(result.data || []);
     } catch (error) {
       console.error("Error fetching services:", error);
     }
@@ -69,16 +69,16 @@ const Services = () => {
         },
         body: JSON.stringify(
           isPayment
-            ? { 
-                service_id: service.id, 
-                amount: service.amount, 
-                request_status: "progress",
-                payment_method: "cod" // ✅ FIXED: Added default method value to satisfy your SQL structural constraint
-              }
-            : { 
-                service_id: service.id, 
-                request_status: "progress" 
-              }
+            ? {
+              service_id: service.id,
+              amount: service.amount,
+              request_status: "progress",
+              payment_method: "cod" // ✅ FIXED: Added default method value to satisfy your SQL structural constraint
+            }
+            : {
+              service_id: service.id,
+              request_status: "progress"
+            }
         ),
       });
 
