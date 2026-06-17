@@ -47,47 +47,50 @@ const PopularServices = () => {
       return;
     }
 
-    setApplying(service.id);
-    const applyUrl = user?.role === "admin"
-      ? apiurl + "admin/apply-service"
-      : apiurl + "user/apply-service";
+    const isPayment = service.btn_text?.toLowerCase() === "pay now";
+const action = isPayment ? "apply-payment" : "apply-service";
+const applyUrl = user?.role === "admin"
+  ? apiurl + `admin/${action}`
+  : apiurl + `user/${action}`;
 
-    try {
-      const res = await fetch(applyUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${userToken}`,
-        },
-        body: JSON.stringify({
-          service_id: service.id,
-          request_status: "progress",
-        }),
-      });
+setApplying(service.id);
 
-      const result = await res.json();
+try {
+  const res = await fetch(applyUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${userToken}`,
+    },
+    body: JSON.stringify(
+      isPayment
+        ? { service_id: service.id, amount: service.amount, request_status: "progress" }
+        : { service_id: service.id, request_status: "progress" }
+    ),
+  });
 
-      if (res.ok) {
-        toast.success("Service request submitted successfully!");
+  const result = await res.json();
 
-        // DYNAMIC ROUTING CONFIGURATION
-        const isPayment = service.btn_text?.toLowerCase() === "pay now";
-        const targetPage = isPayment ? "my-payments" : "my-requests";
-        const rolePath = user?.role === "admin" ? "admin" : "user";
+  if (res.ok) {
+    toast.success(
+      isPayment ? "Payment request submitted successfully!" : "Service request submitted successfully!"
+    );
 
-        // Navigates dynamically to /user/my-payments or /user/my-requests
-        navigate(`/${rolePath}/${targetPage}`);
-      } else {
-        const errorMsg = result?.message || result?.error || "Failed to submit request.";
-        toast.error(errorMsg);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setApplying(null);
-    }
+    const targetPage = isPayment ? "my-payments" : "my-requests";
+    const rolePath = user?.role === "admin" ? "admin" : "user";
+
+    navigate(`/${rolePath}/${targetPage}`);
+  } else {
+    const errorMsg = result?.message || result?.error || "Failed to submit request.";
+    toast.error(errorMsg);
+  }
+} catch (error) {
+  console.error(error);
+  toast.error("Something went wrong. Please try again.");
+} finally {
+  setApplying(null);
+}
   };
 
   return (

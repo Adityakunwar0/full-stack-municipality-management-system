@@ -46,6 +46,7 @@ const Show = () => {
 
     //setServices(result.data)
   };
+  
   useEffect(() => {
     fetchProjects();
   }, []);

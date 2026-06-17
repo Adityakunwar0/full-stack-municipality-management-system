@@ -25,8 +25,7 @@ use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\front\MyPaymentController;
-use App\Http\Controllers\admin\PaymentController as AdminPaymentController;
-
+use App\Http\Controllers\PaymentRequestController;
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
 
@@ -54,7 +53,6 @@ Route::post('complaints', [ComplaintController::class, 'store']);
 
 Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
 
-Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function(){ 
@@ -97,12 +95,19 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         
         Route::get('complaints', [ComplaintController::class,'index']);
         Route::get('complaints/{id}', [ComplaintController::class,'show']);
+        Route::delete('complaints/{id}', [ComplaintController::class,'destroy']);
        
         Route::put('complaints/{id}/status',[ComplaintController::class, 'updateStatus']);
 
-        Route::get('admin/requests', [ServiceRequestController::class, 'allRequests']);
+        Route::get('admin/service-requests', [ServiceRequestController::class, 'allRequests']);
         Route::get('admin/service-requests/{id}', [ServiceRequestController::class, 'show']);
-        Route::put('admin/request/{id}', [ServiceRequestController::class, 'updateStatus']);
+        Route::put('admin/service-requests/{id}', [ServiceRequestController::class, 'updateStatus']);
+        Route::delete('admin/service-requests/{id}', [ServiceRequestController::class, 'destroy']);
+       
+        Route::get('admin/payment-requests', [PaymentRequestController::class, 'allRequests']);
+        Route::get('admin/payment-requests/{id}', [PaymentRequestController::class, 'show']);
+        Route::put('admin/payment-request/{id}/status', [PaymentRequestController::class, 'updateStatus']);
+        Route::delete('admin/payment-requests/{id}', [PaymentRequestController::class, 'destroy']);
 
         Route::post('services', [ServiceController::class,'store']);
         Route::get('services', [ServiceController::class,'index']);
@@ -112,6 +117,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
         Route::post('admin/apply-service', [ServiceRequestController::class, 'apply']);
         Route::get('admin/my-requests', [ServiceRequestController::class, 'myRequests']);
+        Route::post('admin/apply-payment', [PaymentRequestController::class, 'apply']);
+        Route::get('admin/my-payments', [PaymentRequestController::class, 'myRequests']);
+        
 
         Route::get('admin/profiles', [AdminProfileController::class, 'index']);
         Route::get('admin/profiles/{id}', [AdminProfileController::class, 'show']);
@@ -120,22 +128,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
          Route::get('admin/profile',  [ProfileController::class, 'show']);  
          Route::post('admin/profile', [ProfileController::class, 'store']); 
-
-         Route::get('admin/my-payments', [MyPaymentController::class, 'index']);
- 
-    // Single payment detail
-    Route::get('admin/my-payments/{id}', [MyPaymentController::class, 'show']);
- 
-    // Step 1: Create PaymentIntent (returns client_secret to frontend)
-    Route::post('admin/my-payments/create-intent', [MyPaymentController::class, 'createIntent']);
- 
-    // Step 2: Confirm after Stripe processes card on frontend
-    Route::post('admin/my-payments/confirm', [MyPaymentController::class, 'confirm']);
-
-     Route::get('admin/payments', [AdminPaymentController::class, 'index']);
- 
-    // Single payment detail
-    Route::get('admin/payments/{id}', [AdminPaymentController::class, 'show']);
 
 
         
@@ -148,21 +140,13 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
         Route::post('user/apply-service', [ServiceRequestController::class, 'apply']);
         Route::get('user/my-requests', [ServiceRequestController::class, 'myRequests']);
+        Route::post('user/apply-payment', [PaymentRequestController::class, 'apply']);
+        Route::get('user/my-payments', [PaymentRequestController::class, 'myRequests']);
 
         Route::get('user/profile',  [ProfileController::class, 'show']);  
         Route::post('user/profile', [ProfileController::class, 'store']); 
 
-        Route::get('user/my-payments', [MyPaymentController::class, 'index']);
  
-    // Single payment detail
-    Route::get('user/my-payments/{id}', [MyPaymentController::class, 'show']);
- 
-    // Step 1: Create PaymentIntent (returns client_secret to frontend)
-    Route::post('user/my-payments/create-intent', [MyPaymentController::class, 'createIntent']);
- 
-    // Step 2: Confirm after Stripe processes card on frontend
-    Route::post('user/my-payments/confirm', [MyPaymentController::class, 'confirm']);
-
 
     });
   

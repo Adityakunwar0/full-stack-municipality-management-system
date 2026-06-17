@@ -11,7 +11,7 @@ const Show = () => {
     const fetchRequests = async () => {
 
         try {
-            const res = await fetch(apiurl + "admin/service-requests", {
+            const res = await fetch(apiurl + "admin/payment-requests", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -24,20 +24,20 @@ const Show = () => {
 
             // allRequests() returns a plain array (no status wrapper)
             if (Array.isArray(result)) {
-                const serviceRequests = result.filter(
-                (req) =>
-                    req.service?.btn_text?.toLowerCase() === "apply now"
-            );
+                const paymentRequests = result.filter(
+                    (req) =>
+                        req.service?.btn_text?.toLowerCase() === "pay now"
+                );
 
-            setRequests(serviceRequests);
-        }
+                setRequests(paymentRequests);
+            }
         } catch (error) {
             console.error(error);
         }
     };
     const updateStatus = async () => {
         try {
-            const res = await fetch(apiurl + "admin/service-requests/" + id, {
+            const res = await fetch(apiurl + "admin/payment-requests/" + id, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,7 +55,7 @@ const Show = () => {
                 toast.success(result.message);
 
                 setTimeout(() => {
-                    navigate("/admin/serviceRequests");
+                    navigate("/admin/paymentRequests");
                 }, 1000);
             }
         } catch (error) {
@@ -64,7 +64,7 @@ const Show = () => {
     };
     const deleteRequest = async (id) => {
         if (confirm("Are You Sure You Want to Delete ?")) {
-            const res = await fetch(apiurl + "admin/service-requests/" + id, {
+            const res = await fetch(apiurl + "admin/payment-requests/" + id, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json",
@@ -89,19 +89,20 @@ const Show = () => {
     }, []);
 
     const statusBadge = (status) => {
-        const map = {
-            progress: "warning",
-            review: "warning",
-            completed: "success",
-            rejected: "danger",
-        };
-
-        return (
-            <span className={`badge bg-${map[status] || "secondary"}`}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
-            </span>
-        );
+    const map = {
+        progress: "warning",
+        completed: "success",
+        rejected: "danger",
     };
+
+    return (
+        <span className={`badge bg-${map[status] || "secondary"}`}>
+            {status
+                ? status.charAt(0).toUpperCase() + status.slice(1)
+                : "—"}
+        </span>
+    );
+};
 
     return (
         <>
@@ -116,7 +117,7 @@ const Show = () => {
                             <div className="card shadow border-0">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <h4 className="h5 mb-0">Service Requests</h4>
+                                        <h4 className="h5 mb-0">Payment Requests</h4>
                                     </div>
                                     <hr />
                                     <div className="table-responsive">
@@ -126,9 +127,10 @@ const Show = () => {
                                                     <th>ID</th>
                                                     <th>User</th>
                                                     <th>Service</th>
-                                                    <th>Remarks</th>
+                                                    <th>Amount</th>
                                                     <th>Status</th>
                                                     <th>Date</th>
+                                                    <th>Method</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -151,10 +153,8 @@ const Show = () => {
                                                             </td>
 
                                                             <td>
-                                                                {req.remarks
-                                                                    ? req.remarks.length > 40
-                                                                        ? req.remarks.substring(0, 40) + "…"
-                                                                        : req.remarks
+                                                                {req.service?.amount
+                                                                    ? `Rs. ${req.service.amount}`
                                                                     : <span className="text-muted">—</span>}
                                                             </td>
 
@@ -167,10 +167,14 @@ const Show = () => {
                                                                     day: "numeric",
                                                                 })}
                                                             </td>
+                                                            <td>
+                                                                
+                                                                    {req.payment_method || req.method || "COD"}
+                                                            </td>
 
                                                             <td className=" d-flex flex-column flex-md-row gap-2">
                                                                 <Link
-                                                                    to={`/admin/service-requests/${req.id}`}
+                                                                    to={`/admin/payment-requests/${req.id}`}
                                                                     className="btn btn-secondary small"
                                                                 >
                                                                     View

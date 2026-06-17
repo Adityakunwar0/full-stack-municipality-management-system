@@ -21,7 +21,7 @@ const Services = () => {
         method: "GET",
       });
       const result = await res.json();
-      setServices(result.data || []); // Added fallback default empty array
+      setServices(result.data || []); 
     } catch (error) {
       console.error("Error fetching services:", error);
     }
@@ -31,7 +31,6 @@ const Services = () => {
     fetchServices();
   }, []);
 
-  // FIXED: Changed parameter from serviceId to the full service object
   const handleApply = async (service) => {
     const userToken = token();
 
@@ -52,10 +51,13 @@ const Services = () => {
       return;
     }
 
-    setApplying(service.id);
+    const isPayment = service.btn_text?.toLowerCase() === "pay now";
+    const action = isPayment ? "apply-payment" : "apply-service";
     const applyUrl = user?.role === "admin"
-      ? apiurl + "admin/apply-service"
-      : apiurl + "user/apply-service";
+      ? apiurl + `admin/${action}`
+      : apiurl + `user/${action}`;
+
+    setApplying(service.id);
 
     try {
       const res = await fetch(applyUrl, {
@@ -65,19 +67,28 @@ const Services = () => {
           Accept: "application/json",
           Authorization: `Bearer ${userToken}`,
         },
-        body: JSON.stringify({
-          service_id: service.id,
-          request_status: "progress",
-        }),
+        body: JSON.stringify(
+          isPayment
+            ? { 
+                service_id: service.id, 
+                amount: service.amount, 
+                request_status: "progress",
+                payment_method: "cod" // ✅ FIXED: Added default method value to satisfy your SQL structural constraint
+              }
+            : { 
+                service_id: service.id, 
+                request_status: "progress" 
+              }
+        ),
       });
 
       const result = await res.json();
 
       if (res.ok) {
-        toast.success("Service request submitted successfully!");
+        toast.success(
+          isPayment ? "Payment request submitted successfully!" : "Service request submitted successfully!"
+        );
 
-        // FIXED: This safely runs because 'service' object is now in scope
-        const isPayment = service.btn_text?.toLowerCase() === "pay now";
         const targetPage = isPayment ? "my-payments" : "my-requests";
         const rolePath = user?.role === "admin" ? "admin" : "user";
 
@@ -99,7 +110,7 @@ const Services = () => {
       <Header />
       <main>
         <Hero
-          preHeading="Building Today For A Better Tommorow."
+          preHeading="Building Today For A Better Tomorrow."
           heading="Services"
           text=" Stay updated with the latest announcements <br/> and important information. "
         />

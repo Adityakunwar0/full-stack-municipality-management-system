@@ -98,5 +98,23 @@ public function show($id)
         'data' => $complaint
     ]);
 }
+public function destroy($id)
+{
+    $complaint = Complaint::find($id);
+
+    if (!$complaint) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Complaint not found'
+        ]);
+    }
+
+    $complaint->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Complaint deleted successfully'
+    ]);
+}
 
 }

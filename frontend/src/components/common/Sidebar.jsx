@@ -39,6 +39,9 @@ const Sidebar = () => {
                         <Link to="/admin/serviceRequests">Service Requests</Link>
                     </li>
                     <li>
+                        <Link to="/admin/paymentRequests">Payment Requests</Link>
+                    </li>
+                    <li>
                         <Link to="/admin/profiles">Profiles</Link>
                     </li>
 

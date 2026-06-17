@@ -27,6 +27,35 @@ const Show = () => {
             console.error(error);
         }
     };
+    const deleteComplaint = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this complaint?")) {
+            return;
+        }
+
+        try {
+            const res = await fetch(apiurl + `complaints/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "content-type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token()}`,
+                },
+            });
+
+            const result = await res.json();
+
+            if (result.status) {
+                // remove from UI without reload
+                setComplaints((prev) =>
+                    prev.filter((item) => item.id !== id)
+                );
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     useEffect(() => {
         fetchComplaints();
@@ -111,12 +140,19 @@ const Show = () => {
                                                                     })}
                                                                 </td>
 
-                                                                <td>
+                                                                <td className=" d-flex flex-column flex-md-row gap-2">
                                                                     <Link
                                                                         to={`/admin/complaints/${complaint.id}`}
-                                                                        className="btn btn-primary btn-sm"
+                                                                        className="btn btn-secondary small"
                                                                     >
                                                                         View
+                                                                    </Link>
+                                                                    <Link
+                                                                        onClick={() => deleteComplaint(complaint.id)}
+                                                                        href="#"
+                                                                        className="btn btn-secondary small "
+                                                                    >
+                                                                        Delete
                                                                     </Link>
                                                                 </td>
                                                             </tr>

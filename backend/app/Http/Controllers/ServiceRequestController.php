@@ -56,4 +56,22 @@ class ServiceRequestController extends Controller
     $request = ServiceRequest::with(['user', 'service'])->findOrFail($id);
     return response()->json($request);
 }
+public function destroy($id)
+{
+    $serviceRequest = ServiceRequest::find($id);
+
+    if ($serviceRequest == null) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Request not found'
+        ]);
+    }
+
+    $serviceRequest->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Request deleted successfully'
+    ]);
+}
 }
