@@ -23,9 +23,10 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\ProfileController as AdminProfileController;
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\front\MyPaymentController;
 use App\Http\Controllers\PaymentRequestController;
+
+use App\Http\Controllers\StripeWebhookController;
 
 Route::post('authenticate', [AuthenticationController::class,'authenticate']);
 
@@ -52,6 +53,8 @@ Route::post('contact-now', [ContactController::class,'index']);
 Route::post('complaints', [ComplaintController::class, 'store']);
 
 Route::get( 'complaints/status/{token}', [ComplaintController::class, 'checkStatus']);
+
+Route::post('stripe/webhook', [StripeWebhookController::class, 'handle']);
 
 
 
@@ -126,11 +129,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('admin/profiles/{id}', [AdminProfileController::class, 'update']);
         Route::delete('admin/profiles/{id}', [AdminProfileController::class, 'destroy']);
 
-         Route::get('admin/profile',  [ProfileController::class, 'show']);  
-         Route::post('admin/profile', [ProfileController::class, 'store']); 
-
-
+        Route::get('admin/profile',  [ProfileController::class, 'show']);  
+        Route::post('admin/profile', [ProfileController::class, 'store']);
         
+        Route::post('admin/payment-requests/{id}/checkout', [PaymentRequestController::class, 'createCheckoutSession']);
+        Route::post('admin/payment-requests/{id}/cancel', [PaymentRequestController::class, 'cancelPayment']);
+        Route::get('admin/payment-requests/{id}/confirm', [PaymentRequestController::class, 'confirmPayment']);
 
     });
 
@@ -147,6 +151,10 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
 
         Route::get('user/profile',  [ProfileController::class, 'show']);  
         Route::post('user/profile', [ProfileController::class, 'store']); 
+
+        Route::post('user/payment-requests/{id}/checkout', [PaymentRequestController::class, 'createCheckoutSession']);
+        Route::post('user/payment-requests/{id}/cancel', [PaymentRequestController::class, 'cancelPayment']);
+        Route::get('user/payment-requests/{id}/confirm', [PaymentRequestController::class, 'confirmPayment']);
 
  
 

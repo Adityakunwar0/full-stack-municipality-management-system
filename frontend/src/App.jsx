@@ -49,6 +49,8 @@ import { default as ViewProfile } from "./components/backend/profile/View";
 import ProjectDetail from './components/frontend/ProjectDetail';
 import NoticeDetail from './components/frontend/NoticeDetail';
 import Payment from './components/backend/user/Payment';
+import PaymentSuccess from './components/common/PaymentSuccess';
+import PaymentCancel from './components/common/PaymentCancel';
 
 const App = () => {
   return (
@@ -245,6 +247,9 @@ const App = () => {
 
           <Route path="/admin/profiles" element={<RequireAuth><ShowProfile /></RequireAuth>} />
           <Route path="/admin/profiles/:id" element={<RequireAuth><ViewProfile /></RequireAuth>} />
+
+          <Route path="/pay/success" element={<PaymentSuccess />} />
+          <Route path="/pay/cancel" element={<PaymentCancel />} />
 
         </Routes>
 
