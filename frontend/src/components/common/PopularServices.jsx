@@ -48,49 +48,49 @@ const PopularServices = () => {
     }
 
     const isPayment = service.btn_text?.toLowerCase() === "pay now";
-const action = isPayment ? "apply-payment" : "apply-service";
-const applyUrl = user?.role === "admin"
-  ? apiurl + `admin/${action}`
-  : apiurl + `user/${action}`;
+    const action = isPayment ? "apply-payment" : "apply-service";
+    const applyUrl = user?.role === "admin"
+      ? apiurl + `admin/${action}`
+      : apiurl + `user/${action}`;
 
-setApplying(service.id);
+    setApplying(service.id);
 
-try {
-  const res = await fetch(applyUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${userToken}`,
-    },
-    body: JSON.stringify(
-      isPayment
-        ? { service_id: service.id, amount: service.amount, request_status: "progress" }
-        : { service_id: service.id, request_status: "progress" }
-    ),
-  });
+    try {
+      const res = await fetch(applyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+        body: JSON.stringify(
+          isPayment
+            ? { service_id: service.id, amount: service.amount, request_status: "progress" }
+            : { service_id: service.id, request_status: "progress" }
+        ),
+      });
 
-  const result = await res.json();
+      const result = await res.json();
 
-  if (res.ok) {
-    toast.success(
-      isPayment ? "Payment request submitted successfully!" : "Service request submitted successfully!"
-    );
+      if (res.ok) {
+        toast.success(
+          isPayment ? "Payment request submitted successfully!" : "Service request submitted successfully!"
+        );
 
-    const targetPage = isPayment ? "my-payments" : "my-requests";
-    const rolePath = user?.role === "admin" ? "admin" : "user";
+        const targetPage = isPayment ? "my-payments" : "my-requests";
+        const rolePath = user?.role === "admin" ? "admin" : "user";
 
-    navigate(`/${rolePath}/${targetPage}`);
-  } else {
-    const errorMsg = result?.message || result?.error || "Failed to submit request.";
-    toast.error(errorMsg);
-  }
-} catch (error) {
-  console.error(error);
-  toast.error("Something went wrong. Please try again.");
-} finally {
-  setApplying(null);
-}
+        navigate(`/${rolePath}/${targetPage}`);
+      } else {
+        const errorMsg = result?.message || result?.error || "Failed to submit request.";
+        toast.error(errorMsg);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setApplying(null);
+    }
   };
 
   return (

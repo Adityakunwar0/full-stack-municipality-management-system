@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Hero from '../common/Hero';
-import { apiurl, token } from '../common/Http';
+import Portal from '../common/Portal';
 import Quote from '../common/Quote';
+import { apiurl, token } from '../common/Http';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../backend/context/Auth';
@@ -70,15 +71,15 @@ const Services = () => {
         body: JSON.stringify(
           isPayment
             ? {
-              service_id: service.id,
-              amount: service.amount,
-              request_status: "progress",
-              payment_method: "cod" // ✅ FIXED: Added default method value to satisfy your SQL structural constraint
-            }
+                service_id: service.id,
+                amount: service.amount,
+                request_status: "progress",
+                payment_method: "cod"
+              }
             : {
-              service_id: service.id,
-              request_status: "progress"
-            }
+                service_id: service.id,
+                request_status: "progress"
+              }
         ),
       });
 
@@ -109,12 +110,20 @@ const Services = () => {
     <>
       <Header />
       <main>
-        <Hero
-          preHeading="Building Today For A Better Tomorrow."
-          heading="Services"
-          text=" Stay updated with the latest announcements <br/> and important information. "
-        />
+        {user ? (
+          <Portal
+            heading="Municipal Services"
+            text="Access your direct citizen portal dashboard. Submit official applications, pay municipal utilities safely, and review real-time processing pipelines."
+          />
+        ) : (
+          <Hero
+            preHeading="Building Today For A Better Tomorrow."
+            heading="Services"
+            text="Explore and apply for municipal facilities, download tracking certifications, and pay your taxes or service statements online easily."
+          />
+        )}
 
+        {/* Payments Section */}
         <section className='section-3 services light-background py-3'>
           <div className='container-fluid py-5'>
             <div className='section-header text-center'>
@@ -122,30 +131,37 @@ const Services = () => {
               <h2>Municipality Payment Services</h2>
             </div>
             <div className='row pt-4 services-grid'>
-              {services
-                .filter(service => service.btn_text?.toLowerCase() === "pay now")
-                .map((service, index) => (
-                  <div className="service-card" key={index}>
-                    <div className={`icon-circle ${service.color}`}>
-                      <i className={service.icon}></i>
+              {services && services.length > 0 ? (
+                services
+                  .filter(service => service.btn_text?.toLowerCase() === "pay now")
+                  .map((service, index) => (
+                    <div className="service-card" key={`payment-${index}`}>
+                      <div className={`icon-circle ${service.color}`}>
+                        <i className={service.icon}></i>
+                      </div>
+                      <h4>{service.title}</h4>
+                      <p>{service.description}</p>
+                      <button
+                        onClick={() => handleApply(service)}
+                        className={`service-btn ${service.color}`}
+                        disabled={applying === service.id}
+                      >
+                        {applying === service.id
+                          ? "Processing..."
+                          : `${service.btn_text} - Rs. ${service.amount || 0}`}
+                      </button>
                     </div>
-                    <h4>{service.title}</h4>
-                    <p>{service.description}</p>
-                    <button
-                      onClick={() => handleApply(service)}
-                      className={`service-btn ${service.color}`}
-                      disabled={applying === service.id}
-                    >
-                      {applying === service.id
-                        ? "Processing..."
-                        : `${service.btn_text} - Rs. ${service.amount || 0}`}
-                    </button>
-                  </div>
-                ))}
+                  ))
+              ) : (
+                <div className="text-center w-100 py-3">
+                  <p>No payment options listed at this moment.</p>
+                </div>
+              )}
             </div>
           </div>
         </section>
 
+        {/* Requests Section */}
         <section className='section-3 services light-background py-3'>
           <div className='container-fluid py-5'>
             <div className='section-header text-center'>
@@ -154,24 +170,30 @@ const Services = () => {
             </div>
 
             <div className='row pt-4 services-grid'>
-              {services
-                .filter(service => service.btn_text?.toLowerCase() === "apply now")
-                .map((service, index) => (
-                  <div className="service-card" key={index}>
-                    <div className={`icon-circle ${service.color}`}>
-                      <i className={service.icon}></i>
+              {services && services.length > 0 ? (
+                services
+                  .filter(service => service.btn_text?.toLowerCase() === "apply now")
+                  .map((service, index) => (
+                    <div className="service-card" key={`request-${index}`}>
+                      <div className={`icon-circle ${service.color}`}>
+                        <i className={service.icon}></i>
+                      </div>
+                      <h4>{service.title}</h4>
+                      <p>{service.description}</p>
+                      <button
+                        onClick={() => handleApply(service)}
+                        className={`service-btn ${service.color}`}
+                        disabled={applying === service.id}
+                      >
+                        {applying === service.id ? "Applying..." : service.btn_text}
+                      </button>
                     </div>
-                    <h4>{service.title}</h4>
-                    <p>{service.description}</p>
-                    <button
-                      onClick={() => handleApply(service)}
-                      className={`service-btn ${service.color}`}
-                      disabled={applying === service.id}
-                    >
-                      {applying === service.id ? "Applying..." : service.btn_text}
-                    </button>
-                  </div>
-                ))}
+                  ))
+              ) : (
+                <div className="text-center w-100 py-3">
+                  <p>No request forms available right now.</p>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -180,7 +202,7 @@ const Services = () => {
       </main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
 export default Services;

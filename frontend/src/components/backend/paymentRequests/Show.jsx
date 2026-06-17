@@ -89,20 +89,20 @@ const Show = () => {
     }, []);
 
     const statusBadge = (status) => {
-    const map = {
-        progress: "warning",
-        completed: "success",
-        rejected: "danger",
-    };
+        const map = {
+            progress: "warning",
+            completed: "success",
+            rejected: "danger",
+        };
 
-    return (
-        <span className={`badge bg-${map[status] || "secondary"}`}>
-            {status
-                ? status.charAt(0).toUpperCase() + status.slice(1)
-                : "—"}
-        </span>
-    );
-};
+        return (
+            <span className={`badge bg-${map[status] || "secondary"}`}>
+                {status
+                    ? status.charAt(0).toUpperCase() + status.slice(1)
+                    : "—"}
+            </span>
+        );
+    };
 
     return (
         <>
@@ -168,8 +168,8 @@ const Show = () => {
                                                                 })}
                                                             </td>
                                                             <td>
-                                                                
-                                                                    {req.payment_method || req.method || "COD"}
+
+                                                                {req.payment_method || req.method || "COD"}
                                                             </td>
 
                                                             <td className=" d-flex flex-column flex-md-row gap-2">

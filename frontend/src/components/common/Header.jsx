@@ -18,7 +18,7 @@ const Header = () => {
     <header className="main-header">
       <div className="container">
         <Navbar expand="lg" variant="dark">
-          
+
           {/* Logo Brand Identity */}
           <Navbar.Brand as={Link} to="/" className="logo">
             <img width={50} src={Logo} alt="Gaur Municipality Logo" />
@@ -31,7 +31,7 @@ const Header = () => {
           {/* Navigation Container Links */}
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto align-items-lg-center">
-              
+
               {/* Used NavLink for built-in active status link styling rules */}
               <Nav.Link as={NavLink} to="/" className="nav-link">Home</Nav.Link>
               <Nav.Link as={NavLink} to="/about" className="nav-link">About</Nav.Link>
@@ -39,7 +39,7 @@ const Header = () => {
               <Nav.Link as={NavLink} to="/projects" className="nav-link">Projects</Nav.Link>
               <Nav.Link as={NavLink} to="/notices" className="nav-link">Notices</Nav.Link>
               <Nav.Link as={NavLink} to="/contacts" className="nav-link">Contact</Nav.Link>
-              
+
               {/* Dropdown Action Controls Wrapper */}
               <div className={`portal-dropdown ${dropdownOpen ? 'is-open' : ''}`}>
                 {!user ? (
@@ -64,8 +64,8 @@ const Header = () => {
                     </div>
                   </>
                 ) : (
-                  <Link 
-                    to={user?.role === "admin" ? "/admin/dashboard" : "/user/dashboard"} 
+                  <Link
+                    to={user?.role === "admin" ? "/admin/dashboard" : "/user/dashboard"}
                     className="citizen-btn text-decoration-none"
                   >
                     <span className="icon">

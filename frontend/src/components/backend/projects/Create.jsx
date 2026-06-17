@@ -16,7 +16,7 @@ const Create = ({ placeholder }) => {
 
   const config = useMemo(
     () => ({
-      readonly: false, 
+      readonly: false,
       placeholder: placeholder || "Content",
     }),
     [placeholder],

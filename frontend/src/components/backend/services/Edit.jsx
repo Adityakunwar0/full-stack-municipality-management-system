@@ -129,7 +129,7 @@ const Edit = () => {
                                             )}
                                         </div>
                                         {/* Amount */}
- <div className="mb-3">
+                                        <div className="mb-3">
                                             <label className="form-label">Amount</label>
                                             <input
                                                 type="text"

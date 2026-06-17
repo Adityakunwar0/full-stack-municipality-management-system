@@ -37,7 +37,7 @@ const Request = () => {
                             </div>
                         </div>
 
-                        <RequestDashboard  />
+                        <RequestDashboard />
                     </div>
                 </section>
             </main>

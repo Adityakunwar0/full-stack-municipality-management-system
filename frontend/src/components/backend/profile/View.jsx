@@ -17,7 +17,7 @@ const View = () => {
     const [imageId, setImageId] = useState(null);
     const [isDisable, setIsDisable] = useState(false);
     const [profile, setProfile] = useState(null);
-    const [dob, setDob] = useState("");                 
+    const [dob, setDob] = useState("");
     const [gender, setGender] = useState("");
 
     const fetchProfile = async () => {
@@ -38,8 +38,8 @@ const View = () => {
         setCitizenName(profile.citizen_name || "");
         setCitizenNumber(profile.citizen_number || "");
         setNidNumber(profile.nid_number || "");
-        setDob(profile.dob || "");                      
-        setGender(profile.gender || "");  
+        setDob(profile.dob || "");
+        setGender(profile.gender || "");
         setPhone(profile.phone || "");
         setAddress(profile.address || "");
         setAboutMe(profile.about_me || "");
@@ -68,8 +68,8 @@ const View = () => {
                         citizen_number: citizenNumber,
                         nid_number: nidNumber,
                         phone,
-                        dob,                            
-                        gender,  
+                        dob,
+                        gender,
                         address,
                         about_me: aboutMe,
                         imageId
@@ -183,7 +183,7 @@ const View = () => {
                                     />
                                 </div>
 
-                              
+
                                 <div className="mb-3">
                                     <label>Gender</label>
                                     <select

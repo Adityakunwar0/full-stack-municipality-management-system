@@ -184,7 +184,7 @@ const Edit = ({ placeholder }) => {
                             className="form-control"
                             {...register("project_type")}
                           >
-                           <option value="">Project Type</option>
+                            <option value="">Project Type</option>
                             <option value="Urban Development">
                               Urban Development
                             </option>

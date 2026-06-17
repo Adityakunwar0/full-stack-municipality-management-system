@@ -8,8 +8,8 @@ export const Footer = () => {
     <footer>
       <div className="container py-5">
         {/* Added g-4 for consistent responsive column spacing gaps */}
-        <div className="row g-4"> 
-          
+        <div className="row g-4">
+
           {/* Logo & Description Section */}
           <div className="col-sm-6 col-lg-3">
             <Navbar.Brand href="/" className="logo">

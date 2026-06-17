@@ -115,33 +115,33 @@ const PaymentDashboard = () => {
     };
 
     const handlePayNow = async (payment) => {
-    const endpoint =
-        user?.role === "admin"
-            ? `admin/payment-requests/${payment.id}/checkout`
-            : `user/payment-requests/${payment.id}/checkout`;
+        const endpoint =
+            user?.role === "admin"
+                ? `admin/payment-requests/${payment.id}/checkout`
+                : `user/payment-requests/${payment.id}/checkout`;
 
-    try {
-        const res = await fetch(apiurl + endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${token()}`,
-            },
-        });
+        try {
+            const res = await fetch(apiurl + endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token()}`,
+                },
+            });
 
-        const result = await res.json();
+            const result = await res.json();
 
-        if (res.ok && result.checkout_url) {
-            window.location.href = result.checkout_url;
-        } else {
-            toast.error(result.message || "Could not start checkout.");
+            if (res.ok && result.checkout_url) {
+                window.location.href = result.checkout_url;
+            } else {
+                toast.error(result.message || "Could not start checkout.");
+            }
+        } catch (error) {
+            console.error("Error starting checkout:", error);
+            toast.error("Something went wrong starting the payment.");
         }
-    } catch (error) {
-        console.error("Error starting checkout:", error);
-        toast.error("Something went wrong starting the payment.");
-    }
-};
+    };
 
     const filteredPayments = payments.filter((pay) => {
         if (activeTab === "all") return true;
@@ -217,9 +217,8 @@ const PaymentDashboard = () => {
                                 return (
                                     <div
                                         key={pay.id}
-                                        className={`request-item d-flex justify-content-between align-items-center ${
-                                            isRejected ? "table-light text-muted" : ""
-                                        }`}
+                                        className={`request-item d-flex justify-content-between align-items-center ${isRejected ? "table-light text-muted" : ""
+                                            }`}
                                     >
                                         <div className="d-flex align-items-center w-75">
                                             <div className="request-icon">
@@ -227,7 +226,7 @@ const PaymentDashboard = () => {
                                             </div>
                                             <div className="w-100 me-3">
                                                 <h6 className="mb-1">{pay.service?.title || "Payment Request"}</h6>
-                                                
+
                                                 <small className="text-muted">ID-{pay.id}</small>
                                                 <small className="text-muted ms-2">
                                                     • Rs. {pay.service?.amount ?? pay.amount ?? "0"}

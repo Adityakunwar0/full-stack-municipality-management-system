@@ -25,12 +25,12 @@ const Show = () => {
             // allRequests() returns a plain array (no status wrapper)
             if (Array.isArray(result)) {
                 const serviceRequests = result.filter(
-                (req) =>
-                    req.service?.btn_text?.toLowerCase() === "apply now"
-            );
+                    (req) =>
+                        req.service?.btn_text?.toLowerCase() === "apply now"
+                );
 
-            setRequests(serviceRequests);
-        }
+                setRequests(serviceRequests);
+            }
         } catch (error) {
             console.error(error);
         }

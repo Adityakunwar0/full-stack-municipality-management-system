@@ -24,27 +24,27 @@ const View = () => {
 
             const result = await res.json();
             let request = null;
-             if (Array.isArray(result)) {
-            request = result.find(
-                (r) => 
-                    r.id === parseInt(id) &&
-                    r.service?.btn_text?.toLowerCase() === "apply now"
-            );
-        } 
-        else if (
-            result &&
-            result.id &&
-            result.service?.btn_text?.toLowerCase() === "apply now"
-        ) {
-            request = result;
-        }
+            if (Array.isArray(result)) {
+                request = result.find(
+                    (r) =>
+                        r.id === parseInt(id) &&
+                        r.service?.btn_text?.toLowerCase() === "apply now"
+                );
+            }
+            else if (
+                result &&
+                result.id &&
+                result.service?.btn_text?.toLowerCase() === "apply now"
+            ) {
+                request = result;
+            }
 
 
-        if (request) {
-            setServiceRequest(request);
-            setRequestStatus(request.request_status);
-            setRemarks(request.remarks || "");
-        }
+            if (request) {
+                setServiceRequest(request);
+                setRequestStatus(request.request_status);
+                setRemarks(request.remarks || "");
+            }
         } catch (error) {
             console.error(error);
         }

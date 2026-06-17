@@ -54,37 +54,37 @@ const View = () => {
     }, [id]);
 
     const updateStatus = async () => {
-    try {
-        const res = await fetch(apiurl + "admin/payment-requests/" + id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${token()}`,
-            },
-            body: JSON.stringify({
-                request_status: requestStatus,
-                payment_method: paymentRequest?.payment_method || "COD" 
-            }),
-        });
+        try {
+            const res = await fetch(apiurl + "admin/payment-requests/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token()}`,
+                },
+                body: JSON.stringify({
+                    request_status: requestStatus,
+                    payment_method: paymentRequest?.payment_method || "COD"
+                }),
+            });
 
-        const result = await res.json();
+            const result = await res.json();
 
-        if (res.ok) {
-            toast.success(result.message || "Status updated successfully!");
-            
-            
-            setTimeout(() => {
-                navigate("/admin/paymentRequests"); 
-            }, 800);
-        } else {
-            toast.error(result.message || "Failed to update status.");
+            if (res.ok) {
+                toast.success(result.message || "Status updated successfully!");
+
+
+                setTimeout(() => {
+                    navigate("/admin/paymentRequests");
+                }, 800);
+            } else {
+                toast.error(result.message || "Failed to update status.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to update status.");
         }
-    } catch (error) {
-        console.error(error);
-        toast.error("Failed to update status.");
-    }
-};
+    };
 
     const statusBadge = (status) => {
         const map = {
