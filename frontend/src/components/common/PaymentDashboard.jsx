@@ -52,10 +52,15 @@ const PaymentDashboard = () => {
 
     const handleMethodChange = async (paymentId, newMethod) => {
         const targetPayment = payments.find((p) => p.id === paymentId);
-        // Changed to strictly use request_status
         const currentStatus = targetPayment
             ? targetPayment.request_status || "progress"
             : "progress";
+
+        // FIX: Dynamically handle route based on user role
+        const endpoint =
+            user?.role === "admin"
+                ? `admin/payment-requests/${paymentId}`
+                : `user/payment-requests/${paymentId}`; // Adjust this if your user endpoint is named differently
 
         try {
             // Optimistic UI update
@@ -65,7 +70,7 @@ const PaymentDashboard = () => {
                 )
             );
 
-            const res = await fetch(apiurl + `admin/payment-requests/${paymentId}`, {
+            const res = await fetch(apiurl + endpoint, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -114,7 +119,6 @@ const PaymentDashboard = () => {
         window.location.href = `/pay/${payment.id}`;
     };
 
-    // Filter payments matching the selected status tab safely using request_status
     const filteredPayments = payments.filter((pay) => {
         if (activeTab === "all") return true;
         const currentStatus = String(pay.request_status || "progress").toLowerCase();
@@ -127,7 +131,6 @@ const PaymentDashboard = () => {
 
     const hasMore = filteredPayments.length > VISIBLE_LIMIT;
 
-    // Updated to count strictly based on request_status
     const getCountByStatus = (status) => {
         return payments.filter((p) => {
             const currentStatus = String(p.request_status || "progress").toLowerCase();
@@ -141,7 +144,6 @@ const PaymentDashboard = () => {
 
     return (
         <div className="light-background container-fluid requests-wrapper px-0">
-            {/* Payment Filter Tabs */}
             <div className="container request-tabs card border-0 shadow-sm mb-4">
                 <div className="card-body py-2">
                     <ul className="nav">
@@ -164,7 +166,6 @@ const PaymentDashboard = () => {
                 </div>
             </div>
 
-            {/* Main Activities List */}
             <div className="container card border-0 shadow-sm mb-4">
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center mb-4">
@@ -183,7 +184,6 @@ const PaymentDashboard = () => {
                         <>
                             {visiblePayments.map((pay) => {
                                 const currentMethod = String(pay.payment_method || "cod").toLowerCase();
-                                // Changed to strictly use request_status
                                 const currentStatus = String(pay.request_status || "progress").toLowerCase();
 
                                 const isCompleted = currentStatus === "completed";
@@ -269,7 +269,6 @@ const PaymentDashboard = () => {
                 </div>
             </div>
 
-            {/* Metrics Summary Cards */}
             <div className="card light-background border-0 shadow-sm">
                 <div className="container card-body">
                     <h4 className="mb-4">Payment Summary</h4>

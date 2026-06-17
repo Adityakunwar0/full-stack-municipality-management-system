@@ -143,6 +143,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::post('user/apply-payment', [PaymentRequestController::class, 'apply']);
         Route::get('user/my-payments', [PaymentRequestController::class, 'myRequests']);
 
+        Route::put('user/payment-requests/{id}', [PaymentRequestController::class, 'updateStatus']);
+
         Route::get('user/profile',  [ProfileController::class, 'show']);  
         Route::post('user/profile', [ProfileController::class, 'store']); 
 
