@@ -1,57 +1,56 @@
 import React, { useContext, useEffect, useState } from 'react';
+
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Hero from '../common/Hero';
 import Portal from '../common/Portal';
 import Quote from '../common/Quote';
+
 import { apiurl, token } from '../common/Http';
+
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { AuthContext } from '../backend/context/Auth';
 
 const Services = () => {
+
   const [services, setServices] = useState([]);
   const [applying, setApplying] = useState(null);
 
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
+  //Get services from backend 
   const fetchServices = async () => {
     try {
-      const res = await fetch(apiurl + "get-services", {
+      const response = await fetch(apiurl + "get-services", {
         method: "GET",
       });
-      const result = await res.json();
+      const result = await response.json();
       setServices(result.data || []);
     } catch (error) {
-      console.error("Error fetching services:", error);
+      console.log("Error :", error);
     }
   };
 
+  //Load Services when page opens 
   useEffect(() => {
     fetchServices();
   }, []);
 
+  //Apply service Function
   const handleApply = async (service) => {
     const userToken = token();
 
+    //check login
     if (!userToken) {
-      toast.warning(
-        <div>
-          Please login to apply for this service.{" "}
-          <span
-            style={{ cursor: "pointer", textDecoration: "underline" }}
-            onClick={() => navigate("/login")}
-          >
-            Login now
-          </span>
-        </div>,
-        { autoClose: 4000 }
-      );
-      setTimeout(() => navigate("/login"), 3000);
+      toast.warning("Please login to apply for this service");
+      navigate("/login");
       return;
     }
 
+    // check payment or normal service
     const isPayment = service.btn_text?.toLowerCase() === "pay now";
     const action = isPayment ? "apply-payment" : "apply-service";
     const applyUrl = user?.role === "admin"
@@ -71,15 +70,15 @@ const Services = () => {
         body: JSON.stringify(
           isPayment
             ? {
-                service_id: service.id,
-                amount: service.amount,
-                request_status: "progress",
-                payment_method: "cod"
-              }
+              service_id: service.id,
+              amount: service.amount,
+              request_status: "progress",
+              payment_method: "cod"
+            }
             : {
-                service_id: service.id,
-                request_status: "progress"
-              }
+              service_id: service.id,
+              request_status: "progress"
+            }
         ),
       });
 
@@ -131,11 +130,11 @@ const Services = () => {
               <h2>Municipality Payment Services</h2>
             </div>
             <div className='row pt-4 services-grid'>
-              {services && services.length > 0 ? (
+              {
                 services
                   .filter(service => service.btn_text?.toLowerCase() === "pay now")
-                  .map((service, index) => (
-                    <div className="service-card" key={`payment-${index}`}>
+                  .map((service) => (
+                    <div className="service-card" key={service.id}>
                       <div className={`icon-circle ${service.color}`}>
                         <i className={service.icon}></i>
                       </div>
@@ -152,11 +151,7 @@ const Services = () => {
                       </button>
                     </div>
                   ))
-              ) : (
-                <div className="text-center w-100 py-3">
-                  <p>No payment options listed at this moment.</p>
-                </div>
-              )}
+              }
             </div>
           </div>
         </section>
@@ -170,11 +165,11 @@ const Services = () => {
             </div>
 
             <div className='row pt-4 services-grid'>
-              {services && services.length > 0 ? (
+              {
                 services
                   .filter(service => service.btn_text?.toLowerCase() === "apply now")
-                  .map((service, index) => (
-                    <div className="service-card" key={`request-${index}`}>
+                  .map((service) => (
+                    <div className="service-card" key={service.id}>
                       <div className={`icon-circle ${service.color}`}>
                         <i className={service.icon}></i>
                       </div>
@@ -189,11 +184,7 @@ const Services = () => {
                       </button>
                     </div>
                   ))
-              ) : (
-                <div className="text-center w-100 py-3">
-                  <p>No request forms available right now.</p>
-                </div>
-              )}
+              }
             </div>
           </div>
         </section>
