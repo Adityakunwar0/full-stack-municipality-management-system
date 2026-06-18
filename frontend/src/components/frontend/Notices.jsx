@@ -56,7 +56,7 @@ const Notices = () => {
             </div>
             
             <div className="row pt-4">
-              {notices && notices.length > 0 ? (
+              {notices.length > 0 ? (
                 notices.map((notice) => (
                   <div key={notice.id} className="col-md-4 col-lg-4 mb-4">
                     <div className="item">

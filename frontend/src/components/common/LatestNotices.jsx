@@ -19,7 +19,7 @@ const LatestNotices = () => {
 
     return (
         <section className="section-2 light-background">
-            <div className="container  py-5">
+            <div className="container-fluid  py-5">
                 <div className="section-header text-center">
                     <span>Latest Notices</span>
                     <h2>Building A Better Tomorrow</h2>

@@ -1,17 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
+
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Hero from '../common/Hero';
 import Portal from '../common/Portal';
-import { Link } from 'react-router-dom';
 import Quote from '../common/Quote';
+
+import { Link } from 'react-router-dom';
 import { apiurl, fileUrl } from "../common/Http";
 import { AuthContext } from "../backend/context/Auth";
 
 const Projects = () => {
+  //Get Logged In User
   const { user } = useContext(AuthContext);
+
+  //Store Projects
   const [projects, setProjects] = useState([]);
 
+  // Get all Projects From backend
   const fetchAllProjects = async () => {
     try {
       const res = await fetch(apiurl + "get-projects", {
@@ -24,6 +30,7 @@ const Projects = () => {
     }
   };
 
+  // Run function when page loads
   useEffect(() => {
     fetchAllProjects();
   }, []);
@@ -57,7 +64,7 @@ const Projects = () => {
             </div>
             
             <div className="row pt-4">
-              {projects && projects.length > 0 ? (
+              { projects.length > 0 ? (
                 projects.map((project) => (
                   <div key={project.id} className="col-md-4 col-lg-4 mb-4">
                     <div className="item">

@@ -30,7 +30,7 @@ const Services = () => {
       const result = await response.json();
       setServices(result.data || []);
     } catch (error) {
-      console.log("Error :", error);
+      console.error("Error fetching services:", error);
     }
   };
 
