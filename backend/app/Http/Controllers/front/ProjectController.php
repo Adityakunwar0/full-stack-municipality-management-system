@@ -11,6 +11,7 @@ class ProjectController extends Controller
      // This method will return all active projects
     public function index(){
         $projects = Project::where('status',1)->orderBy('created_at','DESC')->get();
+        
          return response()->json([
                 'status' => true,
                 'data' => $projects

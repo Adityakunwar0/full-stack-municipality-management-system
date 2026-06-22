@@ -106,7 +106,7 @@ const Show = () => {
                                         Edit
                                       </Link>
                                       <Link
-                                        onClick={() => deletenotice(notice.id)}
+                                        onClick={() => deleteNotice(notice.id)}
                                         href="#"
                                         className="btn btn-secondary small ms-2"
                                       >

@@ -45,7 +45,7 @@ class NoticeController extends Controller
         $notice->title = $request->title;
         $notice->slug = Str::slug($request->slug);
         $notice->short_desc = $request->short_desc;
-        $notice->content = $request->content;
+        $notice->content = $request->input('content'); 
         $notice->status = $request->status;
         $notice->location = $request->location;
         $notice->save();
@@ -116,7 +116,7 @@ class NoticeController extends Controller
         $notice->title = $request->title;
         $notice->slug = Str::slug($request->slug);
         $notice->short_desc = $request->short_desc;
-        $notice->content = $request->content;
+        $notice->content = $request->input('content'); 
         $notice->status = $request->status;
         $notice->location = $request->location;
         $notice->save();

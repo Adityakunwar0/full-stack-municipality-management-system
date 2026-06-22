@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Member;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use App\Models\TempImage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\File; 
 
 class MemberController extends Controller {
     // this method will return all members 

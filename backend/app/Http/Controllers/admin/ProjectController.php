@@ -34,12 +34,14 @@ class ProjectController extends Controller
 
         $validator = Validator::make($request->all(),[
             'title' => 'required',
-            'slug' => 'required|unique:projects,slug'
+            'slug' => 'required|unique:projects,slug',
+            
         ]);
 
         if($validator->fails()){
             return response()->json([
                 'status' => false,
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ]);
         }
@@ -47,7 +49,7 @@ class ProjectController extends Controller
         $project->title = $request->title;
         $project->slug = Str::slug($request->slug);
         $project->short_desc = $request->short_desc;
-        $project->content = $request->content;
+        $project->content = $request->input('content');
         $project->project_type = $request->project_type;
         $project->sector = $request->sector;
         $project->status = $request->status;
@@ -107,12 +109,13 @@ class ProjectController extends Controller
 
         $validator = Validator::make($request->all(),[
             'title' => 'required',
-            'slug' => 'required|unique:projects,slug,'.$id.',id'
+            'slug' => 'required|unique:projects,slug,'.$id.',id',
         ]);
 
         if($validator->fails()){
             return response()->json([
                 'status' => false,
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ]);
         }
@@ -120,7 +123,7 @@ class ProjectController extends Controller
         $project->title = $request->title;
         $project->slug = Str::slug($request->slug);
         $project->short_desc = $request->short_desc;
-        $project->content = $request->content;
+       $project->content = $request->input('content');
         $project->project_type = $request->project_type;
         $project->sector = $request->sector;
         $project->status = $request->status;
